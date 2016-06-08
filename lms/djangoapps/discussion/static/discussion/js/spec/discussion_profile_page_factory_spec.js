@@ -1,25 +1,40 @@
-define(['jquery', 'backbone', 'discussion/js/discussion_profile_page_factory'],
-    function($, Backbone, DiscussionProfilePageFactory) {
+define(
+    [
+        'underscore',
+        'jquery',
+        'backbone',
+        'common/js/spec_helpers/discussion_spec_helper',
+        'discussion/js/discussion_profile_page_factory'
+    ],
+    function(_, $, Backbone, DiscussionSpecHelper, DiscussionProfilePageFactory) {
         'use strict';
 
         describe('Discussion Profile Page Factory', function() {
-            var initializeDiscussionProfilePageFactory = function(options) {
-                DiscussionProfilePageFactory(options || {});
-            };
+            var testCourseId = 'test_course',
+                initializeDiscussionProfilePageFactory = function(options) {
+                    DiscussionProfilePageFactory(_.extend(
+                        {
+                            courseId: testCourseId,
+                            $el: $('.discussion-user-threads'),
+                            user_info: DiscussionSpecHelper.getTestUserInfo(),
+                            roles: DiscussionSpecHelper.getTestRoleInfo(),
+                            sort_preference: null,
+                            threads: [],
+                            page: 1,
+                            numPages: 5
+                        },
+                        options
+                    ));
+                };
 
             beforeEach(function() {
-                // setFixtures('<section class="teams-content"></section>');
-                // PageHelpers.preventBackboneChangingUrl();
+                setFixtures('<div class="discussion-user-threads"></div>');
+                DiscussionSpecHelper.setUnderscoreFixtures();
             });
 
-            afterEach(function() {
-                // Backbone.history.stop();
-                // $(document).off('ajaxError', TeamsTabView.prototype.errorHandler);
-            });
-
-            it('can render the "Teams" tab', function() {
+            it('can render itself', function() {
                 initializeDiscussionProfilePageFactory();
-                expect($('.teams-content').text()).toContain('See all teams in your course, organized by topic');
+                expect($('.discussion-user-threads').text()).toContain('Active Threads');
             });
         });
     }

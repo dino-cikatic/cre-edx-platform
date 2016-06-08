@@ -27,8 +27,12 @@ var options = {
     // Make sure the patterns in sourceFiles and specFiles do not match the same file.
     // Otherwise Istanbul which is used for coverage tracking will cause tests to not run.
     sourceFiles: [
-        {pattern: '../../common/static/**/!(*spec|djangojs).js'},
-        {pattern: '../static/**/!(*spec|djangojs).js'}
+        {pattern: 'coffee/src/**/!(*spec).js'},
+        {pattern: 'discussion/js/**/!(*spec).js'},
+        {pattern: 'js/**/!(*spec|djangojs).js'},
+        {pattern: 'lms/js/**/!(*spec).js'},
+        {pattern: 'support/js/**/!(*spec).js'},
+        {pattern: 'teams/js/**/!(*spec).js'}
     ],
 
     specFiles: [
