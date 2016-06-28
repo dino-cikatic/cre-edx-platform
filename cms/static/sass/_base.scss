@@ -44,10 +44,10 @@ body, input, button {
 a {
   @include transition(color $tmg-f2 ease-in-out 0s);
   text-decoration: none;
-  color: $blue;
+  color: $blue-d2;
 
   &:hover {
-    color: $orange-d1;
+    color: $orange-d2;
   }
 }
 
@@ -445,10 +445,10 @@ p, ul, ol, dl {
     .tip {
       @extend %t-copy-sub2;
       width: flex-grid(7, 12);
-      float: right;
+      @include float(right);
       margin-top: ($baseline/2);
-      text-align: right;
-      color: $gray-l2;
+      @incude text-align(right);
+      color: $gray-d1;
     }
   }
 }

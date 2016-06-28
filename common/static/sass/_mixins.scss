@@ -277,14 +277,14 @@
   @extend %t-action4;
   text-align: center;
   border-radius: ($baseline/4);
-  border: 1px solid $blue-l2;
+  border: 1px solid $blue-d2;
   padding: 1px ($baseline/2) 2px ($baseline/2);
-  background-color: transparent;
-  color: $blue-l2;
+  background-color: $white;
+  color: $blue-d2;
 
   &:hover, &:focus {
-    border: 1px solid $blue;
-    background-color: $blue;
+    border: 1px solid $blue-d3;
+    background-color: $blue-d2;
     color: $white;
   }
 
