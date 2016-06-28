@@ -84,7 +84,7 @@ h1 {
     position: relative;
     top: ($baseline/4);
     display: block;
-    color: $gray-l2;
+    color: $gray-d2;
   }
 }
 
@@ -292,14 +292,6 @@ p, ul, ol, dl {
         // buttons
         .button {
           padding: ($baseline/4) ($baseline/2) ($baseline/3) ($baseline/2);
-        }
-
-        .new-button {
-
-        }
-
-        .view-button {
-
         }
       }
     }
@@ -705,9 +697,10 @@ hr.divider {
       color: $white;
     }
 
-    &:hover {
+    &:hover,
+    &:active {
       top: 0;
-      background: $blue;
+      background: $blue-d1;
     }
   }
 
