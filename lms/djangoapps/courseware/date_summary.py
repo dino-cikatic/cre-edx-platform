@@ -17,7 +17,7 @@ from pytz import utc
 from course_modes.models import CourseMode
 from lms.djangoapps.commerce.utils import EcommerceService
 from lms.djangoapps.verify_student.models import VerificationDeadline, SoftwareSecurePhotoVerification
-from openedx.core.lib.time_zone_utils import get_formatted_time_zone, get_user_time_zone
+from openedx.core.lib.time_zone_utils import get_time_zone_abbr, get_user_time_zone
 from student.models import CourseEnrollment
 
 
@@ -149,8 +149,7 @@ class TodaysDate(DateSummary):
 
     @property
     def date_format(self):
-        kwargs = {'abbr': True}
-        return u'%b %d, %Y (%H:%M {tz_abbr})'.format(tz_abbr=get_formatted_time_zone(self.time_zone, **kwargs))
+        return u'%b %d, %Y (%H:%M {tz_abbr})'.format(tz_abbr=get_time_zone_abbr(self.time_zone))
 
     # The date is shown in the title, no need to display it again.
     def get_context(self):

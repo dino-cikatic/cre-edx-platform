@@ -10,7 +10,7 @@ from django.db import models
 from pytz import utc
 
 from lazy import lazy
-from openedx.core.lib.time_zone_utils import get_formatted_time_zone
+from openedx.core.lib.time_zone_utils import get_time_zone_abbr
 from xmodule_django.models import CourseKeyField, LocationKeyField
 from xmodule.error_module import ErrorDescriptor
 from xmodule.modulestore.django import modulestore
@@ -91,8 +91,7 @@ class CustomCourseForEdX(models.Model):
         strftime = i18n.strftime
         value = strftime(self.start.astimezone(time_zone), format_string)
         if format_string == 'DATE_TIME':
-            kwargs = {'abbr': True}
-            value += ' ' + get_formatted_time_zone(time_zone, **kwargs)
+            value += ' ' + get_time_zone_abbr(time_zone, self.start)
         return value
 
     def end_datetime_text(self, format_string="SHORT_DATE", time_zone=utc):
@@ -110,8 +109,7 @@ class CustomCourseForEdX(models.Model):
         strftime = i18n.strftime
         value = strftime(self.due.astimezone(time_zone), format_string)
         if format_string == 'DATE_TIME':
-            kwargs = {'abbr': True}
-            value += ' ' + get_formatted_time_zone(time_zone, **kwargs)
+            value += ' ' + get_time_zone_abbr(time_zone, self.due)
         return value
 
     @property

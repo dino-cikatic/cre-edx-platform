@@ -1,7 +1,7 @@
 """
 Utilities related to timezones
 """
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from pytz import common_timezones, timezone, utc
 
@@ -17,41 +17,43 @@ def get_user_time_zone(user):
     return utc
 
 
-def _format_time_zone_string(time_zone, format_string):
+def _format_time_zone_string(time_zone, date_time, format_string):
     """
     Returns a string, specified by format string, of the current date/time of the time zone.
 
     :param time_zone: Pytz time zone object
+    :param date_time: datetime object of date to convert
     :param format_string: A list of format codes can be found at:
             https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior
     """
-    return datetime.now(utc).astimezone(time_zone).strftime(format_string)
+    return date_time.astimezone(time_zone).strftime(format_string)
 
 
-def _is_daylight_savings_time(time_zone):
+def get_time_zone_abbr(time_zone, date_time=None):
     """
-    Returns a bool whether or not a time zone is currently in Daylight Savings Time. Useful in determining
-    which time zone to show user (e.g. EST or EDT) during ambiguous time periods.
+    Returns the time zone abbreviation (e.g. EST) of the time zone for given datetime
+    """
+    date_time = datetime.now(utc) if date_time is None else date_time
+    return _format_time_zone_string(time_zone, date_time, '%Z')
+
+
+def get_time_zone_offset(time_zone, date_time=None):
+    """
+    Returns the time zone offset (e.g. -0800) of the time zone for given datetime
+    """
+    date_time = datetime.now(utc) if date_time is None else date_time
+    return _format_time_zone_string(time_zone, date_time, '%z')
+
+
+def get_formatted_time_zone(time_zone):
+    """
+    Returns a formatted time zone (e.g. 'Asia/Tokyo (JST, UTC+0900)')
 
     :param time_zone: Pytz time zone object
     """
-    now = utc.localize(datetime.now())
-    return now.astimezone(time_zone).dst() != timedelta(0)
+    tz_abbr = get_time_zone_abbr(time_zone)
+    tz_offset = get_time_zone_offset(time_zone)
 
-
-def get_formatted_time_zone(time_zone, **kwargs):
-    """
-    Returns a formatted time zone (e.g. 'Asia/Tokyo (JST, UTC+0900)') by default or just time zone
-    abbreviation (e.g. JST) or utc offset (e.g. +0900), if specified
-
-    :param time_zone: Pytz time zone object
-    """
-    tz_abbr = _format_time_zone_string(time_zone, '%Z')
-    tz_offset = _format_time_zone_string(time_zone, '%z')
-    if 'abbr' in kwargs:
-        return tz_abbr
-    elif 'offset' in kwargs:
-        return tz_offset
     return "{name} ({abbr}, UTC{offset})".format(name=time_zone, abbr=tz_abbr, offset=tz_offset).replace("_", " ")
 
 

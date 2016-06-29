@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 import dateutil.parser
 from math import exp
 
-from openedx.core.lib.time_zone_utils import get_formatted_time_zone
+from openedx.core.lib.time_zone_utils import get_time_zone_abbr
 from pytz import utc
 
 from .fields import Date
@@ -182,14 +182,11 @@ def _datetime_to_string(date_time, format_string, time_zone, strftime_localized)
             formatting function
     """
     result = strftime_localized(date_time.astimezone(time_zone), format_string)
-    abbr = get_formatted_time_zone(time_zone, **{'abbr': True})
+    abbr = get_time_zone_abbr(time_zone, date_time)
     return (
         result + ' ' + abbr if format_string in ['DATE_TIME', 'TIME', 'DAY_AND_TIME']
         else result
     )
-    # TODO: Change this back to above
-    # kwargs = {'abbr': True}
-    # return result + ' ' + get_formatted_time_zone(time_zone, **kwargs)
 
 
 def course_start_datetime_text(start_date, advertised_start, format_string, time_zone, ugettext, strftime_localized):

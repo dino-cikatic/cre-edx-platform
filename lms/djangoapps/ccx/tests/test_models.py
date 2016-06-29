@@ -1,9 +1,9 @@
 """
 tests for the models
 """
+import ddt
 import json
 from datetime import datetime, timedelta
-from freezegun import freeze_time
 from mock import patch
 from nose.plugins.attrib import attr
 from pytz import timezone, utc
@@ -24,6 +24,7 @@ from .factories import (
 from ..overrides import override_field_for_ccx
 
 
+@ddt.ddt
 @attr('shard_1')
 class TestCCX(ModuleStoreTestCase):
     """Unit tests for the CustomCourseForEdX model
@@ -170,37 +171,21 @@ class TestCCX(ModuleStoreTestCase):
         actual = self.ccx.start_datetime_text('DATE_TIME')  # pylint: disable=no-member
         self.assertEqual(expected, actual)
 
-    @freeze_time("2015-11-01 08:59:00")
-    def test_startdate_time_zone_before(self):
+    @ddt.data((datetime(2015, 11, 1, 8, 59, 00, tzinfo=utc), "Nov 01, 2015", "Nov 01, 2015 at 01:59 PDT"),
+              (datetime(2015, 11, 1, 9, 00, 00, tzinfo=utc), "Nov 01, 2015", "Nov 01, 2015 at 01:00 PST"))
+    @ddt.unpack
+    def test_start_date_time_zone(self, start_date_time, expected_short_date, expected_date_time):
         """
         verify that start date is correctly converted when time zone specified
-        and before daylight savings switch
+        during normal daylight hours and daylight savings hours
         """
         time_zone = timezone('America/Los_Angeles')
-        start = datetime(2015, 11, 1, 8, 59, 0, tzinfo=utc)
-        expected_short_date = "Nov 01, 2015"
-        expected_datetime = "Nov 01, 2015 at 01:59 PDT"
-        self.set_ccx_override('start', start)
-        actual_short_date = self.ccx.start_datetime_text(time_zone=time_zone)  # pylint: disable=no-member
-        actual_datetime = self.ccx.start_datetime_text('DATE_TIME', time_zone)  # pylint: disable=no-member
-        self.assertEqual(expected_short_date, actual_short_date)
-        self.assertEqual(expected_datetime, actual_datetime)
 
-    @freeze_time("2015-11-01 09:00:00")
-    def test_startdate_time_zone_after(self):
-        """
-        verify that start date is correctly converted when time zone specified
-        and after daylight savings switch
-        """
-        time_zone = timezone('America/Los_Angeles')
-        start = datetime(2015, 11, 1, 9, 00, 0, tzinfo=utc)
-        expected_short_date = "Nov 01, 2015"
-        expected_datetime = "Nov 01, 2015 at 01:00 PST"
-        self.set_ccx_override('start', start)
+        self.set_ccx_override('start', start_date_time)
         actual_short_date = self.ccx.start_datetime_text(time_zone=time_zone)  # pylint: disable=no-member
         actual_datetime = self.ccx.start_datetime_text('DATE_TIME', time_zone)  # pylint: disable=no-member
         self.assertEqual(expected_short_date, actual_short_date)
-        self.assertEqual(expected_datetime, actual_datetime)
+        self.assertEqual(expected_date_time, actual_datetime)
 
     @patch('util.date_utils.ugettext', fake_ugettext(translations={
         "SHORT_DATE_FORMAT": "%b %d, %Y",
@@ -224,37 +209,21 @@ class TestCCX(ModuleStoreTestCase):
         actual = self.ccx.end_datetime_text('DATE_TIME')  # pylint: disable=no-member
         self.assertEqual(expected, actual)
 
-    @freeze_time("2015-11-01 08:59:00")
-    def test_end_datetime_time_zone_before(self):
+    @ddt.data((datetime(2015, 11, 1, 8, 59, 00, tzinfo=utc), "Nov 01, 2015", "Nov 01, 2015 at 01:59 PDT"),
+              (datetime(2015, 11, 1, 9, 00, 00, tzinfo=utc), "Nov 01, 2015", "Nov 01, 2015 at 01:00 PST"))
+    @ddt.unpack
+    def test_end_datetime_time_zone(self, end_date_time, expected_short_date, expected_date_time):
         """
         verify that end date is correctly converted when time zone specified
-        and before daylight savings switch
+        during normal daylight hours and daylight savings hours
         """
         time_zone = timezone('America/Los_Angeles')
-        end = datetime(2015, 11, 1, 8, 59, 0, tzinfo=utc)
-        expected_short_date = "Nov 01, 2015"
-        expected_datetime = "Nov 01, 2015 at 01:59 PDT"
-        self.set_ccx_override('due', end)
-        actual_short_date = self.ccx.end_datetime_text(time_zone=time_zone)  # pylint: disable=no-member
-        actual_datetime = self.ccx.end_datetime_text('DATE_TIME', time_zone)  # pylint: disable=no-member
-        self.assertEqual(expected_short_date, actual_short_date)
-        self.assertEqual(expected_datetime, actual_datetime)
 
-    @freeze_time("2015-11-01 09:00:00")
-    def test_end_datetime_zone_after(self):
-        """
-        verify that end date is correctly converted when time zone specified
-        and after daylight savings switch
-        """
-        time_zone = timezone('America/Los_Angeles')
-        end = datetime(2015, 11, 1, 9, 00, 0, tzinfo=utc)
-        expected_short_date = "Nov 01, 2015"
-        expected_datetime = "Nov 01, 2015 at 01:00 PST"
-        self.set_ccx_override('due', end)
+        self.set_ccx_override('due', end_date_time)
         actual_short_date = self.ccx.end_datetime_text(time_zone=time_zone)  # pylint: disable=no-member
         actual_datetime = self.ccx.end_datetime_text('DATE_TIME', time_zone)  # pylint: disable=no-member
         self.assertEqual(expected_short_date, actual_short_date)
-        self.assertEqual(expected_datetime, actual_datetime)
+        self.assertEqual(expected_date_time, actual_datetime)
 
     @patch('util.date_utils.ugettext', fake_ugettext(translations={
         "DATE_TIME_FORMAT": "%b %d, %Y at %H:%M",

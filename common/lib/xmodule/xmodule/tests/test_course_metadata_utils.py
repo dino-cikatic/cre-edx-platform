@@ -5,7 +5,6 @@ from collections import namedtuple
 from datetime import timedelta, datetime
 from unittest import TestCase
 
-from freezegun import freeze_time
 from pytz import timezone, utc
 from xmodule.course_metadata_utils import (
     clean_course_key,
@@ -74,45 +73,49 @@ class CourseMetadataUtilsTestCase(TestCase):
                     }
                 )
 
-    def mock_strftime_localized(self, date_time, format_string):
-        """
-        Mock version of strftime_localized used for testing purposes.
-
-        Because we don't have a real implementation of strftime_localized
-        to work with (strftime_localized is provided by the XBlock runtime,
-        which we don't have access to for this test case), we must declare
-        this dummy implementation. This does NOT behave like a real
-        strftime_localized should. It purposely returns a really dumb value
-        that's only useful for testing purposes.
-
-        Arguments:
-            date_time (datetime): datetime to be formatted.
-            format_string (str): format specifier. Valid values include:
-                - 'DATE_TIME'
-                - 'TIME'
-                - 'SHORT_DATE'
-                - 'LONG_DATE'
-
-        Returns (str): format_string + " " + str(date_time)
-        """
-        if format_string in ['DATE_TIME', 'TIME', 'SHORT_DATE', 'LONG_DATE']:
-            return format_string + " " + date_time.strftime("%Y-%m-%d %H:%M:%S")
-        else:
-            raise ValueError("Invalid format string :" + format_string)
-
-    def nop_gettext(self, text):
-        """Dummy implementation of gettext, so we don't need Django."""
-        return text
-
     def test_course_metadata_utils(self):
         """
         Test every single function in course_metadata_utils.
         """
 
-        test_datetime = datetime(1945, 02, 06, 04, 20, 00, tzinfo=utc)
+        def mock_strftime_localized(date_time, format_string):
+            """
+            Mock version of strftime_localized used for testing purposes.
+
+            Because we don't have a real implementation of strftime_localized
+            to work with (strftime_localized is provided by the XBlock runtime,
+            which we don't have access to for this test case), we must declare
+            this dummy implementation. This does NOT behave like a real
+            strftime_localized should. It purposely returns a really dumb value
+            that's only useful for testing purposes.
+
+            Arguments:
+                date_time (datetime): datetime to be formatted.
+                format_string (str): format specifier. Valid values include:
+                    - 'DATE_TIME'
+                    - 'TIME'
+                    - 'SHORT_DATE'
+                    - 'LONG_DATE'
+
+            Returns (str): format_string + " " + str(date_time)
+            """
+            if format_string in ['DATE_TIME', 'TIME', 'SHORT_DATE', 'LONG_DATE']:
+                return format_string + " " + date_time.strftime("%Y-%m-%d %H:%M:%S")
+            else:
+                raise ValueError("Invalid format string :" + format_string)
+
+        def noop_gettext(text):
+            """Dummy implementation of gettext, so we don't need Django."""
+            return text
+
+        test_datetime = datetime(1945, 2, 6, 4, 20, 00, tzinfo=utc)
         advertised_start_parsable = "2038-01-19 03:14:07"
         advertised_start_bad_date = "215-01-01 10:10:10"
         advertised_start_unparsable = "This coming fall"
+        time_zone_normal_parsable = "2016-03-27 00:59:00"
+        time_zone_normal_datetime = datetime(2016, 3, 27, 00, 59, 00, tzinfo=utc)
+        time_zone_daylight_parsable = "2016-03-27 01:00:00"
+        time_zone_daylight_datetime = datetime(2016, 3, 27, 1, 00, 00, tzinfo=utc)
 
         FunctionTest = namedtuple('FunctionTest', 'function scenarios')  # pylint: disable=invalid-name
         TestScenario = namedtuple('TestScenario', 'arguments expected_return')  # pylint: disable=invalid-name
@@ -169,50 +172,72 @@ class CourseMetadataUtilsTestCase(TestCase):
                 # Expect start datetime to be parsed and formatted back into a string.
                 TestScenario(
                     (DEFAULT_START_DATE, advertised_start_parsable, 'DATE_TIME',
-                     utc, self.nop_gettext, self.mock_strftime_localized),
-                    self.mock_strftime_localized(Date().from_json(advertised_start_parsable), 'DATE_TIME') + " UTC"
+                     utc, noop_gettext, mock_strftime_localized),
+                    mock_strftime_localized(Date().from_json(advertised_start_parsable), 'DATE_TIME') + " UTC"
                 ),
                 # Test un-parsable advertised start date.
                 # Expect date parsing to throw a ValueError, and the advertised
                 # start to be returned in Title Case.
                 TestScenario(
                     (test_datetime, advertised_start_unparsable, 'DATE_TIME',
-                     utc, self.nop_gettext, self.mock_strftime_localized),
+                     utc, noop_gettext, mock_strftime_localized),
                     advertised_start_unparsable.title()
                 ),
                 # Test parsable advertised start date from before January 1, 1900.
-                # Expect self.mock_strftime_localized to throw a ValueError, and the
+                # Expect mock_strftime_localized to throw a ValueError, and the
                 # advertised start to be returned in Title Case.
                 TestScenario(
                     (test_datetime, advertised_start_bad_date, 'DATE_TIME',
-                     utc, self.nop_gettext, self.mock_strftime_localized),
+                     utc, noop_gettext, mock_strftime_localized),
                     advertised_start_bad_date.title()
                 ),
                 # Test without advertised start date, but with a set start datetime.
                 # Expect formatted datetime to be returned.
                 TestScenario(
-                    (test_datetime, None, 'SHORT_DATE', utc, self.nop_gettext, self.mock_strftime_localized),
-                    self.mock_strftime_localized(test_datetime, 'SHORT_DATE')
+                    (test_datetime, None, 'SHORT_DATE', utc, noop_gettext, mock_strftime_localized),
+                    mock_strftime_localized(test_datetime, 'SHORT_DATE')
                 ),
                 # Test without advertised start date and with default start datetime.
                 # Expect TBD to be returned.
                 TestScenario(
-                    (DEFAULT_START_DATE, None, 'SHORT_DATE', utc, self.nop_gettext, self.mock_strftime_localized),
+                    (DEFAULT_START_DATE, None, 'SHORT_DATE', utc, noop_gettext, mock_strftime_localized),
                     'TBD'
+                ),
+                # Test correctly formatted start datetime is returned during normal daylight hours
+                TestScenario(
+                    (DEFAULT_START_DATE, time_zone_normal_parsable, 'DATE_TIME',
+                     timezone('Europe/Paris'), noop_gettext, mock_strftime_localized),
+                    "DATE_TIME " + "2016-03-27 01:59:00 CET"
+                ),
+                # Test correctly formatted start datetime is returned during daylight savings hours
+                TestScenario(
+                    (DEFAULT_START_DATE, time_zone_daylight_parsable, 'DATE_TIME',
+                     timezone('Europe/Paris'), noop_gettext, mock_strftime_localized),
+                    "DATE_TIME " + "2016-03-27 03:00:00 CEST"
                 )
             ]),
             FunctionTest(course_end_datetime_text, [
                 # Test with a set end datetime.
                 # Expect formatted datetime to be returned.
                 TestScenario(
-                    (test_datetime, 'TIME', utc, self.mock_strftime_localized),
-                    self.mock_strftime_localized(test_datetime, 'TIME') + " UTC"
+                    (test_datetime, 'TIME', utc, mock_strftime_localized),
+                    mock_strftime_localized(test_datetime, 'TIME') + " UTC"
                 ),
                 # Test with default end datetime.
                 # Expect empty string to be returned.
                 TestScenario(
-                    (None, 'TIME', utc, self.mock_strftime_localized),
+                    (None, 'TIME', utc, mock_strftime_localized),
                     ""
+                ),
+                # Test correctly formatted end datetime is returned during normal daylight hours
+                TestScenario(
+                    (time_zone_normal_datetime, 'TIME', timezone('Europe/Paris'), mock_strftime_localized),
+                    "TIME " + "2016-03-27 01:59:00 CET"
+                ),
+                # Test correctly formatted end datetime is returned during daylight savings hours
+                TestScenario(
+                    (time_zone_daylight_datetime, 'TIME', timezone('Europe/Paris'), mock_strftime_localized),
+                    "TIME " + "2016-03-27 03:00:00 CEST"
                 )
             ]),
             FunctionTest(may_certify_for_course, [
@@ -233,44 +258,4 @@ class CourseMetadataUtilsTestCase(TestCase):
         # we still need to test it with a bad format string in order to
         # satisfy the coverage checker.
         with self.assertRaises(ValueError):
-            self.mock_strftime_localized(test_datetime, 'BAD_FORMAT_SPECIFIER')
-
-    @freeze_time("2016-03-27 00:59:00")
-    def test_time_zone_before(self):
-        """
-        Test correctly formatted datetime is returned when time zone is specified
-        and before daylight savings time has started
-        """
-        time_zone_before_parsable = "2016-03-27 00:59:00"
-        time_zone_before_datetime = datetime(2016, 03, 27, 00, 59, 00, tzinfo=utc)
-
-        actual_start_return = course_start_datetime_text(DEFAULT_START_DATE, time_zone_before_parsable,
-                                                         'DATE_TIME', timezone('Europe/Paris'),
-                                                         self.nop_gettext, self.mock_strftime_localized)
-        expected_start_return = "DATE_TIME " + "2016-03-27 01:59:00 CET"
-        self.assertEqual(actual_start_return, expected_start_return)
-
-        actual_end_return = course_end_datetime_text(time_zone_before_datetime, 'TIME',
-                                                     timezone('Europe/Paris'), self.mock_strftime_localized)
-        expected_end_return = "TIME " + "2016-03-27 01:59:00 CET"
-        self.assertEqual(actual_end_return, expected_end_return)
-
-    @freeze_time("2016-03-27 01:00:00")
-    def test_time_zone_after(self):
-        """
-        Test correctly formatted datetime is returned when time zone is specified
-        and after daylight savings time has started
-        """
-        time_zone_after_parsable = "2016-03-27 01:00:00"
-        time_zone_after_datetime = datetime(2016, 03, 27, 01, 00, 00, tzinfo=utc)
-
-        actual_start_return = course_start_datetime_text(DEFAULT_START_DATE, time_zone_after_parsable,
-                                                         'DATE_TIME', timezone('Europe/Paris'),
-                                                         self.nop_gettext, self.mock_strftime_localized)
-        expected_start_return = "DATE_TIME " + "2016-03-27 03:00:00 CEST"
-        self.assertEqual(actual_start_return, expected_start_return)
-
-        actual_end_return = course_end_datetime_text(time_zone_after_datetime, 'TIME',
-                                                     timezone('Europe/Paris'), self.mock_strftime_localized)
-        expected_end_return = "TIME " + "2016-03-27 03:00:00 CEST"
-        self.assertEqual(actual_end_return, expected_end_return)
+            mock_strftime_localized(test_datetime, 'BAD_FORMAT_SPECIFIER')

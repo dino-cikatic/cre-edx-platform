@@ -4,7 +4,9 @@ from django.test import TestCase
 from freezegun import freeze_time
 from student.tests.factories import UserFactory
 from openedx.core.djangoapps.user_api.preferences.api import set_user_preference
-from openedx.core.lib.time_zone_utils import get_formatted_time_zone, get_user_time_zone
+from openedx.core.lib.time_zone_utils import (
+    get_formatted_time_zone, get_time_zone_abbr, get_time_zone_offset, get_user_time_zone
+)
 from pytz import timezone, utc
 
 
@@ -41,12 +43,8 @@ class TestTimeZoneUtils(TestCase):
         """
         time_zone = timezone(time_zone_string)
         tz_str = get_formatted_time_zone(time_zone)
-
-        kwargs = {'abbr': True}
-        tz_abbr = get_formatted_time_zone(time_zone, **kwargs)
-
-        kwargs = {'offset': True}
-        tz_offset = get_formatted_time_zone(time_zone, **kwargs)
+        tz_abbr = get_time_zone_abbr(time_zone)
+        tz_offset = get_time_zone_offset(time_zone)
 
         return {'str': tz_str, 'abbr': tz_abbr, 'offset': tz_offset}
 
