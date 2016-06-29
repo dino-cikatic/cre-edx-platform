@@ -44,10 +44,10 @@
           @extend %ui-fake-link;
 
           &:hover {
-            color: $blue;
+            color: $blue-d1;
 
             .ui-toggle-expansion {
-              color: $blue;
+              color: $blue-d1;
             }
           }
         }
@@ -212,7 +212,7 @@
             margin: 0 0 ($baseline/4) 0;
 
             &.is-focused {
-              color: $blue;
+              color: $blue-d1;
             }
           }
 

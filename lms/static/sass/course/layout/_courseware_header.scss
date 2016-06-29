@@ -44,14 +44,14 @@
 
         &:hover,
         &:focus {
-          color: $blue;
-          border-bottom: 4px solid $blue;
+          color: $blue-d1;
+          border-bottom: 4px solid $blue-d1;
         }
 
         &.active {
-          border-bottom: 4px solid $blue;
+          border-bottom: 4px solid $blue-d1;
           background-color: transparent;
-          color: $blue;
+          color: $blue-d1;
 
           &:hover,
           &:focus {

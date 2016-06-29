@@ -53,11 +53,11 @@ div.book-wrapper {
         a {
           @include clearfix();
           padding: 0;
-          color: $link-color;
+          color: $blue-d1;
 
           &:hover, &:focus {
             background-color: transparent;
-            color: $link-hover;
+            color: $blue;
 
             .page-number {
               opacity: 1.0;
