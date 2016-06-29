@@ -44,10 +44,10 @@ body, input, button {
 a {
   @include transition(color $tmg-f2 ease-in-out 0s);
   text-decoration: none;
-  color: $blue-d2;
+  color: $uxpl-blue-base;
 
   &:hover {
-    color: $orange-d2;
+    color: $uxpl-blue-hover-active;
   }
 }
 
@@ -700,7 +700,7 @@ hr.divider {
     &:hover,
     &:active {
       top: 0;
-      background: $blue-d1;
+      background: $uxpl-blue-base;
     }
   }
 

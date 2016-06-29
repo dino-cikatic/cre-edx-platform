@@ -277,14 +277,14 @@
   @extend %t-action4;
   text-align: center;
   border-radius: ($baseline/4);
-  border: 1px solid $blue-d2;
+  border: 1px solid $uxpl-blue-base;
   padding: 1px ($baseline/2) 2px ($baseline/2);
   background-color: $white;
-  color: $blue-d2;
+  color: $uxpl-blue-base;
 
   &:hover, &:focus {
-    border: 1px solid $blue-d3;
-    background-color: $blue-d2;
+    border: 1px solid $uxpl-blue-hover-active;
+    background-color: $uxpl-blue-hover-active;
     color: $white;
   }
 
@@ -320,7 +320,7 @@
   @extend %ui-btn-non;
 
   &:hover, &:focus {
-    background-color: $blue;
+    background-color: $uxpl-blue-base;
     color: $white;
   }
 }

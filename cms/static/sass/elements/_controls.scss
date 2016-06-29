@@ -62,22 +62,22 @@
 // blue primary button
 %btn-primary-blue {
   @extend %ui-btn-primary;
-  background: $blue-d2;
-  border-color: $blue-d3;
+  background: $uxpl-blue-base;
+  border-color: $uxpl-blue-base;
   color: $white;
 
   &:hover, &:active {
-    background: $blue-d1;
-    border-color: $blue-d2;
+    background: $uxpl-blue-hover-active;
+    border-color: $uxpl-blue-hover-active;
   }
 
   &.current, &.active {
-    background: $blue-d1;
+    background: $uxpl-blue-hover-active;
+    border-color: $uxpl-blue-hover-active;
     color: $blue-l4;
-    border-color: $blue-d2;
 
     &:hover, &:active {
-      background: $blue-d1;
+      background: $uxpl-blue-hover-active;
     }
   }
 }
@@ -85,22 +85,22 @@
 // green primary button
 %btn-primary-green {
   @extend %ui-btn-primary;
-  background: $green-d2;
-  border-color: $green-d3;
+  background: $uxpl-green-base;
+  border-color: $uxpl-green-base;
   color: $white;
 
   &:hover, &:active {
-    background: $green-d1;
-    border-color: $green-d2;
+    background: $uxpl-green-hover-active;
+    border-color: $uxpl-green-hover-active;
   }
 
   &.current, &.active {
-    background: $green-d1;
-    color: $green-l4;
-    border-color: $green-d2;
+    background: $uxpl-green-hover-active;
+    color: $white;
+    border-color: $uxpl-green-hover-active;
 
     &:hover, &:active {
-      background: $green-d1;
+      background: $uxpl-green-hover-active;
     }
   }
 }
@@ -132,21 +132,17 @@
 %btn-secondary-blue {
   @extend %ui-btn-secondary;
   border-color: $blue-l3;
-  color: $blue-d1;
+  color: $uxpl-blue-base;
 
   &:hover, &:active {
     background: $blue-l4;
-    color: $blue;
+    color: $uxpl-blue-hover-active;
   }
 
   &.current, &.active {
     border-color: $blue-l3;
     background: $blue-l3;
-    color: $blue-d1;
-
-    &:hover, &:active {
-
-    }
+    color: $uxpl-blue-base;
   }
 }
 
@@ -235,7 +231,7 @@
 
   &:hover, &:active {
     background: $white;
-    color: $blue-d1;
+    color: $uxpl-blue-hover-active;
   }
 
   &.current, &.active {
@@ -243,7 +239,7 @@
     color: $gray-d4;
 
     &:hover, &:active {
-      color: $blue-d1;
+      color: $uxpl-blue-hover-active;
     }
   }
 }
@@ -268,7 +264,7 @@
       color: $gray-l1;
 
       &:hover {
-        background-color: $blue-d1;
+        background-color: $uxpl-blue-base;
         color: $gray-l6;
       }
 
@@ -320,7 +316,7 @@
   vertical-align: top;
 
   &:hover {
-    color: $blue-d1;
+    color: $uxpl-blue-base;
   }
 
   .ui-toggle-expansion {
@@ -358,7 +354,7 @@
     // STATE: hover/active
     &:hover, &:active {
       @extend %ui-fake-link;
-      color: $blue-d1;
+      color: $uxpl-blue-base;
     }
   }
 

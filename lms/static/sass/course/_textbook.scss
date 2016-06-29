@@ -53,11 +53,11 @@ div.book-wrapper {
         a {
           @include clearfix();
           padding: 0;
-          color: $blue-d1;
+          color: $uxpl-blue-base;
 
           &:hover, &:focus {
             background-color: transparent;
-            color: $blue;
+            color: $uxpl-blue-hover-active;
 
             .page-number {
               opacity: 1.0;
