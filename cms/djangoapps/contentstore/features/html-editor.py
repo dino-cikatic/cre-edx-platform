@@ -163,7 +163,6 @@ def check_toolbar_buttons(step):
         'bold',
         'italic',
         'underline',
-        'forecolor',
         # This is our custom "code style" button, which uses an image instead of a class.
         'none',
         'bullist',
