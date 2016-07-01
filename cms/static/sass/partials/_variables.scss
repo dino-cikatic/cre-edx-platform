@@ -90,6 +90,9 @@ $blue-t3: rgba($blue, 0.75);
 $uxpl-blue-base: #0074b4; // UXPL, also wcag2a compliant
 $uxpl-blue-hover-active: lighten($uxpl-blue-base, 7%); // UXPL, also wcag2a compliant
 
+$uxpl-green-base: #008100; // UXPL, also wcag2a compliant
+$uxpl-green-hover-active: lighten($uxpl-green-base, 7%); // UXPL, also wcag2a compliant
+
 $pink: rgb(183, 37, 103); // #b72567;
 $pink-l1: tint($pink,20%);
 $pink-l2: tint($pink,40%);
@@ -140,9 +143,6 @@ $green-s3: saturate($green,45%);
 $green-u1: desaturate($green,15%);
 $green-u2: desaturate($green,30%);
 $green-u3: desaturate($green,45%);
-
-$uxpl-green-base: #008100; // UXPL, also wcag2a compliant
-$uxpl-green-hover-active: lighten($uxpl-green-base, 7%); // UXPL, also wcag2a compliant
 
 $yellow: rgb(237, 189, 60);
 $yellow-l1: tint($yellow,20%);
