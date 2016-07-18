@@ -98,6 +98,7 @@ class UserReadOnlySerializer(serializers.Serializer):
             "requires_parental_consent": profile.requires_parental_consent(),
             "accomplishments_shared": accomplishments_shared,
             "account_privacy": get_profile_visibility(profile, user, self.configuration),
+            "is_staff": user.is_staff,
         }
 
         if self.custom_fields:
