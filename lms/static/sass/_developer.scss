@@ -287,12 +287,6 @@
   }
 }
 
-body.view-in-course,
-#content,
-.course-wrapper,
-.course-content,
-.xblock-student_view,
-.xblock-render
-{
-  background: transparent !important;
+body.view-in-course, #content, .course-wrapper, .course-content, .xblock-student_view {
+  background: black !important;
 }
