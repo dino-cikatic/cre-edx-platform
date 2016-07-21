@@ -286,3 +286,11 @@
     }
   }
 }
+
+.xblock-render {
+	background: black !important;
+}
+
+body.view-in-course, #content, .course-wrapper, .course-content, .xblock-student_view {
+  background: black !important;
+}
