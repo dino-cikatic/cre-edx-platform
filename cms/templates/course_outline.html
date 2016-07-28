@@ -10,7 +10,7 @@ from contentstore.utils import reverse_usage_url
 from openedx.core.djangoapps.self_paced.models import SelfPacedConfiguration
 from openedx.core.djangolib.markup import HTML, Text
 %>
-<%block name="title">${_("Course Outline")}</%block>
+<%block name="title">${_("Case Content")}</%block>
 <%block name="bodyclass">is-signedin course view-outline</%block>
 
 <%namespace name='static' file='static_content.html'/>
@@ -114,7 +114,7 @@ from openedx.core.djangolib.markup import HTML, Text
     <header class="mast has-actions has-subtitle">
         <h1 class="page-header">
             <small class="subtitle">${_("Content")}</small>
-            <span class="sr">&gt; </span>${_("Course Outline")}
+            <span class="sr">&gt; </span>${_("Case Content")}
         </h1>
 
         <nav class="nav-actions" aria-label="${_('Page Actions')}">
@@ -180,7 +180,7 @@ from openedx.core.djangolib.markup import HTML, Text
                 <%
                 course_locator = context_course.location
                 %>
-                <h2 class="sr">${_("Course Outline")}</h2>
+                <h2 class="sr">${_("Case Content")}</h2>
                 <article class="outline outline-complex outline-course" data-locator="${course_locator}" data-course-key="${course_locator.course_key}">
                 </article>
             </div>
@@ -190,16 +190,9 @@ from openedx.core.djangolib.markup import HTML, Text
         </article>
         <aside class="content-supplementary" role="complementary">
             <div class="bit">
-                <h3 class="title-3">${_("Creating your course organization")}</h3>
-                <p>${_("You add sections, subsections, and units directly in the outline.")}</p>
-                <p>${_("Create a section, then add subsections and units. Open a unit to add course components.")}</p>
-                <h3 class="title-3">${_("Reorganizing your course")}</h3>
-                <p>${_("Drag sections, subsections, and units to new locations in the outline.")}</p>
-                <h3 class="title-3">${_("Setting release dates and grading policies")}</h3>
-                <p>${_("Select the Configure icon for a section or subsection to set its release date. When you configure a subsection, you can also set the grading policy and due date.")}</p>
-                <h3 class="title-3">${_("Changing the content students see")}</h3>
-                <p>${_("To publish draft content, select the Publish icon for a section, subsection, or unit.")}</p>
-                <p>${Text(_("To hide content from students, select the Configure icon for a section, subsection, or unit, then select {em_start}Hide from students{em_end}.")).format(em_start=HTML("<strong>"), em_end=HTML("</strong>"))}</p>
+                <h3 class="title-3">${_("Generating your own content for the case study")}</h3>
+                <p>${_("edX studio allows you tu create new pieces of content which could then be added to the case material through the Instructor Mode interface.")}</p>
+                <p>${_("More detail to follow soon...")}</p>
             </div>
             <div class="bit external-help">
                 <a href="${get_online_help_info(online_help_token())['doc_url']}" target="_blank" class="button external-help-button">${_("Learn more about the course outline")}</a>
