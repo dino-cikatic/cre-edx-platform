@@ -287,6 +287,15 @@
   }
 }
 
+body.view-in-course,
+#content,
+.course-wrapper,
+.course-content,
+.xblock-student_view,
+.xblock-render
+{
+  background: transparent !important;
+}
 
 // GOOGLE DOCS XBLOCK overrides
 
