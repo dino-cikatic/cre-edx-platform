@@ -922,7 +922,12 @@ class XModule(HTMLSnippet, XModuleMixin):
 
         Makes no use of the context parameter
         """
-        return Fragment(self.get_html())
+        frag = Fragment(self.get_html())
+        if context: 
+            if 'mitcresize' in context:
+                size_html = "<input type='hidden' name='mitcresize' value='{}'/>".format(context['mitcresize'])
+                frag.add_resource(size_html, 'text/html', placement='foot')
+        return frag
 
 
 def policy_key(location):
