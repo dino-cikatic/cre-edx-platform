@@ -58,5 +58,11 @@ SUPPORTED_FIELDS = [
         'merged_visible_to_staff_only',
         VisibilityTransformer,
         requested_field_name='visible_to_staff_only',
-    )
+    ),
+
+    # Provide the thumbnail_url for block background
+    SupportedFieldType('thumbnail_url', requested_field_name='thumbnail_url', default_value=''),
+
+    # Provide the display_description for block
+    SupportedFieldType('display_description', requested_field_name='display_description', default_value='')
 ]
