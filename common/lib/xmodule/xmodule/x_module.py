@@ -263,6 +263,18 @@ class XModuleFields(object):
         # use display_name_with_default for those
         default=None
     )
+    # Added two default fields for all XModules - MIT-CRE
+    thumbnail_url = String(
+        display_name="Thumbnail URL", 
+        help="Thumbnail URL for this block", 
+        scope=Scope.settings
+    )
+
+    display_description = String(
+        display_name="Display Description", 
+        help="Subheader for a block", 
+        scope=Scope.settings
+    )
 
 
 class XModuleMixin(XModuleFields, XBlock):
