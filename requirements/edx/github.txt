@@ -107,4 +107,4 @@ git+https://github.com/mbareta/developers_eyes.git#egg=developers_eyes
 git+https://github.com/vukoviciv/multibarChart_XBlock.git#egg=multibar_chart_xblock
 git+https://github.com/AntimonSb/neighborhood_activity.git#egg=neighborhood_dynamics
 git+https://github.com/ikovic-ee/xblock-google-drive.git#egg=xblock-google-drive
-git+https://github.com/ikovic-ee/pdfXBlock.git
+git+https://github.com/ikovic-ee/pdfXBlock.git#egg=pdf-xblock
