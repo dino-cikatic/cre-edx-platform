@@ -17,7 +17,14 @@
 .status-release,
 [data-type="html"].add-xblock-component-button,
 [data-type="video"].add-xblock-component-button,
-[data-type="discussion"].add-xblock-component-button
+[data-type="discussion"].add-xblock-component-button,
+[data-type="problem"].add-xblock-component-button,
+[data-type="advanced"].add-xblock-component-button
 {
   display: none !important;
+}
+
+.new-component-templates.new-component-advanced 
+{
+	display: block !important;
 }
