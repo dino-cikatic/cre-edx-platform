@@ -1,5 +1,6 @@
 <div class="new-component">
-    <h5><%= gettext("Add New Component") %></h5>
+<!--    <h5><%= gettext("Add New Component") %></h5> -->
     <ul class="new-component-type">
     </ul>
 </div>
+<h5>Select the Media Type to add</h5>

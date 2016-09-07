@@ -24,6 +24,7 @@
                 <% } %>
             <% } %>
         </ul>
-        <button class="cancel-button" data-type="<%= type %>"><%= gettext("Cancel") %></button>
+<!-- MIT-CRE --> 
+<!--    <button class="cancel-button" data-type="<%= type %>"><%= gettext("Cancel") %></button> -->
     </div>
 <% } %>
