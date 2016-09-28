@@ -1,5 +1,6 @@
 """ receivers of course_published and library_updated events in order to trigger indexing task """
-
+import pika
+import json
 from datetime import datetime
 from pytz import UTC
 
@@ -7,9 +8,6 @@ from django.dispatch import receiver
 from django.conf import settings
 
 from celery.task import task
-
-import pika
-import json
 
 from xmodule.modulestore.django import modulestore, SignalHandler
 from contentstore.courseware_index import CoursewareSearchIndexer, LibrarySearchIndexer
@@ -46,7 +44,7 @@ def listen_for_course_publish(sender, course_key, **kwargs):  # pylint: disable=
 
 
 @receiver(SignalHandler.course_published)
-def listen_for_course_publish_custom(sender, course_key, **kwargs):
+def request_builds_update_on_course_publish(sender, course_key, **kwargs):
     request_builds_update.delay(course_key.__str__())
 
 
