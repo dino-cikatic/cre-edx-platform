@@ -4,6 +4,12 @@ from datetime import datetime
 from pytz import UTC
 
 from django.dispatch import receiver
+from django.conf import settings
+
+from celery.task import task
+
+import pika
+import json
 
 from xmodule.modulestore.django import modulestore, SignalHandler
 from contentstore.courseware_index import CoursewareSearchIndexer, LibrarySearchIndexer
@@ -37,6 +43,32 @@ def listen_for_course_publish(sender, course_key, **kwargs):  # pylint: disable=
         from .tasks import update_search_index
 
         update_search_index.delay(unicode(course_key), datetime.now(UTC).isoformat())
+
+
+@receiver(SignalHandler.course_published)
+def listen_for_course_publish_custom(sender, course_key, **kwargs):
+    request_builds_update.delay(course_key.__str__())
+
+
+@task()
+def request_builds_update(course_key):
+    credentials = pika.PlainCredentials(settings.CELERY_BROKER_USER, settings.CELERY_BROKER_PASSWORD)
+    parameters = pika.ConnectionParameters(host=settings.CELERY_BROKER_HOSTNAME,
+                                           credentials=credentials)
+
+    connection = pika.BlockingConnection(parameters)
+    channel = connection.channel()
+
+    data = {
+        "course_id": course_key
+    }
+
+    channel.queue_declare(queue='mit_cre.refresh_builds', durable=True)
+
+    channel.basic_publish(exchange='',
+                          routing_key='mit_cre.refresh_builds',
+                          body=json.dumps(data))
+    connection.close()
 
 
 @receiver(SignalHandler.library_updated)
