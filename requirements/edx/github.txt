@@ -109,3 +109,4 @@ git+https://github.com/AntimonSb/neighborhood_activity.git#egg=neighborhood_dyna
 git+https://github.com/AntimonSb/tinymcexblock.git#egg=tinymcexblock
 git+https://github.com/ikovic-ee/xblock-google-drive.git#egg=xblock-google-drive
 git+https://github.com/ikovic-ee/pdfXBlock.git#egg=pdf-xblock
+git+https://github.com/mbareta/building_simulation_xblock.git#egg=building_simulation_xblock
