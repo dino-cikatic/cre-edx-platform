@@ -104,10 +104,16 @@ def get_courses_list_with_access(user, org, filter_, check_if_enrolled=False):
         """
     courses = branding.get_visible_courses(org=org, filter_=filter_)
 
+    permission_name = microsite.get_value(
+        'COURSE_CATALOG_VISIBILITY_PERMISSION',
+        settings.COURSE_CATALOG_VISIBILITY_PERMISSION
+    )
+
     courses_to_show = []
     for c in courses:
-        course_overview = get_course_overview_with_access(user, get_permission_for_course_about(), c.id)
-        courses_to_show.append(course_overview)
+        if has_access(user, permission_name, c):
+            course_overview = get_course_overview_with_access(user, get_permission_for_course_about(), c.id)
+            courses_to_show.append(course_overview)
 
     return courses_to_show
 
