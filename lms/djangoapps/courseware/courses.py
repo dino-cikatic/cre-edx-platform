@@ -38,7 +38,6 @@ import branding
 from opaque_keys.edx.keys import UsageKey
 from openedx.core.djangoapps.content.course_overviews.models import CourseOverview
 
-
 log = logging.getLogger(__name__)
 
 
@@ -98,6 +97,21 @@ def get_course_with_access(user, action, course_key, depth=0, check_if_enrolled=
     return course
 
 
+def get_courses_list_with_access(user, org, filter_, check_if_enrolled=False):
+    """
+        Returns a list of courses available, sorted by course.number and optionally
+        filtered by org code (case-insensitive).
+        """
+    courses = branding.get_visible_courses(org=org, filter_=filter_)
+
+    courses_to_show = []
+    for c in courses:
+        course_overview = get_course_overview_with_access(user, get_permission_for_course_about(), c.id)
+        courses_to_show.append(course_overview)
+
+    return courses_to_show
+
+
 def get_course_overview_with_access(user, action, course_key, check_if_enrolled=False):
     """
     Given a course_key, look up the corresponding course overview,
@@ -123,10 +137,10 @@ def get_course_overview_with_access(user, action, course_key, check_if_enrolled=
     setattr(course_overview.permissions, 'is_staff', bool(is_staff))
     setattr(course_overview.permissions, 'is_instructor', bool(is_instructor))
     if manual_enrollment:
-        setattr(course_overview.permissions, 
-            'enrolled_by', 
-            manual_enrollment.enrolled_by
-        )
+        setattr(course_overview.permissions,
+                'enrolled_by',
+                manual_enrollment.enrolled_by
+                )
 
     return course_overview
 
@@ -344,6 +358,7 @@ def _get_course_date_summary_blocks(course, user):
         if block.date is None:
             return datetime.max.replace(tzinfo=pytz.UTC)
         return block.date
+
     return sorted((b for b in blocks if b.is_enabled), key=block_key_fn)
 
 

@@ -71,6 +71,7 @@ class CourseSerializer(serializers.Serializer):  # pylint: disable=abstract-meth
     start_display = serializers.CharField()
     start_type = serializers.CharField()
     pacing = serializers.CharField()
+    permissions = serializers.SerializerMethodField()
 
     # 'course_id' is a deprecated field, please use 'id' instead.
     course_id = serializers.CharField(source='id', read_only=True)
@@ -84,6 +85,19 @@ class CourseSerializer(serializers.Serializer):  # pylint: disable=abstract-meth
             urllib.urlencode({'course_id': course_overview.id}),
         ])
         return self.context['request'].build_absolute_uri(base_url)
+
+    def get_permissions(self, course_overview):
+        if hasattr(course_overview, 'permissions'):
+            permissions_dict = {'is_staff': course_overview.permissions.is_staff,
+                                'is_instructor': course_overview.permissions.is_instructor
+                                }
+            try:
+                permissions_dict['enrolled_by'] = course_overview.permissions.enrolled_by
+            except AttributeError:
+                pass
+        else:
+            permissions_dict = {}
+        return permissions_dict
 
 
 class CourseDetailSerializer(CourseSerializer):  # pylint: disable=abstract-method
@@ -99,7 +113,6 @@ class CourseDetailSerializer(CourseSerializer):  # pylint: disable=abstract-meth
     """
 
     overview = serializers.SerializerMethodField()
-    permissions = serializers.SerializerMethodField()
 
     def get_overview(self, course_overview):
         """
@@ -109,13 +122,3 @@ class CourseDetailSerializer(CourseSerializer):  # pylint: disable=abstract-meth
         # fields from CourseSerializer, which get their data
         # from the CourseOverview object in SQL.
         return CourseDetails.fetch_about_attribute(course_overview.id, 'overview')
-
-    def get_permissions(self, course_overview):
-        permissions_dict = {'is_staff': course_overview.permissions.is_staff,
-            'is_instructor': course_overview.permissions.is_instructor
-        }
-        try:
-            permissions_dict['enrolled_by'] = course_overview.permissions.enrolled_by
-        except AttributeError:
-            pass
-        return permissions_dict
