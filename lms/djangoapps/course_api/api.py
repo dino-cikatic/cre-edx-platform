@@ -9,6 +9,7 @@ from lms.djangoapps.courseware.courses import (
     get_courses,
     get_course_overview_with_access,
     get_permission_for_course_about,
+    get_courses_list_with_access
 )
 from .permissions import can_view_courses_for_username
 
@@ -83,4 +84,7 @@ def list_courses(request, username, org=None, filter_=None):
         List of `CourseOverview` objects representing the collection of courses.
     """
     user = get_effective_user(request.user, username)
-    return get_courses(user, org=org, filter_=filter_)
+    if type(user) is AnonymousUser:
+        return get_courses(user, org=org, filter_=filter_)
+    else:
+        return get_courses_list_with_access(user, org=org, filter_=filter_)
