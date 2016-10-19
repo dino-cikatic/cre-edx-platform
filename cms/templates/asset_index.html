@@ -39,8 +39,7 @@
             <small class="subtitle">${_("Content")}</small>
             <span class="sr">&gt; </span>${_("Files & Uploads")}
         </h1>
-        ## MIT override
-        %if user.is_staff:
+
         <nav class="nav-actions" aria-label="${_('Page Actions')}">
             <h3 class="sr">${_("Page Actions")}</h3>
             <ul>
@@ -49,7 +48,6 @@
                 </li>
             </ul>
         </nav>
-        %endif
     </header>
 </div>
 

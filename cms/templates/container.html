@@ -72,7 +72,9 @@ from openedx.core.djangolib.markup import HTML, Text
                 <h1 class="page-header-title xblock-field-value incontext-editor-value"><span class="title-value">${xblock.display_name_with_default}</span></h1>
             </div>
         </div>
-            <nav class="nav-actions" aria-label="${_('Page Actions')}">
+        ## MIT override
+        %if user.is_staff:
+        <nav class="nav-actions" aria-label="${_('Page Actions')}">
             <h3 class="sr">${_("Page Actions")}</h3>
             <ul>
                 % if is_unit_page:
@@ -96,6 +98,7 @@ from openedx.core.djangolib.markup import HTML, Text
                 % endif
             </ul>
         </nav>
+        %endif
     </header>
 </div>
 
