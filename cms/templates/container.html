@@ -60,7 +60,7 @@ from openedx.core.djangolib.markup import HTML, Text
                     <%
                     ancestor_url = xblock_studio_url(ancestor)
                     %>
-                    % if ancestor_url:
+                    % if ancestor_url and user.is_staff:
                         <a href="${ancestor_url}" class="navigation-item navigation-link navigation-parent">${ancestor.display_name_with_default}</a>
                     % else:
                         <span class="navigation-item navigation-parent">${ancestor.display_name_with_default}</span>
@@ -72,8 +72,7 @@ from openedx.core.djangolib.markup import HTML, Text
                 <h1 class="page-header-title xblock-field-value incontext-editor-value"><span class="title-value">${xblock.display_name_with_default}</span></h1>
             </div>
         </div>
-
-        <nav class="nav-actions" aria-label="${_('Page Actions')}">
+            <nav class="nav-actions" aria-label="${_('Page Actions')}">
             <h3 class="sr">${_("Page Actions")}</h3>
             <ul>
                 % if is_unit_page:
@@ -151,6 +150,19 @@ from openedx.core.djangolib.markup import HTML, Text
                             <h5 class="title">${_("Location in Course Outline")}</h5>
                             <div class="wrapper-unit-overview outline outline-simple">
                             </div>
+                        </div>
+                    </div>
+                    ##   MIT add note override
+                    <div class="unit-note">
+                        <h4 class="bar-mod-title">Note:</h4>
+                        <div class="wrapper-unit-note bar-mod-content">
+                            <p class="unit-id">
+                                By clicking on the <b>Publish</b> button all of the contents showing on left get published together.
+                                Once published, contents become visible in the content list for the baseline showing at the top of this page.
+                                This makes these materials available for other instructors to use in additional case studies for the baseline.
+                                Once published, the only way to “un-publish” is to delete the content on left.
+                                Updates to published content go into effect whenever you publish.
+                            </p>
                         </div>
                     </div>
                 % endif
