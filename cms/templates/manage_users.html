@@ -13,32 +13,31 @@ from openedx.core.djangolib.js_utils import (
 <%namespace name='static' file='static_content.html'/>
 
 <%block name="header_extras">
-<script type="text/template" id="team-member-tpl">
-    <%static:include path="js/team-member.underscore" />
-</script>
+    <div class="wrapper-mast wrapper">
+    <header class="mast has-actions has-subtitle">
+        <h1 class="page-header">
+            <small class="subtitle">${_("Settings")}</small>
+            <span class="sr">&gt; </span>${_("Course Team")}
+        </h1>
+        <nav class="nav-actions" aria-label="${_('Page Actions')}">
+            <h3 class="sr">${_("Page Actions")}</h3>
+            <ul>
+                %if allow_actions:
+                    <li class="nav-item">
+                        <a href="#" class="button new-button create-user-button"><span class="icon fa fa-plus" aria-hidden="true"></span> ${_("New Team Member")}</a>
+                    </li>
+                %endif
+            </ul>
+        </nav>
+    </header>
+    </div>
 </%block>
 
 <%block name="content">
 
-<div class="wrapper-mast wrapper">
-  <header class="mast has-actions has-subtitle">
-    <h1 class="page-header">
-      <small class="subtitle">${_("Settings")}</small>
-      <span class="sr">&gt; </span>${_("Course Team")}
-    </h1>
-
-    <nav class="nav-actions" aria-label="${_('Page Actions')}">
-      <h3 class="sr">${_("Page Actions")}</h3>
-      <ul>
-        %if allow_actions:
-        <li class="nav-item">
-          <a href="#" class="button new-button create-user-button"><span class="icon fa fa-plus" aria-hidden="true"></span> ${_("New Team Member")}</a>
-        </li>
-        %endif
-      </ul>
-    </nav>
-  </header>
-</div>
+<script type="text/template" id="team-member-tpl">
+    <%static:include path="js/team-member.underscore" />
+</script>
 
 <div class="wrapper-content wrapper">
   <section class="content">

@@ -261,12 +261,13 @@
     }
 
     // location widget
-    .unit-location, .library-location {
+    .unit-location, .library-location{
       @extend %bar-module;
       border-top: none;
 
-      .wrapper-unit-id, .wrapper-library-id {
-
+      .wrapper-unit-id, .wrapper-library-id,
+      // wrapper-unit-note is MIT addition
+      .wrapper-unit-note {
         .unit-id-value, .library-id-value {
           @extend %status-value-base;
           display: inline-block;
@@ -328,6 +329,12 @@
           padding: 3px 6px;
         }
       }
+    }
+
+    // addition for MIT case
+    .unit-note {
+      @extend %bar-module-red;
+      border-top: none;
     }
   }
 }

@@ -35,6 +35,8 @@ from openedx.core.djangolib.js_utils import (
 
 <%block name="content">
   <div class="wrapper-mast wrapper">
+    ## MIT override
+    %if user.is_staff:
     <header class="mast has-actions has-subtitle">
       <h1 class="page-header">
         <small class="subtitle">${_("Content")}</small>
@@ -50,6 +52,7 @@ from openedx.core.djangolib.js_utils import (
         </ul>
       </nav>
     </header>
+    %endif
   </div>
 
   <div class="wrapper-content wrapper">
