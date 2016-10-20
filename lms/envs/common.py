@@ -2724,6 +2724,7 @@ ACCOUNT_VISIBILITY_CONFIGURATION = {
         "account_privacy",
         "accomplishments_shared",
         "is_staff",
+        'full_name',
     ]
 }
 
