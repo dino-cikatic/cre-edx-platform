@@ -113,6 +113,13 @@ __all__ = ['course_info_handler', 'course_handler', 'course_listing',
            'textbooks_list_handler', 'textbooks_detail_handler',
            'group_configurations_list_handler', 'group_configurations_detail_handler']
 
+COURSE_OUTLINE_TEMPLATES = [
+    'course-outline',
+    'basic-modal', 'modal-button', 'course-outline-modal',
+    'due-date-editor', 'release-date-editor', 'grading-editor', 'publish-editor', 'staff-lock-editor',
+    'xblock-string-field-editor', 'verification-access-editor', 'timed-examination-preference-editor',
+    'access-editor', 'settings-modal-tabs'
+]
 
 class AccessListFallback(Exception):
     """
@@ -601,6 +608,16 @@ def course_index(request, course_key):
 
         deprecated_blocks_info = _deprecated_blocks_info(course_module, settings.DEPRECATED_BLOCK_TYPES)
 
+        # MIT override - only staff can edit component name
+        if not request.user.is_staff:
+            try:
+                COURSE_OUTLINE_TEMPLATES.remove('xblock-string-field-editor')
+            except ValueError:
+                pass
+        # once the template is removed, without restarting the studio, it won't be rendered
+        elif 'xblock-string-field-editor' not in COURSE_OUTLINE_TEMPLATES:
+                COURSE_OUTLINE_TEMPLATES.append('xblock-string-field-editor')
+
         return render_to_response('course_outline.html', {
             'context_course': course_module,
             'lms_link': lms_link,
@@ -612,6 +629,7 @@ def course_index(request, course_key):
             'settings_url': settings_url,
             'reindex_link': reindex_link,
             'deprecated_blocks_info': deprecated_blocks_info,
+            'templates': COURSE_OUTLINE_TEMPLATES,
             'notification_dismiss_url': reverse_course_url(
                 'course_notifications_handler',
                 current_action.course_key,
