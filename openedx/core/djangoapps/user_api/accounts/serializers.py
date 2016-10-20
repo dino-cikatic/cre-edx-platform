@@ -99,6 +99,7 @@ class UserReadOnlySerializer(serializers.Serializer):
             "accomplishments_shared": accomplishments_shared,
             "account_privacy": get_profile_visibility(profile, user, self.configuration),
             "is_staff": user.is_staff,
+            "full_name": user.get_full_name()
         }
 
         if self.custom_fields:
