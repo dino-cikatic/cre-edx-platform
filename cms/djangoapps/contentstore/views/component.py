@@ -127,6 +127,16 @@ def container_handler(request, usage_key_string):
                     break
                 index += 1
 
+            # MIT override - only staff can edit component name
+            if not request.user.is_staff:
+                try:
+                    CONTAINER_TEMPLATES.remove('xblock-string-field-editor')
+                except ValueError:
+                    pass
+            # once the template is removed, without restarting the studio, it won't be rendered
+            elif 'xblock-string-field-editor' not in CONTAINER_TEMPLATES:
+                CONTAINER_TEMPLATES.append('xblock-string-field-editor')
+
             return render_to_response('container.html', {
                 'context_course': course,  # Needed only for display of menus at top of page.
                 'action': action,
