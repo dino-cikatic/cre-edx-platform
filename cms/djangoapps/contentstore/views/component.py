@@ -52,11 +52,13 @@ CONTAINER_TEMPLATES = [
 ]
 
 
-def _advanced_component_types():
+def _advanced_component_types(request):
     """
     Return advanced component types which can be created.
     """
     disabled_create_block_types = XBlockDisableConfig.disabled_create_block_types()
+    if not request.user.is_staff:
+        disabled_create_block_types.extend(settings.MIT_INSTRUCTOR_UNSUPPORTED_BLOCK_TYPES)
     return [c_type for c_type in ADVANCED_COMPONENT_TYPES if c_type not in disabled_create_block_types]
 
 
@@ -91,7 +93,7 @@ def container_handler(request, usage_key_string):
             except ItemNotFoundError:
                 return HttpResponseBadRequest()
 
-            component_templates = get_component_templates(course)
+            component_templates = get_component_templates(request, course)
             ancestor_xblocks = []
             parent = get_parent_xblock(xblock)
             action = request.GET.get('action', 'view')
@@ -127,6 +129,16 @@ def container_handler(request, usage_key_string):
                     break
                 index += 1
 
+            # MIT override - only staff can edit component name
+            if not request.user.is_staff:
+                try:
+                    CONTAINER_TEMPLATES.remove('xblock-string-field-editor')
+                except ValueError:
+                    pass
+            # once the template is removed, without restarting the studio, it won't be rendered
+            elif 'xblock-string-field-editor' not in CONTAINER_TEMPLATES:
+                CONTAINER_TEMPLATES.append('xblock-string-field-editor')
+
             return render_to_response('container.html', {
                 'context_course': course,  # Needed only for display of menus at top of page.
                 'action': action,
@@ -148,7 +160,7 @@ def container_handler(request, usage_key_string):
         return HttpResponseBadRequest("Only supports HTML requests")
 
 
-def get_component_templates(courselike, library=False):
+def get_component_templates(request, courselike, library=False):
     """
     Returns the applicable component templates that can be used by the specified course or library.
     """
@@ -252,7 +264,7 @@ def get_component_templates(courselike, library=False):
     # enabled for the course.
     course_advanced_keys = courselike.advanced_modules
     advanced_component_templates = {"type": "advanced", "templates": [], "display_name": _("Advanced")}
-    advanced_component_types = _advanced_component_types()
+    advanced_component_types = _advanced_component_types(request)
     # Set component types according to course policy file
     if isinstance(course_advanced_keys, list):
         for category in course_advanced_keys:

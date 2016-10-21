@@ -26,7 +26,7 @@ from openedx.core.djangolib.markup import HTML, Text
 
 <%block name="header_extras">
 <link rel="stylesheet" type="text/css" href="${static.url('js/vendor/timepicker/jquery.timepicker.css')}" />
-% for template_name in ['course-outline', 'xblock-string-field-editor', 'basic-modal', 'modal-button', 'course-outline-modal', 'due-date-editor', 'release-date-editor', 'grading-editor', 'publish-editor', 'staff-lock-editor', 'verification-access-editor', 'timed-examination-preference-editor', 'access-editor', 'settings-modal-tabs']:
+% for template_name in templates:
 <script type="text/template" id="${template_name}-tpl">
     <%static:include path="js/${template_name}.underscore" />
 </script>
@@ -116,7 +116,8 @@ from openedx.core.djangolib.markup import HTML, Text
             <small class="subtitle">${_("Content")}</small>
             <span class="sr">&gt; </span>${_("Your Media Units")}
         </h1>
-
+        ## MIT override
+        %if user.is_staff:
         <nav class="nav-actions" aria-label="${_('Page Actions')}">
             <h3 class="sr">${_("Page Actions")}</h3>
             <ul>
@@ -144,6 +145,7 @@ from openedx.core.djangolib.markup import HTML, Text
                 </li>
             </ul>
         </nav>
+        %endif
     </header>
 </div>
 

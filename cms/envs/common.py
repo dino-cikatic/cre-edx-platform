@@ -1195,3 +1195,18 @@ PARTNER_SUPPORT_EMAIL = ''
 
 # Affiliate cookie tracking
 AFFILIATE_COOKIE_NAME = 'affiliate_id'
+
+
+############################ MIT settings ###################################
+
+# Xblock types which only MIT admin (staff user) can add
+MIT_INSTRUCTOR_UNSUPPORTED_BLOCK_TYPES = [
+    'mit_cre_timeline',
+    'charts',
+    'community_eyes',
+    'developers_eyes',
+    'network_chart',
+    'multibar_charts',
+    'neighborhood_dynamics',
+    'building_simulation'
+]

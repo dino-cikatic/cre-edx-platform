@@ -34,13 +34,14 @@
 <%block name="content">
 
 <div class="wrapper-mast wrapper">
+
     <header class="mast has-actions has-subtitle">
         <h1 class="page-header">
             <small class="subtitle">${_("Content")}</small>
             <span class="sr">&gt; </span>${_("Files & Uploads")}
         </h1>
-
-        <nav class="nav-actions" aria-label="${_('Page Actions')}">
+        %if user.is_staff:
+        <nav class="nav-actions upload-file" aria-label="${_('Page Actions')}">
             <h3 class="sr">${_("Page Actions")}</h3>
             <ul>
                 <li class="nav-item">
@@ -48,6 +49,7 @@
                 </li>
             </ul>
         </nav>
+        %endif
     </header>
 </div>
 
