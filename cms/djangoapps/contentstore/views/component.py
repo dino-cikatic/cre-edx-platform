@@ -26,7 +26,6 @@ from contentstore.views.item import create_xblock_info, add_container_page_publi
 from opaque_keys.edx.keys import UsageKey
 
 from student.auth import has_course_author_access
-from student.roles import GlobalStaff
 from django.utils.translation import ugettext as _
 from xblock_django.models import XBlockDisableConfig
 
