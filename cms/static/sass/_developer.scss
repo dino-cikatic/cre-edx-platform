@@ -12,6 +12,7 @@
 .unit-location,
 .wrapper-release.bar-mod-content,
 .wrapper-visibility.bar-mod-content,
+.nav-actions,
 .list-courses .item-actions.course-actions,
 .status-release,
 [data-type="html"].add-xblock-component-button,
@@ -27,4 +28,8 @@
 .new-component-templates.new-component-advanced
 {
 	display: block !important;
+}
+// asset_index.html display file upload for MIT admin
+.nav-actions.upload-file {
+  display: block !important;
 }
