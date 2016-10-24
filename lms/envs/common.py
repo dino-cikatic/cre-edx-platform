@@ -361,6 +361,10 @@ FEATURES = {
 
     # WIP -- will be removed in Ticket #TNL-4750.
     'ENABLE_TIME_ZONE_PREFERENCE': False,
+
+    # Progress - used to see if an user has already seen certain content in a course
+    'MARK_PROGRESS_ON_GRADING_EVENT': True,
+    'STUDENT_PROGRESS': True
 }
 
 # Ignore static asset files on import which match this pattern
@@ -2076,6 +2080,9 @@ INSTALLED_APPS = (
 
     # Email marketing integration
     'email_marketing',
+
+    # Determining student's progress in a course
+    'progress',
 )
 
 # Migrations which are not in the standard module "migrations"
