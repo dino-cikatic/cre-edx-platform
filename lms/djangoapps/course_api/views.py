@@ -10,6 +10,10 @@ from openedx.core.lib.api.view_utils import view_auth_classes, DeveloperErrorVie
 from .api import course_detail, list_courses
 from .forms import CourseDetailGetForm, CourseListGetForm
 from .serializers import CourseSerializer, CourseDetailSerializer
+from .courseware_access import get_course_child, get_course_key, course_exists, get_ids_from_list_param
+from django.http import Http404
+from progress.models import CourseModuleCompletion
+from progress.serializers import CourseModuleCompletionSerializer
 
 
 @view_auth_classes(is_authenticated=False)
@@ -206,3 +210,82 @@ class CourseListView(DeveloperErrorViewMixin, ListAPIView):
             org=form.cleaned_data['org'],
             filter_=form.cleaned_data['filter_'],
         )
+
+
+# @view_auth_classes(is_authenticated=False)
+class CourseModuleCompletionList(ListAPIView):
+    """
+    ### The CourseModuleCompletionList allows clients to view user's course module completion entities
+    to monitor a user's progression throughout the duration of a course,
+    - URI: ```/api/courses/{course_id}/completions```
+    - GET: Returns a JSON representation of the course, content and user and timestamps
+    - GET Example:
+        {
+            "count":"1",
+            "num_pages": "1",
+            "previous": null
+            "next": null
+            "results": [
+                {
+                    "id": 2,
+                    "user_id": "3",
+                    "course_id": "32fgdf",
+                    "content_id": "324dfgd",
+                    "stage": "First",
+                    "created": "2014-06-10T13:14:49.878Z",
+                    "modified": "2014-06-10T13:14:49.914Z"
+                }
+            ]
+        }
+    Filters can also be applied
+    ```/api/courses/{course_id}/completions/?user_id={user_id}```
+    ```/api/courses/{course_id}/completions/?content_id={content_id}&stage={stage}```
+    ```/api/courses/{course_id}/completions/?user_id={user_id}&content_id={content_id}```
+    - POST: Creates a Course-Module completion entity
+    - POST Example:
+        {
+            "content_id":"i4x://the/content/location",
+            "user_id":4,
+            "stage": "First"
+        }
+    ### Use Cases/Notes:
+    * Use GET operation to retrieve list of course completions by user
+    * Use GET operation to verify user has completed specific course module
+    """
+    serializer_class = CourseModuleCompletionSerializer
+
+    def get_queryset(self):
+        """
+        GET /api/courses/{course_id}/completions/
+        """
+        content_id = self.request.query_params.get('content_id', None)
+        stage = self.request.query_params.get('stage', None)
+        course_id = self.kwargs['course_key_string']
+        if not course_exists(self.request, self.request.user, course_id):
+            raise Http404
+        course_key = get_course_key(course_id)
+        queryset = CourseModuleCompletion.objects.filter(course_id=course_key)
+        # user_ids = get_ids_from_list_param(self.request, 'user_id')
+        #user_ids = map(int, [self.request.query_params.get('user_id')])
+        print dir(self.request.user)
+        user_ids = [self.request.user.id]
+        print '--- nakon user IDs ---'
+        if user_ids:
+            queryset = queryset.filter(user__in=user_ids)
+            print '++++++' + str(queryset)
+
+        print '_____ nakon' + str(queryset)
+
+        if content_id:
+            content_descriptor, content_key, existing_content = get_course_child(self.request, self.request.user,
+                                                                                 course_key,
+                                                                                 content_id)  # pylint: disable=W0612,C0301
+            print 'SSSSSSSSSSSSSSSS' + str(dir(content_descriptor))
+            if not content_descriptor:
+                raise Http404
+            queryset = queryset.filter(content_id=content_key)
+
+        if stage:
+            queryset = queryset.filter(stage=stage)
+
+        return queryset
