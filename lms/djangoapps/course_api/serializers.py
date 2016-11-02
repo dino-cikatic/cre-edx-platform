@@ -88,11 +88,12 @@ class CourseSerializer(serializers.Serializer):  # pylint: disable=abstract-meth
 
     def get_permissions(self, course_overview):
         if hasattr(course_overview, 'permissions'):
-            permissions_dict = {'is_staff': course_overview.permissions.is_staff,
-                                'is_instructor': course_overview.permissions.is_instructor
-                                }
+            permissions_dict = {
+                'is_staff': course_overview.permissions.is_staff,
+                'is_instructor': course_overview.permissions.is_instructor
+            }
             try:
-                permissions_dict['enrolled_by'] = course_overview.permissions.enrolled_by
+                permissions_dict['enrolled_by'] = course_overview.permissions.enrolled_by.email
             except AttributeError:
                 pass
         else:
