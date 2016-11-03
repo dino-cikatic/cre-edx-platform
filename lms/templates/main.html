@@ -141,7 +141,7 @@ from pipeline_mako import render_require_js_path_overrides
 <script>
   $(document).ready(function(){
     $('.no-fouc').removeClass('no-fouc');
-    $('#loader').slideUp(1000);
+    $('#loader').fadeOut(1000);
   });
   $(window).load(function(){
     window.dispatchEvent(new Event('resize'));
