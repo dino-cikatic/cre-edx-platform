@@ -104,7 +104,7 @@ def get_courses_list_with_access(user, org, filter_, check_if_enrolled=False):
         """
     courses = branding.get_visible_courses(org=org, filter_=filter_)
 
-    permission_name = microsite.get_value(
+    permission_name = configuration_helpers.get_value(
         'COURSE_CATALOG_VISIBILITY_PERMISSION',
         settings.COURSE_CATALOG_VISIBILITY_PERMISSION
     )
