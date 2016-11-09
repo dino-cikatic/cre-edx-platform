@@ -790,6 +790,9 @@ VIDEO_UPLOAD_PIPELINE = {
 ############################ APPS #####################################
 
 INSTALLED_APPS = (
+    # allow username longer than 30 chars
+    'longerusernameandemail',
+
     # Standard apps
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -1218,3 +1221,8 @@ MIT_INSTRUCTOR_UNSUPPORTED_BLOCK_TYPES = [
     'neighborhood_dynamics',
     'building_simulation'
 ]
+
+
+# specify longerusername params
+MAX_USERNAME_LENGTH=255
+MAX_EMAIL_LENGTH = 255

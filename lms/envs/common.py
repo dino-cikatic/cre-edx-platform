@@ -1849,6 +1849,9 @@ YOUTUBE_API_KEY = None
 
 ################################### APPS ######################################
 INSTALLED_APPS = (
+    # allow username longer than 30 chars
+    'longerusernameandemail',
+
     # Standard ones that are always installed...
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -2960,3 +2963,7 @@ AFFILIATE_COOKIE_NAME = 'affiliate_id'
 # The cache is cleared when Redirect models are saved/deleted
 REDIRECT_CACHE_TIMEOUT = None  # The length of time we cache Redirect model data
 REDIRECT_CACHE_KEY_PREFIX = 'redirects'
+
+# specify longerusername params
+MAX_USERNAME_LENGTH=255
+MAX_EMAIL_LENGTH = 255

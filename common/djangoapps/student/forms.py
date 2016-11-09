@@ -117,7 +117,7 @@ class AccountCreationForm(forms.Form):
     # TODO: Resolve repetition
     username = forms.SlugField(
         min_length=2,
-        max_length=30,
+        max_length=settings.MAX_USERNAME_LENGTH,
         error_messages={
             "required": _USERNAME_TOO_SHORT_MSG,
             "invalid": _("Usernames must contain only letters, numbers, underscores (_), and hyphens (-)."),
@@ -126,7 +126,7 @@ class AccountCreationForm(forms.Form):
         }
     )
     email = forms.EmailField(
-        max_length=254,  # Limit per RFCs is 254
+        max_length=settings.MAX_EMAIL_LENGTH,  # Limit per RFCs is 254
         error_messages={
             "required": _EMAIL_INVALID_MSG,
             "invalid": _EMAIL_INVALID_MSG,
