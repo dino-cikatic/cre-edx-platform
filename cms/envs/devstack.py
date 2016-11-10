@@ -6,8 +6,14 @@ from os.path import abspath, dirname, join
 
 from .aws import *  # pylint: disable=wildcard-import, unused-wildcard-import
 
+# TEMP
+AWS_ACCESS_KEY_ID = 'AKIAJXWRPJNG54L7W2XA'
+AWS_SECRET_ACCESS_KEY = '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'
+FILE_UPLOAD_STORAGE_BUCKET_NAME = 'mit-cre-assets'
+
 # Don't use S3 in devstack, fall back to filesystem
-del DEFAULT_FILE_STORAGE
+#del DEFAULT_FILE_STORAGE
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 MEDIA_ROOT = "/edx/var/edxapp/uploads"
 
 DEBUG = True
