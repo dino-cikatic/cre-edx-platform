@@ -16,7 +16,14 @@ class FileUploadMixin(object):
     def upload_to_s3(self, file_type, file, xblock_id):
         thumbnail_uuid = str(uuid.uuid1())
 
-        content = ContentFile(file.read())
+        is_chunked = file.multiple_chunks
+
+        if is_chunked:
+            content = ContentFile(file.chunks())
+        else:
+            content = ContentFile(file.read())
+
+        #content = ContentFile(file.read())
 
         relative_path = default_storage.save(
             self._file_types[file_type] + xblock_id + '/' + thumbnail_uuid + '_' + file.name,
