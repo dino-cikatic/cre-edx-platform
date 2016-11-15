@@ -5,7 +5,6 @@ import uuid
 
 
 class FileUploadMixin(object):
-
     def __init__(self, **kwargs):
         self._file_types = {
             'THUMBNAIL': '/thumbnails/',
@@ -13,17 +12,20 @@ class FileUploadMixin(object):
             'VIDEO': '/videos/'
         }
 
-    def upload_to_s3(self, file_type, file, xblock_id):
-        thumbnail_uuid = str(uuid.uuid1())
+    def upload_to_s3(self, file_type, file, xblock_id, file_url_to_delete=None):
 
-        is_chunked = file.multiple_chunks
+        if file_url_to_delete:
+            name_to_delete = file_url_to_delete.split(settings.AWS_STORAGE_BUCKET_NAME)[1]
+            if default_storage.exists(name_to_delete):
+                default_storage.delete(name_to_delete)
 
-        if is_chunked:
-            content = ContentFile(file.chunks())
-        else:
-            content = ContentFile(file.read())
+        file_uuid = str(uuid.uuid1())
+
+        content = ContentFile(file.read())
+
+        hashed_xblock_id = str(hash(xblock_id))
 
         relative_path = default_storage.save(
-            self._file_types[file_type] + xblock_id + '/' + thumbnail_uuid + '_' + file.name,
+            self._file_types[file_type] + hashed_xblock_id + '/' + file_uuid + '_' + file.name,
             content)
         return settings.AWS_S3_BASE_URL + settings.AWS_STORAGE_BUCKET_NAME + relative_path
