@@ -13,7 +13,6 @@ class FileUploadMixin(object):
         }
 
     def upload_to_s3(self, file_type, file, xblock_id, file_url_to_delete=None):
-
         if file_url_to_delete:
             name_to_delete = file_url_to_delete.split(settings.AWS_STORAGE_BUCKET_NAME)[1]
             if default_storage.exists(name_to_delete):
