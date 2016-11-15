@@ -23,8 +23,6 @@ class FileUploadMixin(object):
         else:
             content = ContentFile(file.read())
 
-        #content = ContentFile(file.read())
-
         relative_path = default_storage.save(
             self._file_types[file_type] + xblock_id + '/' + thumbnail_uuid + '_' + file.name,
             content)
