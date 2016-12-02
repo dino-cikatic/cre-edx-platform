@@ -12,7 +12,8 @@ class FileUploadMixin(object):
         self._file_types = {
             'THUMBNAIL': '/thumbnails/',
             'BACKGROUND': '/backgrounds/',
-            'VIDEO': '/videos/'
+            'VIDEO': '/videos/',
+            'JSON': '/json/'
         }
 
     def upload_to_s3(self, file_type, file, xblock_id, file_url_to_delete=None):
