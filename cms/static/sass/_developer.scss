@@ -9,6 +9,7 @@
 
 // --------------------
 
+
 .unit-location,
 .wrapper-release.bar-mod-content,
 .wrapper-visibility.bar-mod-content,
@@ -29,7 +30,8 @@
 {
 	display: block !important;
 }
+
 // asset_index.html display file upload for MIT admin
-.nav-actions.upload-file {
+.mast.has-actions .nav-actions.upload-file {
   display: block !important;
 }
