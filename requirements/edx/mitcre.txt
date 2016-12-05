@@ -15,3 +15,4 @@ git+https://github.com/ikovic-ee/xblock-google-drive.git#egg=xblock-google-drive
 git+https://github.com/ikovic-ee/pdfXBlock.git#egg=pdf-xblock
 git+https://github.com/mbareta/building_simulation_xblock.git#egg=building_simulation_xblock
 git+https://github.com/ikovic-ee/mit-cre-carto-xblock.git#egg=mit_cre_carto_xblock
+git+https://github.com/vukoviciv/imageGalleryXBlock.git#egg=image_gallery
