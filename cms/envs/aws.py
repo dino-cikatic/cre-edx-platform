@@ -303,11 +303,14 @@ if AWS_ACCESS_KEY_ID == "":
 AWS_SECRET_ACCESS_KEY = AUTH_TOKENS["AWS_SECRET_ACCESS_KEY"]
 if AWS_SECRET_ACCESS_KEY == "":
     AWS_SECRET_ACCESS_KEY = None
-
     
 AWS_STORAGE_BUCKET_NAME = AUTH_TOKENS["AWS_STORAGE_BUCKET_NAME"]
 if AWS_STORAGE_BUCKET_NAME == "":
     AWS_STORAGE_BUCKET_NAME = None
+
+AWS_S3_BASE_URL = AUTH_TOKENS["AWS_S3_BASE_URL"]
+if AWS_S3_BASE_URL == "":
+    AWS_S3_BASE_URL = None
 
 # Disabling querystring auth instructs Boto to exclude the querystring parameters (e.g. signature, access key) it
 # normally appends to every returned URL.
