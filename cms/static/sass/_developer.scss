@@ -20,16 +20,33 @@
 [data-type="discussion"].add-xblock-component-button,
 [data-type="problem"].add-xblock-component-button,
 [data-type="advanced"].add-xblock-component-button,
-.bit.external-help
-{
+.bit.external-help {
   display: none !important;
 }
 
-.new-component-templates.new-component-advanced
-{
-	display: block !important;
+/******************************* XBlocks list ********************************/
+
+// enable visibility for the advance components list (MIT)
+.new-component-templates.new-component-advanced {
+  display: block !important;
+  margin-bottom: 0;
+  border-bottom: 0;
 }
+// append raw HTML block to the above list
+.new-component-templates.new-component-html {
+  display: block !important;
+  margin-top: 0;
+  border-top: 0;
+  border-radius: 0;
+}
+
+.new-component-templates.new-component-html .button-component {
+  outline: none;
+}
+
+/******************************* XBlocks list end *****************************/
+
 // asset_index.html display file upload for MIT admin
-.nav-actions.upload-file {
+.mast.has-actions .nav-actions.upload-file {
   display: block !important;
 }
