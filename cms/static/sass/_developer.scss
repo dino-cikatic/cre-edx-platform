@@ -25,6 +25,7 @@
 }
 
 /******************************* XBlocks list ********************************/
+
 // enable visibility for the advance components list (MIT)
 .new-component-templates.new-component-advanced {
   display: block !important;
@@ -38,10 +39,6 @@
   border-top: 0;
   border-radius: 0;
 }
-// disable all list items except for the one containing raw html block.
-// hopefully, the list will always be the same
-.new-component-html li:not(:nth-child(6)) { display: none; }
-.new-component-html li:nth-child(6)       { border-bottom: 0; }
 
 .new-component-templates.new-component-html .button-component {
   outline: none;
