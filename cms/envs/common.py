@@ -1219,7 +1219,8 @@ MIT_INSTRUCTOR_UNSUPPORTED_BLOCK_TYPES = [
     'network_chart',
     'multibar_charts',
     'neighborhood_dynamics',
-    'building_simulation'
+    'building_simulation',
+    'carto_xblock'
 ]
 
 
