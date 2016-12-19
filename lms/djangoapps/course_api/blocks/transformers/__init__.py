@@ -64,5 +64,8 @@ SUPPORTED_FIELDS = [
     SupportedFieldType('thumbnail_url', requested_field_name='thumbnail_url', default_value=''),
 
     # Provide the display_description for block
-    SupportedFieldType('display_description', requested_field_name='display_description', default_value='')
+    SupportedFieldType('display_description', requested_field_name='display_description', default_value=''),
+
+    # Provide the embed_code for google drive xblock
+    SupportedFieldType('embed_code', requested_field_name='embed_code', default_value='')
 ]
