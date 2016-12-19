@@ -67,5 +67,5 @@ SUPPORTED_FIELDS = [
     SupportedFieldType('display_description', requested_field_name='display_description', default_value=''),
 
     # Provide the embed_code for google drive xblock
-    SupportedFieldType('embed_code', requested_field_name='embed_code', default_value='')
+    SupportedFieldType('embed_code', requested_field_name='embed_code', default_value=None)
 ]
