@@ -276,6 +276,12 @@ class XModuleFields(object):
         scope=Scope.settings
     )
 
+    uploaded_files = Dict(
+        display_name="Uploaded files",
+        help="Uploaded but not published files",
+        scope=Scope.settings
+    )
+
 
 class XModuleMixin(XModuleFields, XBlock):
     """

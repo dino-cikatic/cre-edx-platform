@@ -1480,10 +1480,13 @@ class MongoModuleStore(ModuleStoreDraftAndPublished, ModuleStoreWriteBase, Mongo
         is_publish_root: when publishing, this indicates whether xblock is the root of the publish and should
           therefore propagate subtree edit info up the tree
         """
+        print '-------------- update item -------------------'
         course_key = xblock.location.course_key
-
+        print str(course_key)
         try:
             definition_data = self._serialize_scope(xblock, Scope.content)
+            print '----------------- scope --------------'
+            print str(definition_data)
             now = datetime.now(UTC)
             payload = {
                 'definition.data': definition_data,
@@ -1495,14 +1498,14 @@ class MongoModuleStore(ModuleStoreDraftAndPublished, ModuleStoreWriteBase, Mongo
                     'subtree_edited_by': user_id,
                 }
             }
-
+            print str(payload)
             if isPublish:
                 payload['edit_info']['published_date'] = now
                 payload['edit_info']['published_by'] = user_id
             elif 'published_date' in getattr(xblock, '_edit_info', {}):
                 payload['edit_info']['published_date'] = xblock._edit_info['published_date']
                 payload['edit_info']['published_by'] = xblock._edit_info['published_by']
-
+            print str(payload)
             if xblock.has_children:
                 children = self._serialize_scope(xblock, Scope.children)
                 payload.update({'definition.children': children['children']})
@@ -1512,9 +1515,9 @@ class MongoModuleStore(ModuleStoreDraftAndPublished, ModuleStoreWriteBase, Mongo
                 parent_cache.delete_by_value(xblock.location)
                 for child in xblock.children:
                     parent_cache.set(unicode(child), xblock.location)
-
+            print '--------------------- before update ---------------------'
             self._update_single_item(xblock.scope_ids.usage_id, payload, allow_not_found=allow_not_found)
-
+            print '--------------------- after update ---------------------'
             # update subtree edited info for ancestors
             # don't update the subtree info for descendants of the publish root for efficiency
             if not isPublish or (isPublish and is_publish_root):
@@ -1522,8 +1525,9 @@ class MongoModuleStore(ModuleStoreDraftAndPublished, ModuleStoreWriteBase, Mongo
                     'edit_info.subtree_edited_on': now,
                     'edit_info.subtree_edited_by': user_id
                 }
+                print '--------------------- before _update_ancestors ---------------------'
                 self._update_ancestors(xblock.scope_ids.usage_id, ancestor_payload)
-
+                print '--------------------- after _update_ancestors ---------------------'
             # update the edit info of the instantiated xblock
             xblock._edit_info = payload['edit_info']
 
@@ -1531,7 +1535,9 @@ class MongoModuleStore(ModuleStoreDraftAndPublished, ModuleStoreWriteBase, Mongo
             self.refresh_cached_metadata_inheritance_tree(xblock.scope_ids.usage_id.course_key, xblock.runtime)
             # fire signal that we've written to DB
         except ItemNotFoundError:
+            print '-------------------- neradi puklo razbilo se ------------------'
             if not allow_not_found:
+                print 'not allowed'
                 raise
             elif not self.has_course(course_key):
                 raise ItemNotFoundError(course_key)

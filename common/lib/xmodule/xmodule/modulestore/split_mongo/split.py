@@ -314,8 +314,10 @@ class SplitBulkWriteMixin(BulkOperationsMixin):
         """
         bulk_write_record = self._get_bulk_ops_record(course_key)
         if bulk_write_record.active:
+            print 'bulk_write_record.active'
             bulk_write_record.index = updated_index_entry
         else:
+            print 'bulk_write_record.inactive'
             self.db_connection.update_course_index(updated_index_entry, course_context=course_key)
 
     def get_structure(self, course_key, version_guid):
@@ -2021,18 +2023,27 @@ class SplitMongoModuleStore(SplitBulkWriteMixin, ModuleStoreWriteBase):
 
             is_updated = False
             definition_fields = partitioned_fields[Scope.content]
+            print str(definition_fields)
             if definition_locator is None:
                 definition_locator = DefinitionLocator(original_entry.block_type, original_entry.definition)
+            print str(definition_locator)
             if definition_fields:
+
                 definition_locator, is_updated = self.update_definition_from_data(
                     course_key, definition_locator, definition_fields, user_id
                 )
+                print definition_locator
+                print is_updated
 
             # check metadata
             settings = partitioned_fields[Scope.settings]
+            print str(settings)
             settings = self._serialize_fields(block_key.type, settings)
+            print str(settings)
             if not is_updated:
+                print str(original_entry.fields)
                 is_updated = self._compare_settings(settings, original_entry.fields)
+                print is_updated
 
             # check children
             if partitioned_fields.get(Scope.children, {}):  # purposely not 'is not None'
@@ -2050,16 +2061,22 @@ class SplitMongoModuleStore(SplitBulkWriteMixin, ModuleStoreWriteBase):
 
             # if updated, rev the structure
             if is_updated or asides_updated:
+                print '------- split should be updated ------------------------'
                 new_structure = self.version_structure(course_key, original_structure, user_id)
+                print '----------------------- new structure ----------------------------'
+                print str(new_contract)
                 block_data = self._get_block_from_structure(new_structure, block_key)
 
                 block_data.definition = definition_locator.definition_id
                 block_data.fields = settings
+                print '------------------------ block data ---------------------'
+                print str(block_data)
 
                 if asides_updated:
                     block_data.asides = asides_data_to_update
 
                 new_id = new_structure['_id']
+                print str(new_id)
 
                 # source_version records which revision a block was copied from. In this method, we're updating
                 # the block, so it's no longer a direct copy, and we can remove the source_version reference.
@@ -2067,6 +2084,8 @@ class SplitMongoModuleStore(SplitBulkWriteMixin, ModuleStoreWriteBase):
 
                 self.version_block(block_data, user_id, new_id)
                 self.update_structure(course_key, new_structure)
+                print '----------------------- new structure ----------------------------'
+                print str(new_contract)
                 # update the index entry if appropriate
                 if index_entry is not None:
                     self._update_search_targets(index_entry, definition_fields)
@@ -2086,18 +2105,25 @@ class SplitMongoModuleStore(SplitBulkWriteMixin, ModuleStoreWriteBase):
                             branch=course_key.branch,
                             version_guid=new_id
                         )
+                        print str(course_key)
                     self._update_head(course_key, index_entry, course_key.branch, new_id)
+
                 elif isinstance(course_key, LibraryLocator):
                     course_key = LibraryLocator(version_guid=new_id)
                 else:
                     course_key = CourseLocator(version_guid=new_id)
+                    print str(course_key)
 
                 if isinstance(course_key, LibraryLocator):
                     self._flag_library_updated_event(course_key)
 
                 # fetch and return the new item--fetching is unnecessary but a good qc step
                 new_locator = course_key.make_usage_key(block_key.type, block_key.id)
-                return self.get_item(new_locator, **kwargs)
+                print '-------------------- new locator ------------------'
+                print str(new_locator)
+                item = self.get_item(new_locator, **kwargs)
+                print str(item)
+                return item
             else:
                 return None
 

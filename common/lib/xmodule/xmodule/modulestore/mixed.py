@@ -780,6 +780,8 @@ class MixedModuleStore(ModuleStoreDraftAndPublished, ModuleStoreWriteBase):
         (content, children, and metadata) attribute the change to the given user.
         """
         store = self._verify_modulestore_support(xblock.location.course_key, 'update_item')
+        print '------------------ prefered store ------------------'
+        print store.__class__
         return store.update_item(xblock, user_id, allow_not_found, **kwargs)
 
     @strip_key

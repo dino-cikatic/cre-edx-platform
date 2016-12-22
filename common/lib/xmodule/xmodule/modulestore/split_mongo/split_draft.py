@@ -144,6 +144,8 @@ class DraftVersioningModuleStore(SplitMongoModuleStore, ModuleStoreDraftAndPubli
             or descriptor.location.block_type in DIRECT_ONLY_CATEGORIES
 
         with self.bulk_operations(descriptor.location.course_key, emit_signals=emit_signals):
+            print '------------ update started -----------------'
+            print str(DraftVersioningModuleStore.__bases__)
             item = super(DraftVersioningModuleStore, self).update_item(
                 descriptor,
                 user_id,
@@ -152,7 +154,9 @@ class DraftVersioningModuleStore(SplitMongoModuleStore, ModuleStoreDraftAndPubli
                 asides=asides,
                 **kwargs
             )
+            print '----------------- update finished ------------------'
             self._auto_publish_no_children(item.location, item.location.category, user_id, **kwargs)
+            print '--------------------------- children published ------------------'
             descriptor.location = old_descriptor_locn
             return item
 
