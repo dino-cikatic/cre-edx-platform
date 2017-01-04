@@ -13,7 +13,8 @@ class FileUploadMixin(object):
             'THUMBNAIL': '/thumbnails/',
             'BACKGROUND': '/backgrounds/',
             'VIDEO': '/videos/',
-            'JSON': '/json/'
+            'JSON': '/json/',
+            'SUBTITLES': '/subtitles/'
         }
 
     def upload_to_s3(self, file_type, file, xblock_id, file_url_to_delete=None):
@@ -26,13 +27,15 @@ class FileUploadMixin(object):
             self._file_types[file_type] + hashed_xblock_id + '/' + file_uuid + '_' + file.name,
             content)
 
-        try:
-            # delete the previously uploaded file if it exists on S3
-            if file_url_to_delete and bucket_name in file_url_to_delete:
-                name_to_delete = file_url_to_delete.split(bucket_name, 1)[1]
-                if default_storage.exists(name_to_delete):
-                    default_storage.delete(name_to_delete)
-        except Exception as e:
-            log.exception(e.message)
-        finally:
-            return settings.AWS_S3_BASE_URL + bucket_name + relative_path
+        return settings.AWS_S3_BASE_URL + bucket_name + relative_path
+
+        # try:
+        #     # delete the previously uploaded file if it exists on S3
+        #     if file_url_to_delete and bucket_name in file_url_to_delete:
+        #         name_to_delete = file_url_to_delete.split(bucket_name, 1)[1]
+        #         if default_storage.exists(name_to_delete):
+        #             default_storage.delete(name_to_delete)
+        # except Exception as e:
+        #     log.exception(e.message)
+        # finally:
+        #     return settings.AWS_S3_BASE_URL + bucket_name + relative_path
