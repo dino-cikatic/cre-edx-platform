@@ -14,7 +14,8 @@ class FileUploadMixin(object):
             'BACKGROUND': '/backgrounds/',
             'VIDEO': '/videos/',
             'JSON': '/json/',
-            'SUBTITLES': '/subtitles/'
+            'SUBTITLES': '/subtitles/',
+            'PDF': '/pdf/'
         }
 
     def upload_to_s3(self, file_type, file, xblock_id, file_url_to_delete=None):
