@@ -216,25 +216,25 @@ def get_component_templates(request, courselike, library=False):
             for template in component_class.templates():
                 _display_name = template['metadata'].get('display_name')
                 # if condition is MIT CRE override: get only Raw HTML
-                if 'Raw HTML' in _display_name:
-                    filter_templates = getattr(component_class, 'filter_templates', None)
-                    if not filter_templates or filter_templates(template, courselike):
-                        # Tab can be 'common' 'advanced'
-                        # Default setting is common/advanced depending on the presence of markdown
-                        tab = 'common'
-                        if template['metadata'].get('markdown') is None:
-                            tab = 'advanced'
-                        hinted = template.get('hinted', False)
-
-                        templates_for_category.append(
-                            create_template_dict(
-                                _(_display_name),    # pylint: disable=translation-of-non-string
-                                category,
-                                template.get('template_id'),
-                                tab,
-                                hinted,
-                            )
-                        )
+                # if 'Raw HTML' in _display_name:
+                #     filter_templates = getattr(component_class, 'filter_templates', None)
+                #     if not filter_templates or filter_templates(template, courselike):
+                #         # Tab can be 'common' 'advanced'
+                #         # Default setting is common/advanced depending on the presence of markdown
+                #         tab = 'common'
+                #         if template['metadata'].get('markdown') is None:
+                #             tab = 'advanced'
+                #         hinted = template.get('hinted', False)
+                #
+                #         templates_for_category.append(
+                #             create_template_dict(
+                #                 _(_display_name),    # pylint: disable=translation-of-non-string
+                #                 category,
+                #                 template.get('template_id'),
+                #                 tab,
+                #                 hinted,
+                #             )
+                #         )
 
         # Add any advanced problem types
         if category == 'problem':
