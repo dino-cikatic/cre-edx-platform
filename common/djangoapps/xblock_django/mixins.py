@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 import uuid
+import re
 
 log = logging.getLogger(__name__)
 
@@ -23,9 +24,10 @@ class FileUploadMixin(object):
         file_uuid = str(uuid.uuid1())
         content = ContentFile(file.read())
         hashed_xblock_id = str(hash(xblock_id))
+        safe_file_name = re.sub(r"(?![a-zA-Z-_0-9\.]).?", "", file.name)
 
         relative_path = default_storage.save(
-            self._file_types[file_type] + hashed_xblock_id + '/' + file_uuid + '_' + file.name,
+            self._file_types[file_type] + hashed_xblock_id + '/' + file_uuid + '_' + safe_file_name,
             content)
 
         return settings.AWS_S3_BASE_URL + bucket_name + relative_path
