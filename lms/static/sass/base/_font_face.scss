@@ -79,3 +79,51 @@
     font-weight: 700;
     font-style: italic;
 }
+
+@font-face {
+    font-family: 'bebasneue-regular';
+    src: url('#{$static-path}/fonts/bebasneue-regular/bebasneue_regular-webfont.eot');
+    src: url('#{$static-path}/fonts/bebasneue-regular/bebasneue_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('#{$static-path}/fonts/bebasneue-regular/bebasneue_regular-webfont.woff2') format('woff2'),
+         url('#{$static-path}/fonts/bebasneue-regular/bebasneue_regular-webfont.woff') format('woff'),
+         url('#{$static-path}/fonts/bebasneue-regular/bebasneue_regular-webfont.ttf') format('truetype'),
+         url('#{$static-path}/fonts/bebasneue-regular/bebasneue_regular-webfont.svg#bebasneue_regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'bebasneue-light';
+    src: url('#{$static-path}/fonts/bebasneue-light/bebasneue_light-webfont.eot');
+    src: url('#{$static-path}/fonts/bebasneue-light/bebasneue_light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('#{$static-path}/fonts/bebasneue-light/bebasneue_light-webfont.woff2') format('woff2'),
+         url('#{$static-path}/fonts/bebasneue-light/bebasneue_light-webfont.woff') format('woff'),
+         url('#{$static-path}/fonts/bebasneue-light/bebasneue_light-webfont.ttf') format('truetype'),
+         url('#{$static-path}/fonts/bebasneue-light/bebasneue_light-webfont.svg#bebasneue_light') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lora';
+    src: url('#{$static-path}/fonts/Lora/lora-regular-webfont.eot');
+    src: url('#{$static-path}/fonts/Lora/lora-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('#{$static-path}/fonts/Lora/lora-regular-webfont.woff2') format('woff2'),
+         url('#{$static-path}/fonts/Lora/lora-regular-webfont.woff') format('woff'),
+         url('#{$static-path}/fonts/Lora/lora-regular-webfont.ttf') format('truetype'),
+         url('#{$static-path}/fonts/Lora/lora-regular-webfont.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Hind';
+    src: url('#{$static-path}/fonts/Hind/hind-light-webfont.eot');
+    src: url('#{$static-path}/fonts/Hind/hind-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('#{$static-path}/fonts/Hind/hind-light-webfont.woff2') format('woff2'),
+         url('#{$static-path}/fonts/Hind/hind-light-webfont.woff') format('woff'),
+         url('#{$static-path}/fonts/Hind/hind-light-webfont.ttf') format('truetype'),
+         url('#{$static-path}/fonts/Hind/hind-light-webfont.svg#hindlight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
