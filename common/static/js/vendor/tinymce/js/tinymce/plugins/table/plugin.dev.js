@@ -36,6 +36,10 @@
 	}
 
 	function resolve(id) {
+		if (exports.privateModules && id in exports.privateModules) {
+			return;
+		}
+
 		var target = exports;
 		var fragments = id.split(/[.\/]/);
 
@@ -66,6 +70,8 @@
 	}
 
 	function define(id, dependencies, definition) {
+		var privateModules, i;
+
 		if (typeof id !== 'string') {
 			throw 'invalid module definition, module id must be defined and be a string';
 		}
@@ -83,10 +89,26 @@
 		});
 
 		if (--moduleCount === 0) {
-			for (var i = 0; i < exposedModules.length; i++) {
+			for (i = 0; i < exposedModules.length; i++) {
 				register(exposedModules[i]);
 			}
 		}
+
+		// Expose private modules for unit tests
+		if (exports.AMDLC_TESTS) {
+			privateModules = exports.privateModules || {};
+
+			for (id in modules) {
+				privateModules[id] = modules[id];
+			}
+
+			for (i = 0; i < exposedModules.length; i++) {
+				delete privateModules[exposedModules[i]];
+			}
+
+			exports.privateModules = privateModules;
+		}
+
 	}
 
 	function expose(ids) {
@@ -106,14 +128,16 @@
 	exports.define = define;
 	exports.require = require;
 
-	expose(["tinymce/tableplugin/TableGrid","tinymce/tableplugin/Quirks","tinymce/tableplugin/CellSelection","tinymce/tableplugin/Plugin"]);
-
+	load('classes/Utils.js');
+	load('classes/SplitCols.js');
 	load('classes/TableGrid.js');
 	load('classes/Quirks.js');
 	load('classes/CellSelection.js');
+	load('classes/Dialogs.js');
+	load('classes/ResizeBars.js');
 	load('classes/Plugin.js');
 
 	writeScripts();
 })(this);
 
-// $hash: 04ebfed8dc91acb8886fbcda197d4ca5
+// $hash: 2bba25eafbcfe7cf5d371219f4309dbe
