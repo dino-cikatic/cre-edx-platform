@@ -22,12 +22,11 @@ from openedx.core.djangolib.markup import HTML, Text
   <header class="mast has-actions">
     <h1 class="page-header">${_("{studio_name} Home").format(studio_name=settings.STUDIO_SHORT_NAME)}</h1>
 
-    % if user.is_active:
-    <nav class="nav-actions" aria-label="${_('Page Actions')}">
+    ## MIT override user.is_staff
+    % if user.is_active and user.is_staff:
+    <nav class="nav-actions cre-admin" aria-label="${_('Page Actions')}">
       <h3 class="sr">${_("Page Actions")}</h3>
       <ul>
-        ## MIT override
-        %if user.is_staff:
         <li class="nav-item">
           % if course_creator_status=='granted':
           <a href="#" class="button new-button new-course-button"><span class="icon fa fa-plus icon-inline" aria-hidden="true"></span>
@@ -36,17 +35,16 @@ from openedx.core.djangolib.markup import HTML, Text
           <a href="mailto:${settings.FEATURES.get('STUDIO_REQUEST_EMAIL','')}">${_("Email staff to create course")}</a>
           % endif
 
-          % if show_new_library_button:
-            <a href="#" class="button new-button new-library-button"><span class="icon fa fa-plus icon-inline" aria-hidden="true"></span>
-            ${_("New Library")}</a>
-          % endif
-
-          % if is_programs_enabled:
-            <a href=${program_authoring_url + 'new'} class="button new-button new-program-button"><span class="icon fa fa-plus icon-inline" aria-hidden="true"></span>
-            ${_("New Program")}</a>
-          % endif
+##            % if show_new_library_button:
+##              <a href="#" class="button new-button new-library-button"><span class="icon fa fa-plus icon-inline" aria-hidden="true"></span>
+##              ${_("New Library")}</a>
+##            % endif
+##
+##            % if is_programs_enabled:
+##              <a href=${program_authoring_url + 'new'} class="button new-button new-program-button"><span class="icon fa fa-plus icon-inline" aria-hidden="true"></span>
+##              ${_("New Program")}</a>
+##            % endif
         </li>
-        %endif
       </ul>
     </nav>
     % endif

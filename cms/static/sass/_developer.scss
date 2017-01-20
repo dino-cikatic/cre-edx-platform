@@ -51,6 +51,11 @@
   display: block !important;
 }
 
+// index.html display add course button
+.mast.has-actions .nav-actions.cre-admin {
+  display:block !important;
+}
+
 /* after trying to fix this with code, I gave up and targeted it with CSS */
 .new-component-html li.editor-md.empty {
   display: none !important;
