@@ -36,10 +36,6 @@
 	}
 
 	function resolve(id) {
-		if (exports.privateModules && id in exports.privateModules) {
-			return;
-		}
-
 		var target = exports;
 		var fragments = id.split(/[.\/]/);
 
@@ -70,8 +66,6 @@
 	}
 
 	function define(id, dependencies, definition) {
-		var privateModules, i;
-
 		if (typeof id !== 'string') {
 			throw 'invalid module definition, module id must be defined and be a string';
 		}
@@ -89,26 +83,10 @@
 		});
 
 		if (--moduleCount === 0) {
-			for (i = 0; i < exposedModules.length; i++) {
+			for (var i = 0; i < exposedModules.length; i++) {
 				register(exposedModules[i]);
 			}
 		}
-
-		// Expose private modules for unit tests
-		if (exports.AMDLC_TESTS) {
-			privateModules = exports.privateModules || {};
-
-			for (id in modules) {
-				privateModules[id] = modules[id];
-			}
-
-			for (i = 0; i < exposedModules.length; i++) {
-				delete privateModules[exposedModules[i]];
-			}
-
-			exports.privateModules = privateModules;
-		}
-
 	}
 
 	function expose(ids) {
@@ -128,10 +106,9 @@
 	exports.define = define;
 	exports.require = require;
 
-	expose(["tinymce/pasteplugin/Utils"]);
+	expose(["tinymce/pasteplugin/Utils","tinymce/pasteplugin/Clipboard","tinymce/pasteplugin/WordFilter","tinymce/pasteplugin/Quirks","tinymce/pasteplugin/Plugin"]);
 
 	load('classes/Utils.js');
-	load('classes/SmartPaste.js');
 	load('classes/Clipboard.js');
 	load('classes/WordFilter.js');
 	load('classes/Quirks.js');
@@ -140,4 +117,4 @@
 	writeScripts();
 })(this);
 
-// $hash: f991045b4dd37405c0ee4fc0d6f2269c
+// $hash: 7defca82ccee8e0915c8ba39c142611d

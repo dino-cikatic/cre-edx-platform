@@ -36,10 +36,6 @@
 	}
 
 	function resolve(id) {
-		if (exports.privateModules && id in exports.privateModules) {
-			return;
-		}
-
 		var target = exports;
 		var fragments = id.split(/[.\/]/);
 
@@ -70,8 +66,6 @@
 	}
 
 	function define(id, dependencies, definition) {
-		var privateModules, i;
-
 		if (typeof id !== 'string') {
 			throw 'invalid module definition, module id must be defined and be a string';
 		}
@@ -89,26 +83,10 @@
 		});
 
 		if (--moduleCount === 0) {
-			for (i = 0; i < exposedModules.length; i++) {
+			for (var i = 0; i < exposedModules.length; i++) {
 				register(exposedModules[i]);
 			}
 		}
-
-		// Expose private modules for unit tests
-		if (exports.AMDLC_TESTS) {
-			privateModules = exports.privateModules || {};
-
-			for (id in modules) {
-				privateModules[id] = modules[id];
-			}
-
-			for (i = 0; i < exposedModules.length; i++) {
-				delete privateModules[exposedModules[i]];
-			}
-
-			exports.privateModules = privateModules;
-		}
-
 	}
 
 	function expose(ids) {
@@ -128,7 +106,7 @@
 	exports.define = define;
 	exports.require = require;
 
-	expose(["tinymce/spellcheckerplugin/DomTextMatcher"]);
+	expose(["tinymce/spellcheckerplugin/DomTextMatcher","tinymce/spellcheckerplugin/Plugin"]);
 
 	load('classes/DomTextMatcher.js');
 	load('classes/Plugin.js');
@@ -136,4 +114,4 @@
 	writeScripts();
 })(this);
 
-// $hash: a894b80e97e733310c550dadb509e87a
+// $hash: c439da07cfa97735afe2d2e4ab14b32b
