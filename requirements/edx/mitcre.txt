@@ -18,3 +18,4 @@ git+https://github.com/ikovic-ee/mit-cre-carto-xblock.git#egg=mit_cre_carto_xblo
 git+https://github.com/vukoviciv/imageGalleryXBlock.git#egg=image_gallery
 git+https://github.com/hrvojevu/xblock-assessment-factory-mit.git#egg=assessment-factory
 git+https://github.com/ikovic-ee/raw_html.git#egg=raw_html
+git+https://github.com/vukoviciv/mitcre_problem_xblock.git#egg=mitcre_problem_xblock
