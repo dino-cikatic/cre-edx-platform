@@ -1220,7 +1220,9 @@ MIT_INSTRUCTOR_UNSUPPORTED_BLOCK_TYPES = [
     'multibar_charts',
     'neighborhood_dynamics',
     'building_simulation',
-    'carto_xblock'
+    'carto_xblock',
+    'mitcre_problem_xblock',
+    'assessment_factory'
 ]
 
 
