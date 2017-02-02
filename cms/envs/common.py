@@ -1223,6 +1223,29 @@ MIT_INSTRUCTOR_UNSUPPORTED_BLOCK_TYPES = [
     'carto_xblock'
 ]
 
+MIT_DEFAULT_ALLOWED_XBLOCKS = [
+    'html',
+    'videojs',
+    'image',
+    'problem',
+    'mit_cre_timeline',
+    'textimagexblock',
+    'google-document',
+    'charts',
+    'community_eyes',
+    'developers_eyes',
+    'network_chart',
+    'pdf',
+    'multibar_charts',
+    'neighborhood_dynamics',
+    'tinymcexblock',
+    'carto_xblock',
+    'building_simulation',
+    'image_gallery',
+    'assessment_factory',
+    'raw_html',
+    'mitcre_problem_xblock'
+]
 
 # specify longerusername params
 MAX_USERNAME_LENGTH=255
