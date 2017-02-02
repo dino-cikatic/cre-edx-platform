@@ -266,6 +266,9 @@ def get_component_templates(request, courselike, library=False):
     # are the names of the modules in ADVANCED_COMPONENT_TYPES that should be
     # enabled for the course.
     course_advanced_keys = courselike.advanced_modules
+    course_advanced_keys.extend(settings.MIT_DEFAULT_ALLOWED_XBLOCKS)
+    course_advanced_keys = list(set(course_advanced_keys))
+
     advanced_component_templates = {"type": "advanced", "templates": [], "display_name": _("Advanced")}
     advanced_component_types = _advanced_component_types(request)
     # Set component types according to course policy file
