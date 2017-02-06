@@ -1226,10 +1226,7 @@ MIT_INSTRUCTOR_UNSUPPORTED_BLOCK_TYPES = [
 ]
 
 MIT_DEFAULT_ALLOWED_XBLOCKS = [
-    'html',
     'videojs',
-    'image',
-    'problem',
     'mit_cre_timeline',
     'textimagexblock',
     'google-document',
