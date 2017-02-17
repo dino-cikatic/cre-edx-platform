@@ -24,6 +24,11 @@
   display: none !important;
 }
 
+// enable new member team button 
+.mast.has-actions .nav-actions.manage-users {
+  display: block !important;
+}
+
 /******************************* XBlocks list ********************************/
 
 // enable visibility for the advance components list (MIT)
