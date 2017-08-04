@@ -2,7 +2,7 @@
 django-longerusernameandemail==0.5.7
 
 # MIT CRE XBlocks
-git+https://mbareta:jll728349@github.com/ExtensionEngine/mit-cre-timeline.git#egg=mit-cre-timeline-xblock
+git+https://github.com/ExtensionEngine/mit-cre-timeline.git#egg=mit-cre-timeline-xblock
 git+https://github.com/mbareta/VideoJSXBlock-Pro.git#egg=VideoJSXBlock
 git+https://github.com/mbareta/textimagexblock.git#egg=textimagexblock
 git+https://github.com/mbareta/community_eyes.git#egg=community_eyes
