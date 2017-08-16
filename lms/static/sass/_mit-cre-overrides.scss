@@ -1,11 +1,26 @@
 $contentFont: Hind, sans-serif;
+$contentFontSize: 16px;
 $headerFont: Lora, sans-serif;
+$headerFontSize: 54px;
 
 $textColor: #fff;
 
 $linkColor: #fff;
 $linkBackgroundOrange: rgba(201, 74, 6, 1);
 $linkBackgroundOrangeWithOpacity: rgba(201, 74, 6, .7);
+
+$lineHeight: 28px;
+
+@mixin font-smoothing() {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin position-content() {
+  width: 70%;
+  margin: 20px auto;
+  padding: 0 20px;
+}
 
 /**
  * MIT overrides for XBlocks
@@ -21,6 +36,8 @@ $linkBackgroundOrangeWithOpacity: rgba(201, 74, 6, .7);
   margin: 0;
   height: 100%;
   width: 100%;
+
+  @include font-smoothing();
 }
 
 .mitcre-textimagexblock-wrapper img {
@@ -34,37 +51,32 @@ $linkBackgroundOrangeWithOpacity: rgba(201, 74, 6, .7);
   height: 100%;
   width: auto;
   background-color: black;
-  background-repeat: no-repeat;
   background-size: cover;
   padding: 2em 4em;
 }
 
 .mitcre-textimagexblock-wrapper .textimagexblock-content {
   position: relative;
+  @include position-content();
+
   top: 7%;
-  padding: 0;
-  margin: 0 auto;
   height: 60%;
-  width: 72%;
   overflow: auto;
 }
 
-.mitcre-textimagexblock-wrapper .header-text {
+.mitcre-textimagexblock-wrapper h1.header-text {
   position: relative;
+  @include position-content();
   top: 60px;
-  width: 70%;
-  margin: 20px auto !important;
-  padding: 0 20px;
-  font-size: 54px !important;
+
+  font-size: $headerFontSize;
   font-weight: 400;
   font-family: $headerFont;
-  color: $textColor !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  color: $textColor;
 }
 
-.mitcre-textimagexblock-wrapper {
-  a.orange-link {
+.mitcre-textimagexblock-wrapper a {
+  &.orange-link {
     padding: 4px;
     background-color: $linkBackgroundOrangeWithOpacity;
 
@@ -73,27 +85,26 @@ $linkBackgroundOrangeWithOpacity: rgba(201, 74, 6, .7);
     }
   }
 
-  a.no-background-link {
+  &.no-background-link {
     text-decoration: underline;
     background: none;
   }
 
-  a.no-background-link,
-  a.orange-link, a.orange-link:hover, a.orange-link:visited {
+  &.no-background-link,
+  &.orange-link, &.orange-link:hover, &.orange-link:visited {
     color: $linkColor;
   }
 }
 
-.mitcre-textimagexblock-wrapper .content-text {
-  font-family: $contentFont;
-  font-size: 16px !important;
-  line-height: 28px;
-  color: $textColor !important;
-  text-align: left;
+.mitcre-textimagexblock-wrapper p.content-text {
   margin: 0;
-  padding: 20px;
-  padding-bottom: 0;
+  padding-top: 20px;
+  line-height: $lineHeight;
   white-space: normal;
+  text-align: left;
+  color: $textColor;
+  font-family: $contentFont;
+  font-size: $contentFontSize;
 }
 
 .mitcre-textimagexblock-wrapper ol {
@@ -102,8 +113,8 @@ $linkBackgroundOrangeWithOpacity: rgba(201, 74, 6, .7);
 
 .mitcre-textimagexblock-wrapper li {
   font-family: $contentFont;
-  font-size: 16px !important;
-  line-height: 28px;
+  font-size: $contentFontSize !important;
+  line-height: $lineHeight;
   color: $textColor;
   text-align: left;
   padding: 0 2em 2em 0;
