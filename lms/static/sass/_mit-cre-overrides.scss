@@ -11,15 +11,25 @@ $linkBackgroundOrangeWithOpacity: rgba(201, 74, 6, .7);
 
 $lineHeight: 28px;
 
-@mixin font-smoothing() {
+@mixin font-smoothing {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-@mixin position-content() {
+@mixin position-content {
   width: 70%;
   margin: 20px auto;
   padding: 0 20px;
+}
+
+@mixin font-header {
+  font-size: $headerFontSize;
+  font-family: $headerFont;
+}
+
+@mixin font-content {
+  font-size: $contentFontSize;
+  font-family: $contentFont;
 }
 
 /**
@@ -37,7 +47,7 @@ $lineHeight: 28px;
   height: 100%;
   width: 100%;
 
-  @include font-smoothing();
+  @include font-smoothing;
 }
 
 .mitcre-textimagexblock-wrapper img {
@@ -57,7 +67,7 @@ $lineHeight: 28px;
 
 .mitcre-textimagexblock-wrapper .textimagexblock-content {
   position: relative;
-  @include position-content();
+  @include position-content;
 
   top: 7%;
   height: 60%;
@@ -66,12 +76,11 @@ $lineHeight: 28px;
 
 .mitcre-textimagexblock-wrapper h1.header-text {
   position: relative;
-  @include position-content();
+  @include position-content;
   top: 60px;
 
-  font-size: $headerFontSize;
+  @include font-header;
   font-weight: 400;
-  font-family: $headerFont;
   color: $textColor;
 }
 
@@ -103,8 +112,7 @@ $lineHeight: 28px;
   white-space: normal;
   text-align: left;
   color: $textColor;
-  font-family: $contentFont;
-  font-size: $contentFontSize;
+  @include font-content;
 }
 
 .mitcre-textimagexblock-wrapper ol {
@@ -171,3 +179,843 @@ $lineHeight: 28px;
 // scroll bar end
 
 /*************************************************** TEXT (HTML) end ***************************************************/
+
+/*************************************************** DATA (charts) *****************************************************/
+
+/**
+  *  Conservatorio's Network
+  **/
+
+$inactiveNodeColor: #954D35;
+$orangeBorderColor: #da7049;
+$brownNodeColor: #592316;
+
+$tooltipFontSize: 14px;
+
+.network-chart-main-container {
+  background: url('https://s3.amazonaws.com/mit-cre/XBlocks/network-chart/imgpsh_fullsize.jpeg');
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  color: $textColor;
+  @include font-smoothing;
+
+  .title {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+
+    @include font-header;
+  }
+
+  .subtitle {
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    right: 10%;
+    padding: 20px 0;
+    margin-top: 25px;
+
+    line-height: $lineHeight;
+    @include font-content;
+    font-weight: 400;
+    text-align: left;
+  }
+}
+
+.chart, svg {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  padding-top: 30px;
+}
+
+.hidden {
+  display: none;
+}
+
+.node {
+  fill: $brownNodeColor;
+  stroke: $textColor;
+  stroke-width: 1px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.active {
+    fill: $textColor;
+  }
+}
+
+.link {
+  fill: none;
+  stroke: $textColor;
+  stroke-width: 1.5px;
+}
+
+.inactive {
+  stroke: $inactiveNodeColor;
+
+}
+
+/* List of sibling nodes */
+
+ul.dataList {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  list-style: none;
+  text-align: center;
+  margin-bottom: 0;
+  padding: 0;
+
+  li {
+    display: inline-block;
+    width: 90px;
+    height: 100px;
+    opacity: .33;
+    padding-bottom: 0;
+  }
+
+  li:hover {
+    opacity: 1;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+}
+
+/* Active node - container for info display */
+
+.dataInfo {
+  position: absolute;
+  right: 11%;
+  top: 30%;
+  border: 7px solid $orangeBorderColor;
+
+  img {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .text-info {
+    position: absolute;
+    bottom: 8%;
+    left: 10%;
+    color: $textColor;
+    font-size: 16px;
+    z-index: 10;
+
+    p {
+      height: auto;
+      margin: 0 !important;
+      font-size: 16px;
+    }
+
+    .fa {
+      padding-left: 5px;
+      cursor: pointer;
+    }
+  }
+}
+
+.data-info-overlay {
+  z-index: 5;
+  bottom: 0;
+  left: 0;
+  opacity: 0.5;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: rgba(248, 80, 50, 0);
+  background: -moz-linear-gradient(top, rgba(248, 80, 50, 0) 0%, rgba(44, 14, 9, 0) 61%, rgba(0, 0, 0, 0.33) 74%, rgba(0, 0, 0, 1) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(248, 80, 50, 0)), color-stop(61%, rgba(44, 14, 9, 0)), color-stop(74%, rgba(0, 0, 0, 0.33)), color-stop(100%, rgba(0, 0, 0, 1)));
+  background: -webkit-linear-gradient(top, rgba(248, 80, 50, 0) 0%, rgba(44, 14, 9, 0) 61%, rgba(0, 0, 0, 0.33) 74%, rgba(0, 0, 0, 1) 100%);
+  background: -o-linear-gradient(top, rgba(248, 80, 50, 0) 0%, rgba(44, 14, 9, 0) 61%, rgba(0, 0, 0, 0.33) 74%, rgba(0, 0, 0, 1) 100%);
+  background: -ms-linear-gradient(top, rgba(248, 80, 50, 0) 0%, rgba(44, 14, 9, 0) 61%, rgba(0, 0, 0, 0.33) 74%, rgba(0, 0, 0, 1) 100%);
+  background: linear-gradient(to bottom, rgba(248, 80, 50, 0) 0%, rgba(44, 14, 9, 0) 61%, rgba(0, 0, 0, 0.33) 74%, rgba(0, 0, 0, 1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f85032', endColorstr='#000000', GradientType=0);
+}
+
+/**
+ *   Tooltip styling for nodes
+ **/
+
+div.data-node-tooltip {
+  position: absolute;
+}
+
+/* Base styles for the element that has a tooltip */
+[data-mit_tooltip],
+.data-node-tooltip {
+  position: relative;
+  cursor: pointer;
+}
+
+/* Base styles for the entire tooltip */
+[data-mit_tooltip]:before,
+[data-mit_tooltip]:after {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out,
+  visibility 0.2s ease-in-out,
+  transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+  transform: translate3d(0, 0, 0);
+  pointer-events: none;
+}
+
+.data-node-tooltip:before,
+.data-node-tooltip:after,
+.data-info-tooltip:before,
+.data-info-tooltip:after {
+  position: absolute;
+  transition: opacity 0.2s ease-in-out,
+  visibility 0.2s ease-in-out,
+  transform 0.2s cubic-bezier(0.71, 1.7, 0.77, 1.24);
+  transform: translate3d(0, 0, 0);
+  pointer-events: none;
+}
+
+/* Show the entire tooltip on hover and focus */
+[data-mit_tooltip]:hover:before,
+[data-mit_tooltip]:hover:after,
+[data-mit_tooltip]:focus:before,
+[data-mit_tooltip]:focus:after,
+.data-node-tooltip:hover:before,
+.data-node-tooltip:hover:after,
+.data-node-tooltip:focus:before,
+.data-node-tooltip:hover:after {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Base styles for the tooltip's directional arrow */
+[data-mit_tooltip]:before,
+.data-node-tooltip:before,
+.data-info-tooltip:before {
+  z-index: 1001;
+  border: 6px solid transparent;
+  background: transparent;
+  content: "";
+}
+
+/* Base styles for the tooltip's content area */
+[data-mit_tooltip]:after {
+  z-index: 1000;
+  padding: 10px;
+  width: 100px;
+  background-color: $orangeBorderColor;
+  color: $textColor;
+  content: attr(data-mit_tooltip);
+  font-size: $tooltipFontSize;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.data-node-tooltip:after {
+  z-index: 1000;
+  padding: 10px;
+  width: 100px;
+  background-color: $orangeBorderColor;
+  color: $textColor;
+  content: attr(data-node-tooltip);
+  font-size: $tooltipFontSize;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.data-info-tooltip {
+  white-space: pre-line;
+}
+
+.data-info-tooltip:after {
+  z-index: 1000;
+  padding: 15px;
+  width: 100px;
+  background-color: $orangeBorderColor;
+  color: $textColor;
+  content: attr(data-info-tooltip);
+  font-size: $tooltipFontSize;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* Directions */
+
+/* Top (default) */
+[data-mit_tooltip]:before,
+[data-mit_tooltip]:after,
+.data-node-tooltip:before,
+.data-node-tooltip:after {
+  bottom: 100%;
+  left: 50%;
+}
+
+[data-mit_tooltip]:before,
+.data-node-tooltip:before {
+  margin-left: -6px;
+  margin-bottom: -12px;
+  border-top-color: $orangeBorderColor;
+}
+
+/* data info tooltip */
+
+.data-info-tooltip:before,
+.data-info-tooltip:after {
+  top: 100%;
+  bottom: auto;
+  left: 50%;
+}
+
+/* this is arrow */
+.data-info-tooltip:before {
+  margin-top: -12px;
+  margin-bottom: 0;
+  border-bottom-color: $orangeBorderColor;
+}
+
+/* here is content displayed */
+.data-info-tooltip:after {
+  left: -15%;
+  width: 350px;
+}
+
+/* Horizontally align top/bottom tooltips */
+[data-mit_tooltip]:after,
+.data-node-tooltip:after {
+  margin-left: -60px;
+}
+
+[data-mit_tooltip]:hover:before,
+[data-mit_tooltip]:hover:after,
+[data-mit_tooltip]:focus:before,
+[data-mit_tooltip]:focus:after,
+.data-node-tooltip:hover:before,
+.data-node-tooltip:hover:after,
+.data-node-tooltip:focus:before,
+.data-node-tooltip:focus:after,
+.data-info-tooltip:hover:before,
+.data-info-tooltip:hover:after {
+  transform: translateY(-12px);
+}
+
+@media (max-width: 1399px) {
+  .data-info-tooltip:after {
+    width: 300px;
+    left: -50%;
+  }
+}
+
+@media (max-width: 1399px) {
+  ul.dataList {
+    width: 95%;
+  }
+
+  ul.dataList li {
+    width: 70px;
+    height: 80px;
+  }
+
+  .dataInfo .text-info {
+    font-size: 12px;
+  }
+}
+
+/*************************************************** DATA (charts) end *************************************************/
+
+/*************************************************** PANAMA HISTORY (timeline) *****************************************/
+// Imported CSS. TODO: refactor!!!
+
+body {
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.ss-links {
+  width: 60px;
+  height: 300px;
+  z-index: 100;
+  background: transparent;
+  border: 0 none;
+}
+
+.ss-links a {
+  background: rgba(95, 46, 49, .8);
+  font-family: "bebasneue_regular", sans-serif;
+  font-size: 1rem;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin: 5px;
+  float: left;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+  -webkit-transition: background 0.1s linear;
+  -moz-transition: background 0.1s linear;
+  -o-transition: background 0.1s linear;
+  -ms-transition: background 0.1s linear;
+  transition: background 0.1s linear;
+}
+
+.ss-links a:hover {
+  background: rgba(95, 46, 49, 1);
+  color: $textColor;
+}
+
+.ss-links a,
+.ss-links a:visited,
+.ss-links a:active {
+  color: $textColor;
+  text-decoration: none;
+
+}
+
+.ss-links a span {
+  font-size: .75rem;
+}
+
+.ss-container {
+  width: 100%;
+  position: relative;
+  text-align: left;
+  float: left;
+  overflow: hidden;
+  margin-top: 30px;
+  z-index: 1;
+  padding-bottom: 20%;
+  background: transparent !important;
+  border: 0 none !important;
+}
+
+.ss-container h2 {
+  text-transform: uppercase;
+  color: rgba(78, 84, 123, 0.2);
+  padding: 20px 0;
+
+  font-family: "bebasneue_regular", sans-serif;
+  color: $textColor;
+  line-height: 1.5rem;
+  text-shadow: none !important;
+
+  font-size: 3em;
+  font-size: 3rem;
+  margin-top: 30% !important;
+}
+
+.ss-container:before {
+  position: absolute;
+  width: 3px;
+  background: $textColor;
+  top: 0px;
+  left: 50%;
+  margin-left: -2px;
+  content: '';
+  height: 100%;
+}
+
+.ss-row {
+  width: 100%;
+  clear: both;
+  float: left;
+  position: relative;
+  padding: 30px 0;
+}
+
+.ss-left, .ss-right {
+  float: left;
+  /*width: 48%;*/
+  width: 40%;
+  position: relative;
+}
+
+.ss-right {
+  /*padding-left: 2%;*/
+  padding-left: 2%;
+}
+
+.ss-left {
+  text-align: right !important;
+  float: left;
+  padding-right: 2%;
+  padding-left: 8%;
+}
+
+.ss-circle {
+  /*border-radius: 50%;*/
+  overflow: hidden;
+  display: block;
+  text-indent: -9000px;
+  text-align: left;
+  -webkit-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.7) /*inset*/
+;
+  /*0px 0px 0px 12px rgba(94,47,49,0.3);*/
+  -moz-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.7) /*inset*/
+;
+  /*0px 0px 0px 12px rgba(94,47,49,0.3);*/
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.7) /*inset*/
+;
+  /*0px 0px 0px 12px rgba(94,47,49,0.3);*/
+  background-size: cover;
+  background-color: #f0f0f0;
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: static;
+}
+
+.ss-small .ss-circle {
+  width: 100px;
+  height: 100px;
+}
+
+.ss-medium .ss-circle {
+  width: 200px;
+  height: 200px;
+}
+
+.ss-large .ss-circle {
+  width: 300px;
+  height: 300px;
+}
+
+.ss-circle-deco:after {
+  width: 0;
+  height: 0;
+
+  content: '';
+  position: absolute;
+  border: 6px solid $textColor;
+  border-radius: 12px;
+  top: 50%;
+  margin-top: -10px;
+}
+
+.ss-left .ss-circle {
+  float: right;
+  margin-right: 20%;
+}
+
+.ss-right .ss-circle {
+  float: left;
+  margin-left: 20%;
+}
+
+.ss-container h3 {
+  margin-top: 34px;
+  padding: 10px 15px;
+  background: rgba(94, 47, 49, 0) !important;
+}
+
+.ss-container .ss-medium h3 {
+  margin-top: 82px;
+}
+
+.ss-container .ss-large h3 {
+  margin-top: 133px;
+}
+
+.ss-container .ss-left h3 {
+  border-right: 5px solid rgba(164, 166, 181, 0.8);
+}
+
+.ss-container .ss-right h3 {
+  border-left: 5px solid rgba(164, 166, 181, 0.8);
+}
+
+.ss-container h3 span {
+  font-family: "bebasneue_regular", sans-serif;
+  color: $textColor;
+  font-size: 1.25em !important;
+  font-size: 1.25rem !important;
+  display: block;
+  padding-bottom: 5px;
+}
+
+.ss-container h3 a {
+  line-height: 34px;
+  display: block;
+
+  font-family: "lora_regular", sans-serif !important;
+  font-size: 1.5em !important;
+  font-size: 1.5rem !important;
+  color: #fff !important;
+}
+
+.ss-container h3 a:hover {
+  color: $textColor;
+}
+
+/* hide spans without picture */
+
+.empty-span {
+  background: transparent;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+
+/******************************************* studio view ********************************************/
+//
+//.xblock-render .mit_cre_timeline_block {
+//    background-color: #615c5c;
+//    max-height: 600px;
+//    overflow: scroll;
+//}
+//
+//.xblock-render #main-wrapper {
+//    position: relative;
+//    background-color: transparent;
+//    margin-top: 20px;
+//}
+//
+//.xblock-render #bg-overlay {
+//    position: relative;
+//    background-color: transparent;
+//}
+//
+//.xblock-render #site-bg-video {
+//    position: relative;
+//}
+//
+//.xblock-render #site-bg-video--wrapper {
+//    display: none;
+//}
+//
+//.xblock-render .ss-container {
+//    float: none;
+//}
+//
+//.xblock-render #timeline-summary {
+//    margin-top: 0;
+//    padding-top: 10%;
+//    height: 100%;
+//}
+//
+//.xblock-render .ss-links--wrapper {
+//    position: absolute;
+//    right: 5%;
+//}
+//
+//.xblock-render #scrollDown {
+//    bottom: initial;
+//    position: relative;
+//}
+
+/*/* XBLOCK overrides */
+
+#timeline_punchline {
+  display: none;
+}
+
+.course-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.course-content {
+  padding: 0 !important;
+}
+
+.ss-links--wrapper {
+  position: fixed;
+  height: 300px;
+  width: 60px !important;
+  top: 30%;
+  z-index: 1000;
+  background: transparent !important;
+  border: 0 none !important;
+}
+
+#main-wrapper {
+  position: absolute;
+  min-height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.container {
+  width: 100%;
+  min-height: 800px;
+  position: relative;
+}
+
+section#timeline-summary h1.section-header {
+  margin-bottom: .5em;
+  margin-bottom: 2rem;
+  position: relative;
+  color: $textColor;
+  @include font-header;
+}
+
+#timeline-summary {
+  position: relative;
+  width: 70%;
+  z-index: 2;
+  left: 15%;
+  margin-top: 12%;
+  color: $textColor;
+  height: calc(100vh - 200px);
+}
+
+#timeline-summary p {
+  @include font-content;
+
+  color: $textColor;
+  line-height: $lineHeight;
+}
+
+@media screen and (max-width: 1199px) {
+  section#timeline-summary h1.section-header {
+    font-size: 2.5rem;
+  }
+
+  #timeline-summary p {
+    font-size: 1rem
+  }
+}
+
+#site-bg-video {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  z-index: -1;
+  //background-image: url(../images/bg-static-int-panamas-history.jpg);
+  background-size: cover;
+}
+
+#site-bg-video--wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 100%;
+  min-width: 100%;
+  background-color: black;
+}
+
+#bg-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 100%;
+  min-width: 100%;
+  z-index: 100;
+  opacity: .5;
+}
+
+.sub-h-rule {
+  position: relative;
+  width: 25%;
+  height: 2px;
+  background-color: $textColor;
+  margin-bottom: 1.25em;
+  margin-bottom: 1.25rem;
+}
+
+.ss-container h3 span {
+  font-family: "bebasneue_regular", sans-serif;
+  color: $textColor;
+  font-size: 1.25em !important;
+  font-size: 1.25rem !important;
+  display: block;
+  padding-bottom: 5px;
+}
+
+.ss-container h3 span span {
+  font-size: 1em !important;
+  font-size: 1rem !important;
+  display: inline-block;
+}
+
+.ss-container h3 a {
+  font-family: "lora_regular", sans-serif !important;
+  font-size: 1.5em !important;
+  font-size: 1.5rem !important;
+  color: $textColor;
+}
+
+.ss-container h3 .restText {
+  font-family: "yantramanav_light", sans-serif;
+  font-size: 1em !important;
+  font-size: 1rem !important;
+  color: $textColor;
+  margin-top: 5px !important;
+}
+
+.ss-container h3 {
+  background: rgba(94, 47, 49, 0) !important;
+  text-shadow: none !important;
+}
+
+.ss-container .ss-right h3 {
+  border-left: 5px solid rgba(71, 173, 167, 0) !important;
+}
+
+.ss-container .ss-left h3 {
+  border-right: 5px solid rgba(71, 173, 167, 0) !important;
+}
+
+.ss-left h2, .ss-left h3 {
+  text-align: right;
+}
+
+.ss-left .ss-circle-deco:after {
+  right: -6px;
+}
+
+.ss-right .ss-circle-deco:after {
+  left: -6px;
+}
+
+.ss-circle-deco:before {
+  display: none !important;
+}
+
+#scrollDown {
+  position: absolute;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  width: 150px;
+  display: inline-block;
+  text-align: center;
+}
+
+#scrollDown p {
+  font-family: $headerFont;
+  font-size: 1em;
+  font-size: 1rem;
+  text-transform: uppercase;
+  opacity: 1;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+#next-arrow {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  background-position: 0 0;
+  background-size: 16px 10px;
+  background-repeat: no-repeat;
+  width: 16px;
+  height: 10px;
+  opacity: .81;
+}
+
+/*************************************************** PANAMA HISTORY end ************************************************/
