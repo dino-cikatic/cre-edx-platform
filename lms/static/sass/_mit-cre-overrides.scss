@@ -32,6 +32,29 @@ $lineHeight: 28px;
   font-family: $contentFont;
 }
 
+// COMMON COMPONENTS
+
+/* custom  scroll bar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(255, 255, 255, 0.4);
+}
+
 /**
  * MIT overrides for XBlocks
  **/
@@ -149,34 +172,6 @@ $lineHeight: 28px;
   width: 100%;
   object-fit: cover;
 }
-
-/**
- * Scroll bar
- **/
-
-.mitcre-textimagexblock-wrapper ::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-.mitcre-textimagexblock-wrapper ::-webkit-scrollbar-track {
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.3);
-}
-
-/* Handle */
-.mitcre-textimagexblock-wrapper ::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.9);
-}
-
-.mitcre-textimagexblock-wrapper ::-webkit-scrollbar-thumb:window-inactive {
-  background: rgba(255, 255, 255, 0.4);
-}
-
-// scroll bar end
 
 /*************************************************** TEXT (HTML) end ***************************************************/
 
@@ -766,55 +761,6 @@ body::-webkit-scrollbar {
   box-shadow: none;
 }
 
-/******************************************* studio view ********************************************/
-//
-//.xblock-render .mit_cre_timeline_block {
-//    background-color: #615c5c;
-//    max-height: 600px;
-//    overflow: scroll;
-//}
-//
-//.xblock-render #main-wrapper {
-//    position: relative;
-//    background-color: transparent;
-//    margin-top: 20px;
-//}
-//
-//.xblock-render #bg-overlay {
-//    position: relative;
-//    background-color: transparent;
-//}
-//
-//.xblock-render #site-bg-video {
-//    position: relative;
-//}
-//
-//.xblock-render #site-bg-video--wrapper {
-//    display: none;
-//}
-//
-//.xblock-render .ss-container {
-//    float: none;
-//}
-//
-//.xblock-render #timeline-summary {
-//    margin-top: 0;
-//    padding-top: 10%;
-//    height: 100%;
-//}
-//
-//.xblock-render .ss-links--wrapper {
-//    position: absolute;
-//    right: 5%;
-//}
-//
-//.xblock-render #scrollDown {
-//    bottom: initial;
-//    position: relative;
-//}
-
-/*/* XBLOCK overrides */
-
 #timeline_punchline {
   display: none;
 }
@@ -1164,3 +1110,656 @@ section#timeline-summary h1.section-header {
 }
 
 /*************************************************** DEMOGRAPHICS AND SOCIOECONOMICS end *******************************/
+
+/*
+** COMMON CSS FOR ALL ACTIVITIES (Progress bar, Buttons (in navigation), Background, Splash screen)
+**/
+
+$activityPageContentWidth: 72%;
+
+.mitcre-activity-container {
+  .background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .splash {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    overflow: auto;
+    padding: 0 !important;
+    width: 100%;
+
+    h1.header-text {
+      font-size: 36px;
+      font-family: "Lora", sans-serif;
+      line-height: normal;
+      color: $textColor;
+      padding: 30px 0 35px;
+      text-align: center;
+      margin: 0 !important;
+    }
+  }
+
+  #activity-progress {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    z-index: 12;
+    li {
+      width: calc(25% - 5px);
+      margin-right: 0.85px;
+      display: inline-block;
+      background: white;
+      opacity: .3;
+    }
+
+    li:last-child {
+      margin-right: 0;
+      width: 25%;
+    }
+
+    li.highlighted {
+      opacity: 1;
+    }
+  }
+
+  // page navigation buttons
+  button {
+    background: transparent;
+    color: $textColor;
+    text-transform: uppercase;
+    padding: 6px 60px;
+    cursor: pointer;
+    text-shadow: 0 0 0;
+    box-shadow: 0 0 0;
+    border-radius: 0;
+    font-size: 14px;
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    outline: none;
+
+    &#begin {
+      padding: 20px 60px;
+    }
+
+    &:hover {
+      background: $textColor;
+      color: black;
+      text-shadow: 0 0 0;
+      box-shadow: 0 0 0;
+    }
+
+    &:focus {
+      box-shadow: none !important;
+    }
+
+    &:disabled,
+    &:disabled:hover {
+      border-color: gray;
+      color: gray;
+    }
+  }
+}
+
+/*************************************************** CALCULATING CONSERVATORIO FINANCIALS ******************************/
+
+.mitcre_problem_xblock_block {
+  color: $textColor;
+
+  .background {
+    background: url(https://s3-us-west-2.amazonaws.com/mit-cre-edx/xblocks/calculating_conservatorio_financials/backgrounds_conservatorio-financials-activity.jpg);
+    background-size: cover;
+  }
+
+  section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    padding-top: 4%;
+  }
+  .content {
+    position: relative;
+    display: block;
+    overflow: auto;
+    height: 65%;
+    padding: 0;
+    width: $activityPageContentWidth;
+    margin: 20px auto;
+
+    @include font-content;
+    font-weight: 400;
+
+    p {
+      line-height: $lineHeight;
+    }
+  }
+
+  /* hide other pages at the beginning */
+  .net-operating-income,
+  .internal-rate-of-return {
+    display: none;
+  }
+
+  /* links */
+  a.download-link,
+  a.download-link:visited,
+  a.download-link:hover {
+    color: $textColor;
+    border-bottom: 1px solid $textColor;
+  }
+
+  /* titles for both pages */
+  .activity-title {
+    width: $activityPageContentWidth;
+    margin: 0 auto;
+
+    @include font-header;
+  }
+
+  .footer {
+    position: relative;
+    width: $activityPageContentWidth;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+
+  .return-to-case {
+    border-bottom: 1px solid white;
+    cursor: pointer;
+  }
+
+  /* page navigation */
+  .page-navigation {
+    right: 0;
+    vertical-align: bottom;
+    display: inline-block;
+    position: absolute;
+  }
+
+  /*** begin page ***/
+  .begin {
+    left: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    padding: 0 !important;
+
+    .content {
+      width: 30%;
+      margin: 0 auto;
+    }
+
+    .begin-container {
+      text-align: center;
+    }
+
+    .activity {
+      font-size: 14px;
+      font-family: "Hind", sans-serif !important;
+      font-weight: 300;
+      line-height: normal;
+      display: block;
+      text-transform: uppercase;
+      color: #fff;
+      text-align: center;
+      text-decoration: underline;
+      margin: 0 !important;
+    }
+  }
+
+  /*** Q&A  ***/
+
+  .question {
+    margin: 4px 0;
+  }
+
+  input.task-input {
+    font-size: 15px;
+    font-style: italic;
+    color: white;
+    background: #666666;
+    border: none;
+    padding: 10px 24px;
+    width: 166px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    box-shadow: none;
+  }
+
+  input.task-input:focus {
+    outline: none;
+  }
+
+  .task-label {
+    position: relative;
+    display: inline-block;
+  }
+
+  .net-operating-income .task-label {
+    min-width: 70px;
+  }
+
+  .internal-rate-of-return .task-label {
+    min-width: 110px;
+  }
+
+  .hint {
+    margin-top: 15px;
+    position: relative;
+    visibility: hidden;
+
+    .hint-message {
+      visibility: hidden;
+    }
+
+    .hint-link {
+      display: none;
+      text-decoration: underline;
+      cursor: pointer;
+
+      &:hover:after {
+        background: #d96f48;
+        color: white;
+        content: attr(data-hint);
+        white-space: pre-line;
+        padding: 15px;
+        position: absolute;
+        z-index: 5;
+        width: 500px;
+        font-style: normal;
+        bottom: 30px;
+        left: 0;
+      }
+    }
+  }
+
+  .task-circle {
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    display: inline-block;
+    background: #880d0f;
+    vertical-align: middle;
+    margin-left: 10px;
+  }
+
+  #sale_value_circle {
+    margin-left: 26px;
+  }
+
+  .task-circle.correct {
+    background: #809342;
+  }
+
+  .submit {
+    position: relative;
+    display: inline-block;
+  }
+}
+
+/*************************************************** CALCULATING CONSERVATORIO FINANCIALS end **************************/
+
+/*************************************************** NEIGHBORHOOD DYNAMICS *********************************************/
+
+.neighborhood_dynamics_block {
+
+  .background {
+    background: url('https://s3-us-west-2.amazonaws.com/mit-cre-edx/xblocks/neighborhood_dynamics/bg-static-int-street-grid_2x.jpg') no-repeat;
+    background-size: cover;
+  }
+
+  .section {
+    height: 100%;
+    width: 100%;
+  }
+
+  .content-wrapper {
+    position: relative;
+    height: 65%;
+    width: $activityPageContentWidth;
+    margin: 160px auto 20px;
+    overflow: auto;
+  }
+
+  .content {
+    position: relative;
+    display: block;
+    width: auto;
+    padding: 0;
+  }
+
+  .page-navigation {
+    width: $activityPageContentWidth;
+    margin: 0 auto;
+    position: relative;
+    bottom: 0;
+  }
+
+  .content a {
+    text-decoration: underline;
+    font-style: italic;
+    color: $textColor;
+  }
+
+  .section-container {
+    height: 100%;
+    width: 100%;
+  }
+
+  p.content-text {
+    padding: 5px 15px 0 0 !important;
+    line-height: $lineHeight;
+
+    @include font-content;
+    margin-bottom: 0 !important;
+  }
+
+  .begin {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .task1 .charts .task2 {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .begin-container {
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+  }
+
+  .main-content {
+    margin: 50px auto;
+    position: relative;
+    text-align: center;
+    width: 100%;
+  }
+
+  span.myicon-map {
+    background-position: 0 0;
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    position: relative;
+    left: 5px;
+    z-index: 1;
+  }
+
+  .view-on-map {
+    font-size: 16px !important;
+    font-family: "Hind", sans-serif !important;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: #fff;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  .view-on-map span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .view-on-map .view-on-map-text:hover {
+    text-decoration: underline;
+  }
+
+  .hint-link {
+    font-style: italic;
+    text-decoration: underline;
+    cursor: pointer;
+    display: inline;
+    position: relative;
+    overflow-x: visible !important;
+
+    &:hover:after {
+      background: #d96f48;
+      bottom: 40px;
+      color: white;
+      content: attr(data-nesto);
+      left: -440px;
+      padding: 20px;
+      position: absolute;
+      z-index: 98;
+      width: 500px;
+      font-style: normal;
+      line-height: 24px;
+    }
+
+    &:hover:before {
+      border: solid;
+      border-color: #d96f48 transparent;
+      border-width: 10px 10px 0 10px;
+      bottom: 30px;
+      content: "";
+      left: 50%;
+      position: absolute;
+      z-index: 99;
+    }
+  }
+
+  .task-label {
+    display: inline-block;
+    font-size: 18px;
+    font-family: "Hind", sans-serif;
+    font-weight: bold;
+    text-shadow: none;
+    color: $textColor;
+    cursor: initial;
+    vertical-align: middle;
+    min-width: 157px;
+    margin: 7px 0 0 0;
+  }
+
+  .task-label-small {
+    display: inline-block;
+    min-width: 167px;
+
+    vertical-align: middle;
+    color: $textColor;
+    font-size: 18px;
+    font-family: "Hind", sans-serif;
+    font-weight: normal;
+    text-shadow: none;
+  }
+
+  .task-input {
+    display: inline-block;
+    width: 166px;
+    margin: 0 0 10px 0;
+    padding: 10px 18px;
+    border: none;
+    vertical-align: middle;
+    box-shadow: none;
+
+    background: #666666;
+    outline: none;
+    text-align: center;
+    color: $textColor;
+    font-style: italic;
+    @include font-content;
+  }
+
+  .task-line {
+    left: 555px;
+    border: 1px solid $textColor;
+    display: inline-block;
+    margin: -14px 10px 0 10px;
+    vertical-align: middle;
+    width: 12px;
+  }
+
+  .task-circle {
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    display: inline-block;
+    background: #880d0f;
+    vertical-align: middle;
+    margin: 0 0 10px 10px;
+  }
+
+  .qa-wrapper {
+    padding-top: 15px;
+  }
+
+  .qa-wrapper .qa-container {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .question-wrapper {
+    margin-top: 30px;
+  }
+
+  .answers {
+    padding-top: 10px;
+  }
+
+  .pn-wrapper {
+    float: right;
+    vertical-align: middle;
+    display: inline-block;
+    position: relative;
+  }
+
+  .submit {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .item {
+    width: 20%;
+    text-align: left;
+    color: $textColor;
+    padding: 20px;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .item-line-top {
+    background-color: #c94d29;
+    height: 7px;
+    border: none;
+    border-radius: 1px;
+  }
+
+  .item-title {
+    font-size: 48px;
+    font-family: "Hind" !important;
+    display: block;
+  }
+
+  .activity {
+    font-size: 14px;
+    font-family: "Hind", sans-serif !important;
+    font-weight: 300;
+    line-height: normal;
+    display: block;
+    text-transform: uppercase;
+    color: $textColor;
+    text-align: center;
+    text-decoration: underline;
+  }
+
+  .item-text {
+    font-size: 18px;
+    font-family: "Hind" !important;
+    display: block;
+    padding: 20px 0;
+  }
+
+  .content-text {
+    font-size: 16px !important;
+    font-weight: 400;
+    line-height: normal;
+    color: $textColor;
+    text-align: left;
+    margin: 0;
+    padding: 3em;
+  }
+
+  .download-case-kit-link {
+    cursor: pointer;
+  }
+
+  .download-case-kit-link:hover {
+    text-decoration: underline !important;
+  }
+
+  /*
+   HINT
+   */
+
+  .hint {
+    margin-top: 15px;
+    position: relative;
+    visibility: hidden;
+    color: $textColor;
+  }
+
+  .hint .hint-message {
+    visibility: hidden;
+  }
+
+  .hint .hint-link {
+    display: none;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .task2 .hint-link:hover:after {
+    background: #d96f48;
+    color: $textColor;
+    content: attr(data-hint);
+    white-space: pre-line;
+    padding: 15px;
+    position: absolute;
+    z-index: 5;
+    width: 500px;
+    font-style: normal;
+    bottom: 40px;
+    left: 0;
+  }
+
+  .task2 .hint-link:hover:before {
+    left: 6%
+  }
+}
+
+/*************************************************** NEIGHBORHOOD DYNAMICS end *****************************************/
+
+
+
