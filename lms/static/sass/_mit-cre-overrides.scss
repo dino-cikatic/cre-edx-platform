@@ -1008,7 +1008,7 @@ section#timeline-summary h1.section-header {
 
   .header {
     width: 66%;
-    padding: 1% 10% 2% 23%;
+    padding: 1% 10% 2% 23%; // this has to be overwritten
     margin: 0 auto;
   }
 
@@ -1761,5 +1761,621 @@ $activityPageContentWidth: 72%;
 
 /*************************************************** NEIGHBORHOOD DYNAMICS end *****************************************/
 
+/*************************************************** SEE THROUGH THE DEVELOPERS' EYES **********************************/
 
+//    studio
+//.xblock-render #container,
+//.xblock-render #container .developers_eyes_block,
+//.xblock-render #container a,
+//.xblock-render #container .textimagexblock-wrapper {
+//  position: absolute;
+//}
+
+.course-content {
+  padding: 0 !important;
+}
+
+.developers_eyes_block {
+    background: black;
+    position: relative;
+    min-height: 400px;
+    overflow: hidden;
+
+  #container {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    //background: url(../img/background/background.jpg) no-repeat center center;
+    background-size: cover;
+    overflow: hidden;
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+
+    a {
+      position: absolute;
+      z-index: 2;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-family: bebasneue_regular, sans;
+      color: white;
+      padding-left: 0;
+      padding-right: 1em;
+      padding-top: .5em;
+      padding-bottom: .25em;
+      text-shadow: 2px 2px 8px black;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-smooth: always;
+    }
+  }
+
+  /* text ease-in */
+  @keyframes street-grid-anim {
+    0% {
+      opacity: 0;
+    }
+    30% {
+      margin-bottom: -90px;
+      opacity: 0;
+    }
+
+    100% {
+      margin-bottom: 0;
+      opacity: 1;
+    }
+  }
+
+  @keyframes place-making-anim {
+    0% {
+      opacity: 0;
+    }
+    40% {
+      opacity: 0;
+      margin-bottom: -90px;
+    }
+
+    100% {
+      margin-bottom: 0;
+      opacity: 1;
+    }
+  }
+
+  @keyframes good-bones-anim {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+      margin-bottom: -90px;
+    }
+
+    100% {
+      margin-bottom: 0;
+      opacity: 1;
+    }
+  }
+
+  @keyframes investment-potential-anim {
+    0% {
+      opacity: 0;
+    }
+    60% {
+      opacity: 0;
+      margin-top: 90px;
+    }
+
+    100% {
+      margin-top: 0;
+      opacity: 1;
+    }
+  }
+
+  @keyframes high-density-anim {
+    0% {
+      opacity: 0;
+    }
+    70% {
+      opacity: 0;
+      margin-top: 90px;
+    }
+
+    100% {
+      margin-top: 0;
+      opacity: 1;
+    }
+  }
+
+  @keyframes strat-location-anim {
+    0% {
+      opacity: 0;
+    }
+    70% {
+      opacity: 0;
+      margin-top: 90px;
+    }
+
+    100% {
+      margin-top: 0;
+      opacity: 1;
+    }
+  }
+
+  #streetGrid {
+    animation: street-grid-anim 3s;
+  }
+
+  #placemakingPotential {
+    animation: place-making-anim 3s;
+  }
+
+  #goodBones {
+    animation: good-bones-anim 3s;
+  }
+
+  #investmentPotential {
+    animation: investment-potential-anim 3s;
+  }
+
+  #highDensity {
+    animation: high-density-anim 3s;
+  }
+
+  #strategicLocation {
+    animation: strat-location-anim 3s;
+  }
+
+  /* end text ease-in */
+
+  #placemakingPotential {
+    bottom: 22%;
+    left: 10%;
+    transform: rotate(-4deg) skewX(0deg) skewY(-15deg);
+    font-size: 1.875rem;
+  }
+
+  #placemakingPotentialContent .content {
+    height: auto !important;
+  }
+
+  #streetGrid {
+    bottom: 26%;
+    left: 29.5%;
+    transform: rotate(-2deg) skewX(-2deg) skewY(38deg);
+    font-size: 1.5rem;
+  }
+
+  //#streetGridContent .background {
+  //  background-image: url(../img/background/street-grid.jpg);
+  //}
+  //
+  //#streetGridImg {
+  //  content: url(../img/street-grid.jpg);
+  //}
+
+  #streetGridImg:after {
+    //background-image: url(../img/street-grid.jpg);
+    display: inline-block;
+    background-size: 100% 100%;
+    content: "";
+  }
+
+  #goodBones {
+    bottom: 38%;
+    right: 22%;
+    transform: rotate(-2deg) skewX(-10deg) skewY(-25deg);
+    font-size: 1.875rem;
+  }
+
+  #goodBonesContent .background {
+    //background-image: url(../img/background/good-bones.jpg);
+  }
+
+  #investmentPotential {
+    top: 30%;
+    left: 30%;
+    transform: rotate(0deg) skewX(0deg) skewY(-12deg);
+    font-size: 1.25rem;
+  }
+
+  #investmentPotentialContent .button-container {
+    position: fixed;
+    top: 90%;
+    text-align: right !important;
+    left: 60%;
+    width: 24%;
+    z-index: 1;
+  }
+
+  #strategicLocation {
+    top: 8%;
+    left: 54%;
+    transform: rotate(0deg) skewX(0deg) skewY(4deg);
+    font-size: 1rem;
+  }
+
+  #strategicLocationContent .background,
+  #strategicLocationContent .background:after {
+    //background-image: url(../img/background/strat-location.jpg);
+  }
+
+  #airplaneIcon,
+  #airplaneIcon::after {
+    width: 80px;
+    margin-left: 70%;
+    //content: url(../img/airplane.png);
+  }
+
+  #buildingIcon,
+  #buildingIcon::after {
+    margin-left: 80px;
+    //content: url(../img/building.png);
+  }
+
+  #highDensity {
+    top: 18%;
+    right: 18%;
+    transform: rotate(0deg) skewX(0deg) skewY(8deg);
+    font-size: 1rem;
+  }
+
+  #highDensityContent .background {
+    //background-image: url(../img/background/high-density.jpg);
+  }
+
+  .developerEyesContent {
+    display: none;
+  }
+
+  #streetGridContent .content {
+    margin-top: 1em;
+  }
+
+  #streetGridContent a {
+    color: white;
+  }
+
+  #twentytwenty {
+    line-height: 0;
+    min-height: 400px;
+  }
+  //
+  //#ttBefore {
+  //  content: url(../img/1_1.jpg);
+  //}
+  //
+  //#ttAfter {
+  //  content: url(../img/1_2.jpg);
+  //}
+  //
+  //#ttBefore::after {
+  //  content: url(../img/1_1.jpg);
+  //  display: flex;
+  //}
+  //
+  //#ttAfter::after {
+  //  content: url(../img/1_2.jpg);
+  //  display: flex;
+  //}
+
+  #twentytwenty img, img::after {
+    height: 400px;
+    min-width: 500px;
+  }
+
+  #goodBonesContent .content-text {
+    font-size: 14px !important;
+  }
+
+  #panoContainer {
+    padding: 0;
+  }
+
+  /* STANDARD CSS */
+  //.xblock-render .textimagexblock-wrapper {
+  //  display: none;
+  //}
+  //
+  //.xblock-render .background {
+  //  width: auto !important;
+  //}
+
+  .back-to-aerial-view.investment-potential {
+    margin: 0 18% 0 0;
+  }
+
+  .textimagexblock-wrapper button, .back-to-aerial-view {
+    background: transparent;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 1px solid white;
+    z-index: 101;
+    box-shadow: 0 0 0 !important;
+    text-shadow: 0 0 0 !important;
+
+    padding: 6px 60px;
+    font-size: 14px;
+    font-size: .875rem;
+    font-family: Roboto;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    border-radius: 0;
+  }
+
+  .textimagexblock-wrapper button:focus, .back-to-aerial-view:focus {
+    box-shadow: 0 0 0;
+  }
+
+  .textimagexblock-wrapper button:hover, .back-to-aerial-view:hover {
+    opacity: .7;
+    background: transparent;
+  }
+
+  #panoContainer .content {
+    position: absolute;
+    top: 15%;
+    left: 14%;
+    padding: 0;
+    height: 80%;
+    width: 72%;
+    overflow: auto;
+    z-index: 100;
+  }
+
+  #panoContainer .header-text {
+    position: relative;
+    top: 0;
+  }
+
+  #panoContainer .button-container {
+    position: absolute;
+    display: inline-block;
+    text-align: right;
+    width: 40%;
+    left: 50%;
+    top: 70%;
+    z-index: 100;
+  }
+
+  .textimagexblock-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 3;
+
+    .background {
+      height: 100%;
+      width: 100%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-color: black;
+      position: relative;
+    }
+    .content {
+      position: absolute;
+      top: 25%;
+      left: 14%;
+      padding: 0;
+      height: 55%;
+      width: 75%;
+      overflow: auto;
+      z-index: 100;
+      display: inline-block;
+    }
+
+    p {
+      padding: 0 15px 0 0 !important;
+      font-size: 1em !important;
+    }
+
+    button {
+      margin-top: 22px;
+    }
+
+    img {
+      display: block;
+      width: 90%;
+      height: auto;
+    }
+
+    h1.header-text {
+      position: relative;
+      top: 60px;
+      left: 14%;
+      margin: 0;
+      padding: 0;
+      color: $textColor;
+      text-align: left;
+      @include font-header;
+      font-weight: 100;
+
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .main-content {
+      position: relative;
+      text-align: center;
+      width: 100%;
+    }
+
+    .button-container {
+      display: inline-block;
+      text-align: right;
+      width: 40%;
+      left: 35%;
+      top: 80%;
+      position: absolute;
+      padding-top: 10px;
+    }
+
+    .item {
+      width: 360px;
+      text-align: left;
+      color: white;
+      padding: 20px;
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    .item-line-top {
+      background-color: #c94d29;
+      height: 7px;
+      border: none;
+      border-radius: 1px;
+    }
+
+    .item-number {
+      font-size: 100px;
+      font-family: "Roboto Condensed";
+      display: block;
+    }
+
+    .item-title {
+      font-size: 2em;
+      font-family: "Roboto Condensed";
+      display: block;
+      padding-bottom: 15px;
+    }
+
+    .item-text {
+      font-size: 1.4em;
+      font-family: "Roboto Condensed";
+      display: block;
+      padding: 20px 0;
+      min-height: 45px;
+    }
+
+    .content-text {
+      line-height: 36px;
+      color: white !important;
+      text-align: left;
+      margin: 0;
+      padding: 3em;
+
+      font-family: Hind, sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      font-size: 1rem;
+    }
+
+    ol {
+      margin-left: 4em !important;
+    }
+
+    li {
+      font-family: sans;
+      font-size: 18px;
+      line-height: 28px;
+      color: white;
+      text-align: left;
+      padding: 0 2em 2em 0;
+    }
+
+    .left-side {
+      width: 40%;
+      min-width: 500px;
+      display: inline-block;
+    }
+
+    .right-side {
+      display: inline-block;
+      vertical-align: top;
+      width: 40%;
+      margin-left: 20px;
+    }
+
+    .view-on-map {
+      font-size: 24px;
+      font-family: "Roboto Condensed" !important;
+      font-weight: lighter;
+      color: white;
+      margin-left: 20px;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  hr {
+    border: 0;
+    height: 1px;
+    background: white;
+    margin: 6px 0;
+  }
+
+  .meter {
+    height: 8px; /* Can be anything */
+    position: relative;
+    background: #555;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    padding: 0;
+  }
+
+  .meter > span {
+    display: block;
+    height: 100%;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: #48ada7;
+    position: relative;
+  }
+
+  .meter > span:after {
+    content: " ";
+    position: absolute;
+    right: -7px;
+    top: -3px;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background: #48ada7;
+    border-radius: 100%;
+  }
+
+  .content-text .img-icon {
+    display: inline;
+    width: 50px;
+    height: 50px;
+  }
+
+  .meter-caption {
+    font-size: 16px;
+    color: white;
+    font-family: Roboto;
+  }
+
+  .meter-caption * {
+    vertical-align: middle;
+  }
+
+  // chart overrides for this XBlock
+  .multibar-chart-container {
+    background-size: cover;
+    background-color: black;
+    z-index: 1;
+
+    .header {
+      padding: 0 10% 0 23%;
+    }
+
+    svg.nvd3-svg {
+      padding-top: 0;
+    }
+  }
+
+}
+
+/*************************************************** SEE THROUGH THE DEVELOPERS' EYES end *******************************/
 
