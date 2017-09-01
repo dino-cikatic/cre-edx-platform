@@ -1198,10 +1198,10 @@ $activityPageContentWidth: 72%;
     }
 
     &:hover {
-      background: $textColor;
+      background: $textColor !important;
       color: black;
       text-shadow: 0 0 0;
-      box-shadow: 0 0 0;
+      box-shadow: 0 0 0 !important;
     }
 
     &:focus {
@@ -1776,10 +1776,18 @@ $activityPageContentWidth: 72%;
 }
 
 .developers_eyes_block {
-    background: black;
-    position: relative;
-    min-height: 400px;
-    overflow: hidden;
+  background: black;
+  position: relative;
+  min-height: 400px;
+  overflow: hidden;
+
+  svg {
+    padding-top: 0;
+  }
+
+  .background {
+    padding: 0;
+  }
 
   #container {
     position: relative;
@@ -1788,7 +1796,6 @@ $activityPageContentWidth: 72%;
     width: 100%;
     height: 100%;
     margin: 0;
-    //background: url(../img/background/background.jpg) no-repeat center center;
     background-size: cover;
     overflow: hidden;
     -webkit-transform-style: preserve-3d;
@@ -1813,6 +1820,7 @@ $activityPageContentWidth: 72%;
   }
 
   /* text ease-in */
+
   @keyframes street-grid-anim {
     0% {
       opacity: 0;
@@ -1947,16 +1955,11 @@ $activityPageContentWidth: 72%;
     font-size: 1.5rem;
   }
 
-  //#streetGridContent .background {
-  //  background-image: url(../img/background/street-grid.jpg);
-  //}
-  //
-  //#streetGridImg {
-  //  content: url(../img/street-grid.jpg);
-  //}
+  #streetGridImg {
+    width: 100%;
+  }
 
   #streetGridImg:after {
-    //background-image: url(../img/street-grid.jpg);
     display: inline-block;
     background-size: 100% 100%;
     content: "";
@@ -1967,10 +1970,6 @@ $activityPageContentWidth: 72%;
     right: 22%;
     transform: rotate(-2deg) skewX(-10deg) skewY(-25deg);
     font-size: 1.875rem;
-  }
-
-  #goodBonesContent .background {
-    //background-image: url(../img/background/good-bones.jpg);
   }
 
   #investmentPotential {
@@ -1996,22 +1995,15 @@ $activityPageContentWidth: 72%;
     font-size: 1rem;
   }
 
-  #strategicLocationContent .background,
-  #strategicLocationContent .background:after {
-    //background-image: url(../img/background/strat-location.jpg);
-  }
-
   #airplaneIcon,
   #airplaneIcon::after {
     width: 80px;
     margin-left: 70%;
-    //content: url(../img/airplane.png);
   }
 
   #buildingIcon,
   #buildingIcon::after {
     margin-left: 80px;
-    //content: url(../img/building.png);
   }
 
   #highDensity {
@@ -2019,10 +2011,6 @@ $activityPageContentWidth: 72%;
     right: 18%;
     transform: rotate(0deg) skewX(0deg) skewY(8deg);
     font-size: 1rem;
-  }
-
-  #highDensityContent .background {
-    //background-image: url(../img/background/high-density.jpg);
   }
 
   .developerEyesContent {
@@ -2041,28 +2029,11 @@ $activityPageContentWidth: 72%;
     line-height: 0;
     min-height: 400px;
   }
-  //
-  //#ttBefore {
-  //  content: url(../img/1_1.jpg);
-  //}
-  //
-  //#ttAfter {
-  //  content: url(../img/1_2.jpg);
-  //}
-  //
-  //#ttBefore::after {
-  //  content: url(../img/1_1.jpg);
-  //  display: flex;
-  //}
-  //
-  //#ttAfter::after {
-  //  content: url(../img/1_2.jpg);
-  //  display: flex;
-  //}
 
   #twentytwenty img, img::after {
     height: 400px;
     min-width: 500px;
+    margin: 0;
   }
 
   #goodBonesContent .content-text {
@@ -2082,103 +2053,51 @@ $activityPageContentWidth: 72%;
   //  width: auto !important;
   //}
 
+  .button-container {
+    position: absolute;
+    top: 90%;
+    left: 0;
+    right: 0;
+    width: $activityPageContentWidth;
+    height: auto;
+    margin: 0 auto;
+    z-index: 100;
+
+    text-align: right;
+  }
+
   .back-to-aerial-view.investment-potential {
     margin: 0 18% 0 0;
   }
 
-  .textimagexblock-wrapper button, .back-to-aerial-view {
-    background: transparent;
-    color: white;
-    text-transform: uppercase;
-    cursor: pointer;
-    border: 1px solid white;
-    z-index: 101;
-    box-shadow: 0 0 0 !important;
-    text-shadow: 0 0 0 !important;
-
-    padding: 6px 60px;
-    font-size: 14px;
-    font-size: .875rem;
-    font-family: Roboto;
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    border-radius: 0;
+  button.back-to-aerial-view {
+    margin-top: 0;
   }
 
-  .textimagexblock-wrapper button:focus, .back-to-aerial-view:focus {
-    box-shadow: 0 0 0;
+
+  // placemaking potential
+  #panoContainer {
+    .textimagexblock-content {
+      height: auto;
+    }
+
+    .textimagexblock-content,
+    h1.header-text {
+      z-index: 5;
+    }
+
+    .psv-container.psv-container--has-navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+    }
   }
 
-  .textimagexblock-wrapper button:hover, .back-to-aerial-view:hover {
-    opacity: .7;
-    background: transparent;
-  }
-
-  #panoContainer .content {
-    position: absolute;
-    top: 15%;
-    left: 14%;
-    padding: 0;
-    height: 80%;
-    width: 72%;
-    overflow: auto;
-    z-index: 100;
-  }
-
-  #panoContainer .header-text {
-    position: relative;
-    top: 0;
-  }
-
-  #panoContainer .button-container {
-    position: absolute;
-    display: inline-block;
-    text-align: right;
-    width: 40%;
-    left: 50%;
-    top: 70%;
-    z-index: 100;
-  }
-
-  .textimagexblock-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 0;
-    margin: 0;
-    height: 100%;
-    width: 100%;
+  .mitcre-textimagexblock-wrapper {
     z-index: 3;
-
-    .background {
-      height: 100%;
-      width: 100%;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-color: black;
-      position: relative;
-    }
-    .content {
-      position: absolute;
-      top: 25%;
-      left: 14%;
-      padding: 0;
-      height: 55%;
-      width: 75%;
-      overflow: auto;
-      z-index: 100;
-      display: inline-block;
-    }
-
-    p {
-      padding: 0 15px 0 0 !important;
-      font-size: 1em !important;
-    }
-
-    button {
-      margin-top: 22px;
-    }
 
     img {
       display: block;
@@ -2186,35 +2105,10 @@ $activityPageContentWidth: 72%;
       height: auto;
     }
 
-    h1.header-text {
-      position: relative;
-      top: 60px;
-      left: 14%;
-      margin: 0;
-      padding: 0;
-      color: $textColor;
-      text-align: left;
-      @include font-header;
-      font-weight: 100;
-
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
     .main-content {
       position: relative;
       text-align: center;
       width: 100%;
-    }
-
-    .button-container {
-      display: inline-block;
-      text-align: right;
-      width: 40%;
-      left: 35%;
-      top: 80%;
-      position: absolute;
-      padding-top: 10px;
     }
 
     .item {
@@ -2254,19 +2148,6 @@ $activityPageContentWidth: 72%;
       min-height: 45px;
     }
 
-    .content-text {
-      line-height: 36px;
-      color: white !important;
-      text-align: left;
-      margin: 0;
-      padding: 3em;
-
-      font-family: Hind, sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      font-size: 1rem;
-    }
-
     ol {
       margin-left: 4em !important;
     }
@@ -2290,7 +2171,7 @@ $activityPageContentWidth: 72%;
       display: inline-block;
       vertical-align: top;
       width: 40%;
-      margin-left: 20px;
+      margin-left: 5%;
     }
 
     .view-on-map {
@@ -2374,7 +2255,6 @@ $activityPageContentWidth: 72%;
       padding-top: 0;
     }
   }
-
 }
 
 /*************************************************** SEE THROUGH THE DEVELOPERS' EYES end *******************************/
