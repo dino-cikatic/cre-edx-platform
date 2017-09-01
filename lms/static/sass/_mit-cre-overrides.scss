@@ -1267,7 +1267,6 @@ $activityPageContentWidth: 72%;
 
   /* titles for both pages */
   .activity-title {
-    width: $activityPageContentWidth;
     margin: 0 auto;
 
     @include font-header;
@@ -1937,6 +1936,7 @@ $activityPageContentWidth: 72%;
 
   /* end text ease-in */
 
+  // labels
   #placemakingPotential {
     bottom: 22%;
     left: 10%;
@@ -2074,6 +2074,11 @@ $activityPageContentWidth: 72%;
     margin-top: 0;
   }
 
+  #goodBonesContent {
+    .textimagexblock-content {
+      top: 10%;
+    }
+  }
 
   // placemaking potential
   #panoContainer {
@@ -2249,6 +2254,12 @@ $activityPageContentWidth: 72%;
 
     .header {
       padding: 0 10% 0 23%;
+
+      .navigation-title {
+        @include font-header;
+        font-weight: 400;
+        color: $textColor;
+      }
     }
 
     svg.nvd3-svg {
