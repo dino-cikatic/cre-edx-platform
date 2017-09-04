@@ -1775,6 +1775,7 @@ $activityPageContentWidth: 72%;
 
 /*************************************************** SEE THROUGH THE DEVELOPERS' EYES **********************************/
 
+// TODO: update css when studio display is fixed (for now only begin screen works)
 .course-content {
   padding: 0 !important;
 }
@@ -2083,6 +2084,11 @@ $activityPageContentWidth: 72%;
 
   // placemaking potential
   #panoContainer {
+    &.background {
+      width: 100%;
+      padding: 2em 0;
+    }
+
     .textimagexblock-content {
       height: auto;
     }
@@ -2091,7 +2097,6 @@ $activityPageContentWidth: 72%;
     h1.header-text {
       z-index: 5;
     }
-
     .psv-container.psv-container--has-navbar {
       position: fixed;
       top: 0;
