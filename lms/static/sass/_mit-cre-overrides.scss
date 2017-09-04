@@ -1776,6 +1776,11 @@ $activityPageContentWidth: 72%;
   z-index: 100;
 
   text-align: right;
+
+  button.back-to-aerial-view {
+    margin-right: 2em;
+    margin-top: 1em;
+  }
 }
 
 /* BACK TO AREAL button end */
@@ -2194,6 +2199,12 @@ $activityPageContentWidth: 72%;
 
   .meter-caption * {
     vertical-align: middle;
+  }
+
+  #investmentPotentialContent {
+    .button-container {
+      top: 85%; // we need more space because of the chart
+    }
   }
 
   // chart overrides for this XBlock
