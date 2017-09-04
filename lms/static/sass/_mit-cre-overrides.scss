@@ -1126,7 +1126,6 @@ $activityPageContentWidth: 72%;
     bottom: 0;
     right: 0;
     height: 100%;
-    width: 100%;
   }
 
   .splash {
@@ -1233,7 +1232,7 @@ $activityPageContentWidth: 72%;
     left: 0;
     height: 100%;
     width: 100%;
-    padding-top: 4%;
+    padding-top: 5em;
   }
   .content {
     position: relative;
@@ -1269,6 +1268,7 @@ $activityPageContentWidth: 72%;
   /* titles for both pages */
   .activity-title {
     margin: 0 auto;
+    width: $activityPageContentWidth;
 
     @include font-header;
   }
@@ -1763,13 +1763,22 @@ $activityPageContentWidth: 72%;
 
 /*************************************************** SEE THROUGH THE DEVELOPERS' EYES **********************************/
 
-//    studio
-//.xblock-render #container,
-//.xblock-render #container .developers_eyes_block,
-//.xblock-render #container a,
-//.xblock-render #container .textimagexblock-wrapper {
-//  position: absolute;
-//}
+/* BACK TO AREAL button */
+
+.button-container {
+  position: absolute;
+  top: 80%;
+  left: 0;
+  right: 0;
+  width: $activityPageContentWidth;
+  height: auto;
+  margin: 0 auto;
+  z-index: 100;
+
+  text-align: right;
+}
+
+/* BACK TO AREAL button end */
 
 .course-content {
   padding: 0 !important;
@@ -1783,10 +1792,6 @@ $activityPageContentWidth: 72%;
 
   svg {
     padding-top: 0;
-  }
-
-  .background {
-    padding: 0;
   }
 
   #container {
@@ -1980,15 +1985,6 @@ $activityPageContentWidth: 72%;
     font-size: 1.25rem;
   }
 
-  #investmentPotentialContent .button-container {
-    position: fixed;
-    top: 90%;
-    text-align: right !important;
-    left: 60%;
-    width: 24%;
-    z-index: 1;
-  }
-
   #strategicLocation {
     top: 8%;
     left: 54%;
@@ -2018,14 +2014,6 @@ $activityPageContentWidth: 72%;
     display: none;
   }
 
-  #streetGridContent .content {
-    margin-top: 1em;
-  }
-
-  #streetGridContent a {
-    color: white;
-  }
-
   #twentytwenty {
     line-height: 0;
     min-height: 400px;
@@ -2037,52 +2025,13 @@ $activityPageContentWidth: 72%;
     margin: 0;
   }
 
-  #goodBonesContent .content-text {
-    font-size: 14px !important;
-  }
-
-  #panoContainer {
-    padding: 0;
-  }
-
-  /* STANDARD CSS */
-  //.xblock-render .textimagexblock-wrapper {
-  //  display: none;
-  //}
-  //
-  //.xblock-render .background {
-  //  width: auto !important;
-  //}
-
-  .button-container {
-    position: absolute;
-    top: 90%;
-    left: 0;
-    right: 0;
-    width: $activityPageContentWidth;
-    height: auto;
-    margin: 0 auto;
-    z-index: 100;
-
-    text-align: right;
-  }
-
-  .back-to-aerial-view.investment-potential {
-    margin: 0 18% 0 0;
-  }
-
-  button.back-to-aerial-view {
-    margin-top: 0;
-  }
-
-  #goodBonesContent {
-    .textimagexblock-content {
-      top: 10%;
-    }
-  }
-
   // placemaking potential
   #panoContainer {
+    &.background {
+      width: 100%;
+      padding: 2em 0;
+    }
+
     .textimagexblock-content {
       height: auto;
     }
