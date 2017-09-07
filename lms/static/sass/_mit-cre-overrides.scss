@@ -1193,8 +1193,10 @@ $activityPageContentWidth: 72%;
     -moz-osx-font-smoothing: grayscale;
     outline: none;
 
-    &#begin {
+    &#begin,
+    &.splash-button {
       padding: 20px 60px;
+      margin: 0 auto;
     }
 
     &:hover {
