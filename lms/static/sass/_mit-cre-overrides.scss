@@ -106,7 +106,6 @@ $lineHeight: 28px;
   width: auto;
   background-color: black;
   background-size: cover;
-  //padding: 2em 4em;
   position: absolute;
   overflow: auto;
 }
@@ -115,7 +114,6 @@ $lineHeight: 28px;
   position: relative;
   @include position-content;
 
-  //top: 7%;
   top: 10%;
   height: 60%;
   overflow: auto;
@@ -124,7 +122,6 @@ $lineHeight: 28px;
 .mitcre-textimagexblock-wrapper h1.header-text {
   position: relative;
   @include position-content;
-  //top: 60px;
 
   top: 10%;
 
@@ -881,7 +878,6 @@ section#timeline-summary h1.section-header {
   width: 100%;
   overflow: hidden;
   z-index: -1;
-  //background-image: url(../images/bg-static-int-panamas-history.jpg);
   background-size: cover;
 }
 
