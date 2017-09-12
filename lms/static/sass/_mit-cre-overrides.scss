@@ -1019,6 +1019,7 @@ section#timeline-summary h1.section-header {
   font-family: 'Roboto Condensed', sans-serif;
   /* background image is generated from js*/
   background-size: cover;
+  overflow: auto;
 
   .multibar-content {
     padding: 2% 4%;
@@ -1036,9 +1037,7 @@ section#timeline-summary h1.section-header {
 
   svg {
     // we need initial size. But it will be overwritten later if needed.
-    min-height: 800px;
-    min-width: 950px;
-
+    min-height: 500px;
     color: $textColor;
   }
 
