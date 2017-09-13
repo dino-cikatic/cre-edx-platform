@@ -63,6 +63,7 @@ $lineHeight: 28px;
   width: 100% !important;
   height: 100%;
   max-width: 100% !important;
+  background-color: black;
 }
 
 .course-content {
@@ -1337,7 +1338,7 @@ $activityPageContentWidth: 72%;
   /* page navigation */
   .page-navigation {
     position: absolute;
-    width:100%;
+    width: 100%;
     vertical-align: bottom;
     display: inline-block;
 
@@ -1827,13 +1828,13 @@ $activityPageContentWidth: 72%;
 /* BACK TO AREAL button */
 
 .button-container {
-  position: absolute;
-  top: 80%;
+  position: relative;
+  top: 10%;
   left: 0;
   right: 0;
   width: $activityPageContentWidth;
   height: auto;
-  margin: 0 auto;
+  margin: 0 auto 5% auto;
   z-index: 100;
 
   text-align: right;
@@ -1853,11 +1854,11 @@ $activityPageContentWidth: 72%;
 .developers_eyes_block {
   background: black;
   position: relative;
-  min-height: 400px;
   overflow: hidden;
 
   svg {
     padding-top: 0;
+    min-height: unset;
   }
 
   #container {
@@ -2078,6 +2079,12 @@ $activityPageContentWidth: 72%;
 
   .developerEyesContent {
     display: none;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 
   #twentytwenty {
@@ -2095,11 +2102,11 @@ $activityPageContentWidth: 72%;
   #panoContainer {
     &.background {
       width: 100%;
-      padding: 2em 0;
+      padding: 1% 0;
     }
 
     .textimagexblock-content {
-      height: auto;
+      height: 50%;
     }
 
     .textimagexblock-content,
@@ -2262,20 +2269,33 @@ $activityPageContentWidth: 72%;
     vertical-align: middle;
   }
 
-  #investmentPotentialContent {
-    .button-container {
-      top: 85%; // we need more space because of the chart
-    }
-  }
-
   // chart overrides for this XBlock
   .multibar-chart-container {
+    padding-top: 0;
     background-size: cover;
     background-color: black;
     z-index: 1;
 
+    .multibar-chart {
+      height: 100%;
+
+      .button-container {
+        position: absolute;
+        top: unset;
+        bottom: 0;
+        width: 100%;
+        margin: 0 auto;
+      }
+    }
+
+    .multibar-content {
+      position: relative;
+      height: 65%;
+      padding: 0;
+    }
+
     .header {
-      padding: 0 10% 0 23%;
+      padding: 3% 10% 2% 23%;
 
       .navigation-title {
         @include font-header;
