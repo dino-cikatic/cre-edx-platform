@@ -55,6 +55,28 @@ $lineHeight: 28px;
   background: rgba(255, 255, 255, 0.4);
 }
 
+/* EDX overrides */
+.course-wrapper {
+  position: absolute;
+  overflow: auto;
+
+  width: 100% !important;
+  height: 100%;
+  max-width: 100% !important;
+  background-color: black;
+}
+
+.course-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100% !important;
+
+  margin: 0;
+  padding: 0 !important;
+}
+
 /**
  * MIT overrides for XBlocks
  **/
@@ -85,14 +107,15 @@ $lineHeight: 28px;
   width: auto;
   background-color: black;
   background-size: cover;
-  padding: 2em 4em;
+  position: absolute;
+  overflow: auto;
 }
 
 .mitcre-textimagexblock-wrapper .textimagexblock-content {
   position: relative;
   @include position-content;
 
-  top: 7%;
+  top: 10%;
   height: 60%;
   overflow: auto;
 }
@@ -100,7 +123,8 @@ $lineHeight: 28px;
 .mitcre-textimagexblock-wrapper h1.header-text {
   position: relative;
   @include position-content;
-  top: 60px;
+
+  top: 10%;
 
   @include font-header;
   font-weight: 400;
@@ -164,13 +188,22 @@ $lineHeight: 28px;
   }
 }
 
-.mitcre-textimagexblock-wrapper .background-video {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
+/* Casco viejo overrides */
+.mitcre-textimagexblock-wrapper.casco-viejo {
+  .background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+
+    background-color: black;
+  }
+
+  .background {
+    background-color: transparent;
+  }
 }
 
 /*************************************************** TEXT (HTML) end ***************************************************/
@@ -538,6 +571,15 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+.mit_cre_timeline_block,
+.xblock-student_view-mit_cre_timeline {
+  height: 100%;
+}
+
+.xblock-student_view-mit_cre_timeline {
+  top: 0;
+}
+
 .ss-links {
   width: 60px;
   height: 300px;
@@ -614,7 +656,7 @@ body::-webkit-scrollbar {
   position: absolute;
   width: 3px;
   background: $textColor;
-  top: 0px;
+  top: 2rem;
   left: 50%;
   margin-left: -2px;
   content: '';
@@ -765,15 +807,6 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-.course-wrapper {
-  width: 100% !important;
-  max-width: 100% !important;
-}
-
-.course-content {
-  padding: 0 !important;
-}
-
 .ss-links--wrapper {
   position: fixed;
   height: 300px;
@@ -785,7 +818,8 @@ body::-webkit-scrollbar {
 }
 
 #main-wrapper {
-  position: absolute;
+  position: relative;
+  top: 13%;
   min-height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, .5);
@@ -807,12 +841,14 @@ section#timeline-summary h1.section-header {
 
 #timeline-summary {
   position: relative;
-  width: 70%;
-  z-index: 2;
   left: 15%;
-  margin-top: 12%;
+  top: 12%;
+  width: 70%;
+  height: auto;
+  min-height: calc(100vh - 20%);
+  margin-top: 0;
   color: $textColor;
-  height: calc(100vh - 200px);
+  z-index: 2;
 }
 
 #timeline-summary p {
@@ -830,6 +866,11 @@ section#timeline-summary h1.section-header {
   #timeline-summary p {
     font-size: 1rem
   }
+
+  .ss-links--wrapper {
+    top: 0;
+  }
+
 }
 
 #site-bg-video {
@@ -838,7 +879,6 @@ section#timeline-summary h1.section-header {
   width: 100%;
   overflow: hidden;
   z-index: -1;
-  //background-image: url(../images/bg-static-int-panamas-history.jpg);
   background-size: cover;
 }
 
@@ -932,12 +972,14 @@ section#timeline-summary h1.section-header {
 }
 
 #scrollDown {
-  position: absolute;
-  left: 50%;
-  bottom: 40px;
-  transform: translateX(-50%);
-  width: 150px;
   display: inline-block;
+  position: absolute;
+  top: -2rem;
+  left: 50%;
+  width: 150px;
+  transform: translateX(-50%);
+  z-index: 10;
+  color: $textColor;
   text-align: center;
 }
 
@@ -978,6 +1020,7 @@ section#timeline-summary h1.section-header {
   font-family: 'Roboto Condensed', sans-serif;
   /* background image is generated from js*/
   background-size: cover;
+  overflow: auto;
 
   .multibar-content {
     padding: 2% 4%;
@@ -995,9 +1038,7 @@ section#timeline-summary h1.section-header {
 
   svg {
     // we need initial size. But it will be overwritten later if needed.
-    min-height: 800px;
-    min-width: 950px;
-
+    min-height: 500px;
     color: $textColor;
   }
 
@@ -1120,12 +1161,13 @@ $activityPageContentWidth: 72%;
 .mitcre-interactive-container,
 .mitcre-activity-container {
   .background {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     height: 100%;
+    overflow: auto;
   }
 
   .splash {
@@ -1229,21 +1271,22 @@ $activityPageContentWidth: 72%;
   }
 
   section {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
-    padding-top: 5em;
   }
+
   .content {
-    position: relative;
     display: block;
-    overflow: auto;
-    height: 65%;
-    padding: 0;
+    position: relative;
+    top: 10%;
+    height: 60%;
     width: $activityPageContentWidth;
     margin: 20px auto;
+    padding: 0;
+    overflow: auto;
 
     @include font-content;
     font-weight: 400;
@@ -1269,8 +1312,10 @@ $activityPageContentWidth: 72%;
 
   /* titles for both pages */
   .activity-title {
-    margin: 0 auto;
+    position: relative;
+    top: 10%;
     width: $activityPageContentWidth;
+    margin: 0 auto;
 
     @include font-header;
   }
@@ -1278,6 +1323,7 @@ $activityPageContentWidth: 72%;
   .footer {
     position: relative;
     width: $activityPageContentWidth;
+    top: 10%;
     bottom: 0;
     left: 0;
     right: 0;
@@ -1291,10 +1337,23 @@ $activityPageContentWidth: 72%;
 
   /* page navigation */
   .page-navigation {
-    right: 0;
+    position: absolute;
+    width: 100%;
     vertical-align: bottom;
     display: inline-block;
-    position: absolute;
+
+    button.submit {
+      float: left;
+    }
+
+    button.forward-progress,
+    button.backward-progress {
+      float: right;
+    }
+
+    button.backward-progress {
+      margin-right: .3rem;
+    }
   }
 
   /*** begin page ***/
@@ -1437,9 +1496,10 @@ $activityPageContentWidth: 72%;
 
   .content-wrapper {
     position: relative;
+    top: 15%;
     height: 65%;
     width: $activityPageContentWidth;
-    margin: 160px auto 20px;
+    margin: 0 auto;
     overflow: auto;
   }
 
@@ -1454,7 +1514,7 @@ $activityPageContentWidth: 72%;
     width: $activityPageContentWidth;
     margin: 0 auto;
     position: relative;
-    bottom: 0;
+    top: 15%;
   }
 
   .content a {
@@ -1768,13 +1828,13 @@ $activityPageContentWidth: 72%;
 /* BACK TO AREAL button */
 
 .button-container {
-  position: absolute;
-  top: 80%;
+  position: relative;
+  top: 10%;
   left: 0;
   right: 0;
   width: $activityPageContentWidth;
   height: auto;
-  margin: 0 auto;
+  margin: 0 auto 5% auto;
   z-index: 100;
 
   text-align: right;
@@ -1794,11 +1854,11 @@ $activityPageContentWidth: 72%;
 .developers_eyes_block {
   background: black;
   position: relative;
-  min-height: 400px;
   overflow: hidden;
 
   svg {
     padding-top: 0;
+    min-height: unset;
   }
 
   #container {
@@ -2019,6 +2079,12 @@ $activityPageContentWidth: 72%;
 
   .developerEyesContent {
     display: none;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 
   #twentytwenty {
@@ -2036,11 +2102,11 @@ $activityPageContentWidth: 72%;
   #panoContainer {
     &.background {
       width: 100%;
-      padding: 2em 0;
+      padding: 1% 0;
     }
 
     .textimagexblock-content {
-      height: auto;
+      height: 50%;
     }
 
     .textimagexblock-content,
@@ -2203,20 +2269,33 @@ $activityPageContentWidth: 72%;
     vertical-align: middle;
   }
 
-  #investmentPotentialContent {
-    .button-container {
-      top: 85%; // we need more space because of the chart
-    }
-  }
-
   // chart overrides for this XBlock
   .multibar-chart-container {
+    padding-top: 0;
     background-size: cover;
     background-color: black;
     z-index: 1;
 
+    .multibar-chart {
+      height: 100%;
+
+      .button-container {
+        position: absolute;
+        top: unset;
+        bottom: 0;
+        width: 100%;
+        margin: 0 auto;
+      }
+    }
+
+    .multibar-content {
+      position: relative;
+      height: 65%;
+      padding: 0;
+    }
+
     .header {
-      padding: 0 10% 0 23%;
+      padding: 3% 10% 2% 23%;
 
       .navigation-title {
         @include font-header;
