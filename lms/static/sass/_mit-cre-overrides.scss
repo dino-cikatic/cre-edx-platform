@@ -2319,53 +2319,6 @@ $activityPageContentWidth: 72%;
 /*************************************************** THROUGH THE EYES OF THE COMMUNITY  *********************************/
 
 .xblock-student_view-community_eyes {
-  @media (max-width: $breakMedium) {
-    &.zoomed {
-      font-size: 14px;
-
-      .expander-text {
-        top: 5% !important;
-        line-height: normal;
-      }
-
-      .person-name {
-        margin-top: 0;
-      }
-
-      .quote, .description {
-        max-width: 100%;
-      }
-
-      #expander-two {
-        .quote {
-          font-size: 1.5em;
-        }
-      }
-
-      #expander-six {
-        .description {
-          max-width: 65%;
-        }
-      }
-
-      #expander-four {
-        .expander-text {
-          max-width: 60%;
-        }
-      }
-
-      #expander-five {
-        .expander-text {
-          left: 5%;
-        }
-      }
-    }
-  }
-
-  @media (max-width: $smallMedium) {
-    font-size: 12px;
-  }
-
   #container {
     position: fixed;
     top: 0;
@@ -2422,6 +2375,7 @@ $activityPageContentWidth: 72%;
 
   .expander-text {
     position: fixed;
+    max-width: 60%;
     margin-right: .5em;
     color: $textColor;
     font-family: serif;
@@ -2451,6 +2405,62 @@ $activityPageContentWidth: 72%;
   .description {
     font-size: 1em;
     max-width: 70%;
+  }
+
+  @media (max-width: $breakMedium) {
+    &.zoomed {
+      font-size: 14px;
+
+      .expander-text {
+        top: 5% !important;
+        line-height: normal;
+      }
+
+      .person-name {
+        margin-top: 0;
+      }
+
+      .quote, .description {
+        max-width: 100%;
+      }
+
+      #expander-two {
+        .quote {
+          font-size: 1.5em;
+        }
+      }
+
+      #expander-six {
+        .description {
+          max-width: 65%;
+        }
+      }
+
+      #expander-four {
+        .expander-text {
+          max-width: 60%;
+        }
+      }
+
+      #expander-five {
+        .expander-text {
+          left: 5%;
+        }
+      }
+    }
+  }
+
+  @media (max-width: $smallMedium) {
+    .quote {
+      font-size: 1.2em;
+    }
+
+    .expander-trigger {
+      height: 1.5em;
+      width: 1.5em;
+      line-height: 1.5em;
+      font-size: 1em;
+    }
   }
 }
 
