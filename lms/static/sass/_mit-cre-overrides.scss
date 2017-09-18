@@ -2383,7 +2383,7 @@ $activityPageContentWidth: 72%;
   }
 
   .quote {
-    $quoteFontSize: 1.8em;
+    $quoteFontSize: 1.85em;
 
     font-size: $quoteFontSize;
     max-width: 75%;
@@ -2451,15 +2451,17 @@ $activityPageContentWidth: 72%;
   }
 
   @media (max-width: $smallMedium) {
-    .quote {
-      font-size: 1.2em;
-    }
+    &.zoomed {
+      .quote {
+        font-size: 1.2em;
+      }
 
-    .expander-trigger {
-      height: 1.5em;
-      width: 1.5em;
-      line-height: 1.5em;
-      font-size: 1em;
+      .expander-trigger {
+        height: 1.5em;
+        width: 1.5em;
+        line-height: 1.5em;
+        font-size: 1em;
+      }
     }
   }
 }
