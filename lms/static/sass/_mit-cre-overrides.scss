@@ -13,7 +13,8 @@ $lineHeight: 28px;
 
 /* Breakpoints for media screen */
 $breakMedium: 1600px;
-$smallMedium: 1024px;
+$breakMediumSmall: 1366px;
+$breakSmall: 1024px;
 
 @mixin font-smoothing {
   -webkit-font-smoothing: antialiased;
@@ -2375,7 +2376,7 @@ $activityPageContentWidth: 72%;
 
   .expander-text {
     position: fixed;
-    max-width: 60%;
+    max-width: 50%;
     margin-right: .5em;
     color: $textColor;
     font-family: serif;
@@ -2407,61 +2408,81 @@ $activityPageContentWidth: 72%;
     max-width: 70%;
   }
 
-  @media (max-width: $breakMedium) {
-    &.zoomed {
-      font-size: 14px;
+  /* Each person's text wrapper */
+  #expander-one .expander-text {
+    top: 26%;
+    left: 25%;
+  }
 
+  #expander-two .expander-text {
+    top: 14%;
+    left: 41%;
+  }
+
+  #expander-three .expander-text {
+    top: 15%;
+    left: 55%;
+  }
+
+  #expander-four .expander-text {
+    top: 25%;
+    left: 6%;
+  }
+
+  #expander-five .expander-text {
+    top: 10%;
+    left: 15%;
+    right: 35%;
+  }
+
+  #expander-six .expander-text {
+    top: 8%;
+    left: 35%;
+  }
+
+  @media screen and (max-width: $breakMedium) {
+    font-size: 14px;
+
+    .person-name {
+      margin-top: 0;
+    }
+
+    .quote, .description {
+      max-width: 100%;
+    }
+
+    #expander-six {
+      .description {
+        max-width: 65%;
+      }
+    }
+
+    #expander-four {
       .expander-text {
-        top: 5% !important;
-        line-height: normal;
+        max-width: 60%;
       }
+    }
 
-      .person-name {
-        margin-top: 0;
-      }
-
-      .quote, .description {
-        max-width: 100%;
-      }
-
-      #expander-two {
-        .quote {
-          font-size: 1.5em;
-        }
-      }
-
-      #expander-six {
-        .description {
-          max-width: 65%;
-        }
-      }
-
-      #expander-four {
-        .expander-text {
-          max-width: 60%;
-        }
-      }
-
-      #expander-five {
-        .expander-text {
-          left: 5%;
-        }
+    #expander-five {
+      .expander-text {
+        left: 5%;
       }
     }
   }
 
-  @media (max-width: $smallMedium) {
-    &.zoomed {
-      .quote {
-        font-size: 1.2em;
-      }
+  @media screen and (max-width: $breakMediumSmall) {
+    font-size: 12px;
+    line-height: normal;
 
-      .expander-trigger {
-        height: 1.5em;
-        width: 1.5em;
-        line-height: 1.5em;
-        font-size: 1em;
-      }
+    .quote {
+      font-size: 1.5em;
+    }
+
+    .expander-trigger {
+      height: 1.5em;
+      width: 1.5em;
+      line-height: 1.5em;
+      font-size: 1em;
     }
   }
 }
