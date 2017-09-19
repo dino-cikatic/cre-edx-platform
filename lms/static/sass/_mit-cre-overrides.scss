@@ -2485,6 +2485,16 @@ $activityPageContentWidth: 72%;
       font-size: 1em;
     }
   }
+
+  @media screen and (max-width: $breakSmall) {
+    .break-quote {
+      display: inline;
+    }
+
+    #expander-two .expander-text {
+      top: 5% !important;
+    }
+  }
 }
 
 /*************************************************** THROUGH THE EYES OF THE COMMUNITY end ******************************/
