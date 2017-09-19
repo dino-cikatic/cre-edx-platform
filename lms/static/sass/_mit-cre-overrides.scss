@@ -11,6 +11,11 @@ $linkBackgroundOrangeWithOpacity: rgba(201, 74, 6, .7);
 
 $lineHeight: 28px;
 
+/* Breakpoints for media screen */
+$breakMedium: 1600px;
+$breakMediumSmall: 1366px;
+$breakSmall: 1024px;
+
 @mixin font-smoothing {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -104,7 +109,7 @@ $lineHeight: 28px;
 
 .mitcre-textimagexblock-wrapper .background {
   height: 100%;
-  width: auto;
+  width: 100%;
   background-color: black;
   background-size: cover;
   position: absolute;
@@ -2312,3 +2317,184 @@ $activityPageContentWidth: 72%;
 
 /*************************************************** SEE THROUGH THE DEVELOPERS' EYES end *******************************/
 
+/*************************************************** THROUGH THE EYES OF THE COMMUNITY  *********************************/
+
+.xblock-student_view-community_eyes {
+  #container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    z-index: 1;
+  }
+
+  .expander-trigger {
+    $diameter: 2em;
+
+    position: fixed;
+    height: $diameter;
+    width: $diameter;
+    border: 1px solid $textColor;
+    border-radius: 100%;
+    text-align: center;
+    line-height: $diameter;
+    font-size: 1.4em;
+    color: $textColor;
+    background-color: rgb(110, 27, 24);
+    opacity: .7;
+    z-index: 3;
+  }
+
+  .expander-trigger:hover {
+    opacity: 1;
+    z-index: 5;
+    background-color: $textColor;
+    color: black;
+
+  }
+
+  .expander-trigger:hover + .expander-image {
+    opacity: 1;
+    z-index: 4;
+  }
+
+  .expander-image {
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    z-index: 2;
+    transition: opacity .4s;
+  }
+
+  .expander-text {
+    position: fixed;
+    max-width: 50%;
+    margin-right: .5em;
+    color: $textColor;
+    font-family: serif;
+    font-style: italic;
+  }
+
+  .quote {
+    $quoteFontSize: 1.85em;
+
+    font-size: $quoteFontSize;
+    max-width: 75%;
+
+    &::before {
+      content: "“";
+      position: absolute;
+      left: - ($quoteFontSize - 0.8);
+    }
+  }
+
+  .person-name {
+    margin-top: 1.8em;
+    font-size: 1.25em;
+    font-style: normal;
+    line-height: 2.8em;
+  }
+
+  .description {
+    font-size: 1em;
+    max-width: 70%;
+  }
+
+  /* Each person's text wrapper */
+  #expander-one .expander-text {
+    top: 26%;
+    left: 25%;
+  }
+
+  #expander-two .expander-text {
+    top: 14%;
+    left: 41%;
+  }
+
+  #expander-three .expander-text {
+    top: 15%;
+    left: 55%;
+  }
+
+  #expander-four .expander-text {
+    top: 25%;
+    left: 6%;
+  }
+
+  #expander-five .expander-text {
+    top: 10%;
+    left: 15%;
+    right: 35%;
+  }
+
+  #expander-six .expander-text {
+    top: 8%;
+    left: 35%;
+  }
+
+  @media screen and (max-width: $breakMedium) {
+    font-size: 14px;
+
+    .person-name {
+      margin-top: 0;
+    }
+
+    .quote, .description {
+      max-width: 100%;
+    }
+
+    #expander-six {
+      .description {
+        max-width: 65%;
+      }
+    }
+
+    #expander-four {
+      .expander-text {
+        max-width: 60%;
+      }
+    }
+
+    #expander-five {
+      .expander-text {
+        left: 5%;
+      }
+    }
+  }
+
+  @media screen and (max-width: $breakMediumSmall) {
+    font-size: 12px;
+    line-height: normal;
+
+    .quote {
+      font-size: 1.5em;
+    }
+
+    .expander-trigger {
+      height: 1.5em;
+      width: 1.5em;
+      line-height: 1.5em;
+      font-size: 1em;
+    }
+  }
+
+  @media screen and (max-width: $breakSmall) {
+    .break-quote {
+      display: inline;
+    }
+
+    #expander-two .expander-text {
+      top: 5% !important;
+    }
+  }
+}
+
+/*************************************************** THROUGH THE EYES OF THE COMMUNITY end ******************************/
