@@ -98,98 +98,128 @@ $breakSmall: 1024px;
   width: 100%;
 
   @include font-smoothing;
-}
 
-.mitcre-textimagexblock-wrapper img {
-  display: block;
-  width: 70%;
-  height: auto;
-  margin: 1em auto;
-}
+  img {
+    display: block;
+    width: 70%;
+    height: auto;
+    margin: 1em auto;
+  }
 
-.mitcre-textimagexblock-wrapper .background {
-  height: 100%;
-  width: 100%;
-  background-color: black;
-  background-size: cover;
-  position: absolute;
-  overflow: auto;
-}
+  .background {
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    background-size: cover;
+    position: absolute;
+    overflow: auto;
+  }
 
-.mitcre-textimagexblock-wrapper .textimagexblock-content {
-  position: relative;
-  @include position-content;
+  .textimagexblock-content {
+    position: relative;
+    @include position-content;
 
-  top: 10%;
-  height: 60%;
-  overflow: auto;
-}
+    top: 10%;
+    height: 60%;
+    overflow: auto;
+  }
 
-.mitcre-textimagexblock-wrapper h1.header-text {
-  position: relative;
-  @include position-content;
+  h1.header-text {
+    position: relative;
+    @include position-content;
 
-  top: 10%;
+    top: 10%;
 
-  @include font-header;
-  font-weight: 400;
-  color: $textColor;
-}
+    @include font-header;
+    font-weight: 400;
+    color: $textColor;
+  }
 
-.mitcre-textimagexblock-wrapper a {
-  &.orange-link {
-    padding: 4px;
-    background-color: $linkBackgroundOrangeWithOpacity;
+  a {
+    &.orange-link {
+      padding: 4px;
+      background-color: $linkBackgroundOrangeWithOpacity;
 
-    &:hover {
-      background-color: $linkBackgroundOrange;
+      &:hover {
+        background-color: $linkBackgroundOrange;
+      }
+    }
+
+    &.no-background-link {
+      text-decoration: underline;
+      background: none;
+    }
+
+    &.no-background-link,
+    &.orange-link, &.orange-link:hover, &.orange-link:visited {
+      color: $linkColor;
     }
   }
 
-  &.no-background-link {
-    text-decoration: underline;
-    background: none;
+  p.content-text, p {
+    margin: 0;
+    padding-top: 20px;
+    line-height: $lineHeight;
+    white-space: normal;
+    text-align: left;
+    color: $textColor;
+    @include font-content;
   }
 
-  &.no-background-link,
-  &.orange-link, &.orange-link:hover, &.orange-link:visited {
-    color: $linkColor;
+  ol {
+    margin-left: 4em !important;
   }
-}
 
-.mitcre-textimagexblock-wrapper p.content-text {
-  margin: 0;
-  padding-top: 20px;
-  line-height: $lineHeight;
-  white-space: normal;
-  text-align: left;
-  color: $textColor;
-  @include font-content;
-}
+  li {
+    font-family: $contentFont;
+    font-size: $contentFontSize !important;
+    line-height: $lineHeight;
+    color: $textColor;
+    text-align: left;
+    padding: 0 2em 2em 0;
+  }
 
-.mitcre-textimagexblock-wrapper ol {
-  margin-left: 4em !important;
-}
+  table {
+    margin: 2em;
+    width: 94%;
+    border-collapse: collapse;
+    color: $textColor;
+    font-family: $contentFont;
 
-.mitcre-textimagexblock-wrapper li {
-  font-family: $contentFont;
-  font-size: $contentFontSize !important;
-  line-height: $lineHeight;
-  color: $textColor;
-  text-align: left;
-  padding: 0 2em 2em 0;
-}
+    td, th {
+      border: 1px solid $textColor;
+      padding: 0.3em;
+    }
+  }
 
-.mitcre-textimagexblock-wrapper table {
-  margin: 2em;
-  width: 94%;
-  border-collapse: collapse;
-  color: $textColor;
-  font-family: $contentFont;
+  &.tinymce {
+    // this is to be sure that old data's styles
+    // will be overwritten.
+    p span {
+      font-family: Hind, sans-serif !important;
+    }
 
-  td, th {
-    border: 1px solid $textColor;
-    padding: 0.3em;
+    table {
+      table-layout: fixed;
+      border-collapse: collapse;
+
+      caption, td, th {
+        border: 1px solid;
+        border-collapse: collapse;
+        table-layout: fixed;
+      }
+
+      td {
+        display: table-cell;
+        width: 100px;
+      }
+    }
+
+    table[border="0"] {
+      caption, td, th {
+        border: none;
+      }
+    }
   }
 }
 

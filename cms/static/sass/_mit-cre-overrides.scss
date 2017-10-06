@@ -152,6 +152,67 @@ $breakSmall: 1024px;
   object-fit: cover;
 }
 
+/* TinyMce */
+.mitcre-textimagexblock-wrapper.tinymce {
+
+  // this is to be sure that old data's styles
+  // will be overwritten.
+  p span {
+    font-family: Hind, sans-serif !important;
+  }
+
+  table {
+    table-layout: fixed;
+    border-collapse: collapse;
+
+    caption, td, th {
+      border: 1px solid;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    td {
+      display: table-cell;
+      width: 100px;
+    }
+  }
+
+  table[border="0"] {
+    caption, td, th {
+      border: none;
+    }
+  }
+}
+
+// TM editor
+.editor-with-buttons.tinymce-studio {
+  height: 720px;
+
+  .list-input.settings-list {
+    height: 720px !important;
+  }
+
+  .setting-input.hidden {
+    display: none;
+  }
+
+  .choose-file {
+    min-width: 100px;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #b2b2b2;
+    text-overflow: ellipsis;
+    margin-right: 20px;
+  }
+
+  .crop-url {
+    padding: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
 /**
  * Scroll bar
  **/
@@ -193,6 +254,8 @@ $breakSmall: 1024px;
     display: none;
   }
 }
+
+/* TinyMce */
 
 /*************************************************** TEXT (HTML) end ***************************************************/
 
@@ -2280,7 +2343,6 @@ $activityPageContentWidth: 72%;
 }
 
 /*************************************************** SEE THROUGH THE DEVELOPERS' EYES end *******************************/
-
 
 /*************************************************** THROUGH THE EYES OF THE COMMUNITY  *********************************/
 
