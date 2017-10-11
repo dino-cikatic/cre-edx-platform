@@ -1628,15 +1628,19 @@ $activityPageContentWidth: 72%;
     color: #fff;
     margin-left: 10px;
     cursor: pointer;
-  }
 
-  .view-on-map span {
-    display: inline-block;
-    vertical-align: middle;
+    span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    
+    a {
+      font-style: normal;
+    }
   }
 
   .view-on-map .view-on-map-text:hover {
-    text-decoration: underline;
+    text-decoration: underline !important;
   }
 
   .hint-link {
