@@ -1110,17 +1110,27 @@ section#timeline-summary h1.section-header {
     /*font-size: 13px;*/
     font-size: 0.75em;
 
-    &:hover, &.active {
-      cursor: pointer;
+    &:hover, &.active, button:focus {
       background-color: #e5e5e5;
       color: black;
     }
 
-    span {
-      margin: 0;
-      padding: 7px;
+    // override edx style for button
+    button {
+      width: 100%;
+      height: 100%;
+      background: none;
+      color: inherit;
+      border: none;
+      box-shadow: none;
+      font-family: inherit;
+      font-size: inherit;
+      text-transform: inherit;
+      font-weight: normal;
+      text-shadow: none;
+      outline: none;
+      border-radius: 0;
     }
-
   }
 
   /* y-axis */
@@ -1283,16 +1293,13 @@ $activityPageContentWidth: 72%;
       box-shadow: 0 0 0 !important;
     }
 
-    &:focus {
-      box-shadow: none !important;
-    }
-
     &:disabled,
     &:disabled:hover {
       border-color: gray;
       color: gray;
     }
   }
+
 }
 
 /*************************************************** CALCULATING CONSERVATORIO FINANCIALS ******************************/
@@ -1621,15 +1628,19 @@ $activityPageContentWidth: 72%;
     color: #fff;
     margin-left: 10px;
     cursor: pointer;
-  }
 
-  .view-on-map span {
-    display: inline-block;
-    vertical-align: middle;
+    span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    
+    a {
+      font-style: normal;
+    }
   }
 
   .view-on-map .view-on-map-text:hover {
-    text-decoration: underline;
+    text-decoration: underline !important;
   }
 
   .hint-link {
