@@ -61,6 +61,10 @@ $breakSmall: 1024px;
 }
 
 /* EDX overrides */
+.view-in-course.courseware .nav-skip {
+  display: none;
+}
+
 .course-wrapper {
   position: absolute;
   overflow: auto;
