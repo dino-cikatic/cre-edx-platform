@@ -1243,7 +1243,8 @@ MIT_DEFAULT_ALLOWED_XBLOCKS = [
     'image_gallery',
     'assessment_factory',
     'raw_html',
-    'mitcre_problem_xblock'
+    'mitcre_problem_xblock',
+    'scrollxblock'
 ]
 
 # specify longerusername params
