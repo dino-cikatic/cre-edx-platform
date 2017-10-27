@@ -17,6 +17,7 @@ $breakMediumSmall: 1366px;
 $breakSmall: 1024px;
 
 @mixin font-smoothing {
+  font-smoothing: antialiased;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -91,6 +92,7 @@ $breakSmall: 1024px;
  **/
 
 /*************************************************** TEXT (HTML) ***************************************************/
+/**************************************** Includes Scroll and TinMCE blocks ****************************************/
 
 .mitcre-textimagexblock-wrapper {
   position: fixed;
@@ -105,7 +107,7 @@ $breakSmall: 1024px;
 
   img {
     display: block;
-    width: 70%;
+    max-width: 70%;
     height: auto;
     margin: 1em auto;
   }
@@ -223,6 +225,108 @@ $breakSmall: 1024px;
       caption, td, th {
         border: none;
       }
+    }
+  }
+
+  &.scroll {
+    .header {
+      position: fixed;
+      width: 80%;
+      top: 50%;
+      left: 50%;
+      z-index: 98;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+
+      h1.header-text {
+        margin: 1em auto;
+        text-align: center;
+      }
+
+      h2.subhead-text {
+        text-transform: none;
+        margin: 1em auto;
+        text-align: center;
+        font-family: 'Hind', sans-serif;
+      }
+
+      .scroll-tip {
+        position: fixed;
+        left: 50%;
+        transform: translate(-50%, 150%);
+        z-index: 3;
+        opacity: 1;
+
+        text-transform: uppercase;
+        text-align: center;
+        @include font-content;
+        font-size: 14px; // override above 16px
+
+        p {
+          text-transform: uppercase;
+          text-align: center;
+          margin-bottom: .25em;
+          margin-bottom: .25rem;
+          @include font-smoothing;
+        }
+
+        .scroll-arrow {
+          position: fixed;
+          left: 50%;
+          width: 14px;
+          height: 8px;
+          margin: 0;
+          transform: translateX(-50%);
+          background-repeat: no-repeat;
+          background-size: 14px 8px;
+          background-position: center;
+        }
+      }
+    }
+
+    hr {
+      position: relative;
+      top: -40px;
+      left: 50%;
+      display: block;
+      height: 1px;
+      width: 50%;
+      transform: translate(-50%);
+      margin: 1em 0;
+      padding: 0;
+      border-top: 1px solid rgba(199, 75, 26, 1);
+    }
+
+    .text {
+      position: relative;
+      top: 100%;
+      z-index: 99;
+      margin: 0;
+      padding: 1% 20% 10%;
+      line-height: 26px;
+
+      p {
+        max-width: 900px;
+        margin: 0 auto;
+        font-family: 'PT Serif', serif;
+        font-size: 21px;
+        line-height: 1.75em;
+        @include font-smoothing;
+      }
+    }
+
+    .overlay {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      background-color: #000000;
+      opacity: .3;
+
+      pointer-events: none;
+      transition: all .25s ease-in-out;
+      -moz-transition: all .25s ease-in-out;
+      -webkit-transition: all .25s;
     }
   }
 }
@@ -1637,7 +1741,7 @@ $activityPageContentWidth: 72%;
       display: inline-block;
       vertical-align: middle;
     }
-    
+
     a {
       font-style: normal;
     }
