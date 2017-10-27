@@ -328,6 +328,10 @@ $breakSmall: 1024px;
       -moz-transition: all .25s ease-in-out;
       -webkit-transition: all .25s;
     }
+
+    .background-video {
+      position: fixed;
+    }
   }
 }
 

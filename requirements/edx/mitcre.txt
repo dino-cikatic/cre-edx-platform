@@ -19,3 +19,4 @@ git+https://github.com/vukoviciv/imageGalleryXBlock.git#egg=image_gallery
 git+https://github.com/ExtensionEngine/xblock-assessment-factory-mit.git#egg=assessment-factory
 git+https://github.com/ikovic-ee/raw_html.git#egg=raw_html
 git+https://github.com/vukoviciv/mitcre_problem_xblock.git#egg=mitcre_problem_xblock
+git+https://github.com/vukoviciv/scroll-xblock#egg=scroll-xblock
