@@ -315,7 +315,7 @@ $breakSmall: 1024px;
     }
 
     .background-video {
-      display: none;
+      display: none !important;
     }
   }
 }
