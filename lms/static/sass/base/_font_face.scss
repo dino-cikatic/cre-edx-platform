@@ -127,3 +127,23 @@
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'PT Serif';
+    src: url('#{$static-path}/fonts/PTSerif/PT_Serif-Web-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'PT Serif Italic';
+    src: url('#{$static-path}/fonts/PTSerif/PT_Serif-Web-Italic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'PT Serif Bold';
+    src: url('#{$static-path}/fonts/PTSerif/PT_Serif-Web-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'PT Serif Bold Italic';
+    src: url('#{$static-path}/fonts/PTSerif/PT_Serif-Web-BoldItalic.ttf') format('truetype');
+}
